@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Iniciar Sesion</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="myForm" (ngSubmit)="loginUser()">
+        <ion-list inset>
+            <ion-item text-center style="margin-top:40px">
+                <ion-img style="background-color:white" width="220px" height="50px" src="assets/imgs/logo-mystique.png"></ion-img>
+            </ion-item>
+            <br><br><br><br>
+            <ion-item inset>
+                <ion-icon name="person" item-left></ion-icon>
+                <ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item>
+                <ion-icon name="key" item-left></ion-icon>
+                <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
+            </ion-item>
+        </ion-list>
+        <div padding>
+            <button ion-button block color="secondary" type="submit">Ingresar</button>
+        </div>
+    </form>
+    <div text-center>
+        <a ion-button block clear color="secondary" (click)="goToResetPassword()">
+      Olvide Contraseña
+    </a>
+    </div>
+</ion-content>
