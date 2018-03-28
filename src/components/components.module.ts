@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
-import { NavbarComponent } from './navbar/navbar';
 import { ListaPeluqueriaComponent } from './lista-peluqueria/lista-peluqueria';
+import { ServrecomendadoComponent } from './servrecomendado/servrecomendado';
+import { ArtrecomendadoComponent } from './artrecomendado/artrecomendado';
 @NgModule({
-	declarations: [NavbarComponent,
-    ListaPeluqueriaComponent],
+	declarations: [
+    ListaPeluqueriaComponent,
+    ServrecomendadoComponent,
+    ArtrecomendadoComponent],
 	imports: [],
 	exports: [
-		NavbarComponent,
-    ListaPeluqueriaComponent]
+	
+    ListaPeluqueriaComponent,
+    ServrecomendadoComponent,
+    ArtrecomendadoComponent]
 })
 export class ComponentsModule {}
