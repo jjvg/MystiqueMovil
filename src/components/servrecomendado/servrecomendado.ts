@@ -19,7 +19,19 @@ export class ServrecomendadoComponent {
         "nombre":"Alisado Chino",
         "subtitulo":"Para cabellos rebeldes",
         "img":"assets/imgs/alisado.jpg"
-      }]
+      },
+    {
+      "nombre":"Peinado Romantico",
+      "subtitulo":"Para cabellos ondulados",
+      "img":"assets/imgs/pelo-rizado-peinado.jpg"
+    },
+    {
+      "nombre":"Contouring Redondo",
+      "subtitulo":"Para rostros redondos",
+      "img":"assets/imgs/maquillaje-noche.jpg"
+    },
+  
+  ]
     console.log('Hello ServrecomendadoComponent Component');
     this.text = 'Hello World';
   }

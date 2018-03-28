@@ -1,4 +1,5 @@
 
+
 //Modulos , librerias
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +13,7 @@ import { LoginPage} from '../pages/login/login';
 import { ServicioPage } from '../pages/servicio/servicio';
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
+import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
 // Nativos
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,6 +27,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsPage,
     ServicioPage,
     ServrecomendadoComponent,
+    ArtrecomendadoComponent
     
   ],
   imports: [

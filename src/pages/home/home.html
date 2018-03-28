@@ -23,8 +23,14 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <servrecomendado></servrecomendado>
-    <ion-fab right bottom style="margin-bottom:60px; margin-left:10px">
+    <ion-item-group>
+        <ion-item-divider><button ion-button clear color="slate-gray">Servicios especiales para ti</button></ion-item-divider>
+        <servrecomendado></servrecomendado>
+        <ion-item-divider><button ion-button clear color="slate-gray">Recomendaciones para ti</button></ion-item-divider>
+        <artrecomendado></artrecomendado>
+    </ion-item-group>
+
+    <ion-fab right bottom style="margin-bottom:5px; margin-left:10px">
         <button ion-fab color="primary">
         <ion-icon name="add"></ion-icon>
       </button>
