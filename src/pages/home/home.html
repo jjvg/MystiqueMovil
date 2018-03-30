@@ -8,8 +8,10 @@
     <ion-navbar color="primary">
         <ion-buttons start>
             <button ion-button icon-only>
-      <ion-icon name="person"></ion-icon>
-    </button>
+             <ion-avatar >
+              <img class="ava"src=".../../assets/imgs/jeni.jpg">
+            </ion-avatar>
+         </button>
         </ion-buttons>
         <ion-title>Mystique</ion-title>
         <ion-buttons end>
@@ -48,7 +50,7 @@
     </ion-item-group>
 
     <ion-fab right bottom style="margin-bottom:5px; margin-left:10px">
-        <button ion-fab color="primary">
+        <button ion-fab color="primary" (click)="gotoSolicitud()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-fab>

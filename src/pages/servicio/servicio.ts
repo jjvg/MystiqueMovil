@@ -1,3 +1,4 @@
+import { SolicitudPage } from './../solicitud/solicitud';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ServiciosProvider } from '../../providers/servicios/servicios';
@@ -20,12 +21,15 @@ export class ServicioPage {
     servicios:any;
     searchControl: FormControl;
     searching: any = false;
+    rate:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public dataSer: ServiciosProvider) {
 
     this.searchControl = new FormControl();
+    this.rate=0;
   }
 
   ionViewDidLoad() {
+    this.rate=4;
     this.setFilteredItems();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
       this.searching = false;
@@ -38,5 +42,8 @@ export class ServicioPage {
    }
   setFilteredItems() {
     this.servicios = this.dataSer.filterItems(this.searchTerm);
+    }
+    gotoSolicitud(){
+      this.navCtrl.push(SolicitudPage)
     }
 }
