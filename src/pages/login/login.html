@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="light">
         <ion-title>Iniciar sesión</ion-title>
     </ion-navbar>
 </ion-header>
@@ -7,10 +7,10 @@
 <ion-content>
     <form [formGroup]="myForm" (ngSubmit)="loginUser()">
         <ion-list>
-            <ion-item no-lines text-center style="margin-top:40px">
+            <ion-item no-lines text-center style="margin-top:70px">
                 <ion-img class="img" src="assets/imgs/logo-mystique.png"></ion-img>
             </ion-item>
-            <br><br><br>
+            <br><br>
             <ion-item inset>
                 <ion-input formControlName="email" type="text" placeholder="Correo"></ion-input>
             </ion-item>

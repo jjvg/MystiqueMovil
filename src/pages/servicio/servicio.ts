@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { ServiciosProvider } from '../../providers/servicios/servicios';
+import 'rxjs/add/operator/debounceTime';
+import { FormControl } from '@angular/forms';
 /**
  * Generated class for the ServicioPage page.
  *
@@ -14,25 +16,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'servicio.html',
 })
 export class ServicioPage {
+  searchTerm: string = '';
+    servicios:any;
+    searchControl: FormControl;
+    searching: any = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dataSer: ServiciosProvider) {
 
-    tipo: string = "peluqueria";
-    speluqueria: Array<{name: string, descripcion: string}>;
-    smaquillaje: Array<{name: string, descripcion: string}>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-    this.speluqueria=[
-      {name: 'Corte bajo', descripcion:'Corte hecho con maquinas'},
-      {name: 'Trensado especial', descripcion:'Perfecto para salir de noche'}
-    ];
-    this.smaquillaje=[
-      {name: 'Maquillaje Ecologico', descripcion:'Facil de Remover'},
-      {name: 'Ojos Brillantes', descripcion:'Para resaltar tu mirada'}
-    ];
-
+    this.searchControl = new FormControl();
   }
 
   ionViewDidLoad() {
+    this.setFilteredItems();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
+      this.searching = false;
+      this.setFilteredItems();
+      });
     console.log('ionViewDidLoad ServicioPage');
   }
-
+  onSearchInput(){
+    this.searching = true;
+   }
+  setFilteredItems() {
+    this.servicios = this.dataSer.filterItems(this.searchTerm);
+    }
 }
