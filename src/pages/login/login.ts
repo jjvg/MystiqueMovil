@@ -1,10 +1,10 @@
+import { PrincipalPage } from './../principal/principal';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,
 LoadingController, AlertController } from 'ionic-angular';
 import{ FormBuilder, Validators} from '@angular/forms';
 import {FormGroup } from '@angular/forms/src/model';
 import { Loading } from 'ionic-angular/components/loading/loading';
-
 import {TabsPage} from '../tabs/tabs'
 
 
@@ -37,7 +37,7 @@ export class LoginPage {
     });
   }
   loginUser(){
-    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.setRoot(PrincipalPage);
 
     this.loading = this.loadingCtrl.create({
       dismissOnPageChange: true,

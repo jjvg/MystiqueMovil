@@ -8,7 +8,7 @@ import { ServicioPage } from '../servicio/servicio';
 
 @IonicPage()
 @Component({
- 
+ selector:'tabs',
   templateUrl: 'tabs.html'
 })
 export class TabsPage {

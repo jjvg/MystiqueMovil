@@ -5,10 +5,18 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="primary">
         <ion-title>Solicitud</ion-title>
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <button ion-button (click)="verDate()">elije una fechas</button>
+    <h1>Seleccione Fecha y hora</h1>
+    <ion-item>
+        <button ion-button (click)="openDate()" item-start large>
+                <ion-icon name="calendar"></ion-icon>
+        </button>
+        <span ion-datepicker [(value)]="initDate" [localeStrings]="localeString" [disabledDates]="disabledDates" [min]="initDate" clear class="ScheduleDate" locale="en-US">
+                <h1 style="margin-left:10px">{{initDate |  date:'dd/MM/yyyy'}}</h1>
+        </span>
+    </ion-item>
 </ion-content>

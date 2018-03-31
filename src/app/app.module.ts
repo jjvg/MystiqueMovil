@@ -1,6 +1,7 @@
 
 
 
+
 //Modulos , librerias
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,19 +10,21 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { DatePickerModule } from 'ion-datepicker';
+import { DatePickerDirective } from 'ion-datepicker';
 // Pages
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage} from '../pages/login/login';
 import { ServicioPage } from '../pages/servicio/servicio';
 import { SolicitudPage } from './../pages/solicitud/solicitud';
+import { PrincipalPage } from './../pages/principal/principal';
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
 import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
 // Nativos
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { DatePicker } from '@ionic-native/date-picker';
 //Providers
 import { ServiciosProvider } from '../providers/servicios/servicios';
 
@@ -35,7 +38,8 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     ServicioPage,
     ServrecomendadoComponent,
     ArtrecomendadoComponent,
-    SolicitudPage
+    SolicitudPage,
+    PrincipalPage
     
   ],
   imports: [
@@ -43,6 +47,7 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     HttpModule,
     HttpClientModule,
     Ionic2RatingModule,
+    DatePickerModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -52,7 +57,8 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     LoginPage,
     TabsPage,
     ServicioPage,
-    SolicitudPage
+    SolicitudPage,
+    PrincipalPage
    
   ],
   providers: [
@@ -60,7 +66,8 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServiciosProvider,
-    DatePicker
+   
+    
   ]
 })
 export class AppModule {}
