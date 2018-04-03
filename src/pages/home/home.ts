@@ -1,6 +1,6 @@
 import { SolicitudPage } from './../solicitud/solicitud';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the HomePage page.
@@ -21,6 +21,9 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+  }
+  gotoSolicitud(){
+    this.navCtrl.push(SolicitudPage);
   }
  
 }

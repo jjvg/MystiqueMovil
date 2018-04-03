@@ -22,6 +22,8 @@ export class ServicioPage {
     searchControl: FormControl;
     searching: any = false;
     rate:any;
+    servi:any;
+    errorMessage: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public dataSer: ServiciosProvider) {
 
     this.searchControl = new FormControl();
@@ -29,13 +31,17 @@ export class ServicioPage {
   }
 
   ionViewDidLoad() {
-    this.rate=4;
     this.setFilteredItems();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
       this.searching = false;
       this.setFilteredItems();
       });
+    //this.getCiudad();
+   
+    this.rate=4;
+  
     console.log('ionViewDidLoad ServicioPage');
+    //console.log(this.servi); 
   }
   onSearchInput(){
     this.searching = true;
@@ -46,4 +52,25 @@ export class ServicioPage {
     gotoSolicitud(){
       this.navCtrl.push(SolicitudPage)
     }
+   /* filterItems2(searchTerm){
+      return this.servi.filter((item) => {
+       return item.name.toLowerCase().
+       indexOf(searchTerm.toLowerCase()) > -1 ||
+          item.capital.toLowerCase().
+          indexOf(searchTerm.toLowerCase()) > -1;;
+       });
+      }*/
+     /* getCiudad(){
+        this.dataSer.getCountries().subscribe(
+          (data)=>{
+            this.servi = data;
+            console.log(this.servi);
+            this.setFilteredItems();
+            this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
+              this.searching = false;
+              this.setFilteredItems();
+              });
+          },(error) =>{ 
+            this.errorMessage=<any>error});
+      }*/
 }

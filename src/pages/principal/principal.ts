@@ -1,5 +1,5 @@
 import { SolicitudPage } from './../solicitud/solicitud';
-import { TabsPage } from './../tabs/tabs';
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController } from 'ionic-angular';
 

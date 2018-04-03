@@ -11,7 +11,6 @@ import { HttpModule } from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { DatePickerModule } from 'ion-datepicker';
-import { DatePickerDirective } from 'ion-datepicker';
 // Pages
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';

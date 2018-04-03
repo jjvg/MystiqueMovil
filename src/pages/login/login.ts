@@ -5,7 +5,7 @@ LoadingController, AlertController } from 'ionic-angular';
 import{ FormBuilder, Validators} from '@angular/forms';
 import {FormGroup } from '@angular/forms/src/model';
 import { Loading } from 'ionic-angular/components/loading/loading';
-import {TabsPage} from '../tabs/tabs'
+
 
 
 /**

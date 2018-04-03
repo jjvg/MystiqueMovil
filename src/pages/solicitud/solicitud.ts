@@ -15,6 +15,8 @@ import { DatePickerDirective } from 'ion-datepicker';
   templateUrl: 'solicitud.html',
 })
 export class SolicitudPage {
+  public serSelec:Array<{}>;
+  bloques:Array<{id_bloque:string,hora_inicio:Number,hora_fin:Number}>
   @ViewChild(DatePickerDirective) private datepicker: DatePickerDirective;
   public localDate: Date = new Date();
   public initDate: Date = new Date();
@@ -26,7 +28,9 @@ export class SolicitudPage {
   public maxDate: Date = new Date(new Date().setDate(new Date().getDate() + 30));
   public min: Date = new Date()
   fecha: any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  
   this.fecha= this.localDate.toLocaleString()
   }
 
@@ -48,6 +52,18 @@ export class SolicitudPage {
     this.initDate = date;
     this.fecha=this.initDate.toLocaleString();
   }
-  
- 
+ /* Discutir calcularHoras(){
+    let acum:Number;
+    for(let i=0; i<this.serSelec.length; i++){
+      acum =+ this.serSelec[i].duracion;
+    }
+    return acum;
+  }
+  obtenerBloques(){
+    this.dataAgenda.getBloquesDispo(this.initDate).subscribe(
+      (data)=>{
+        this.bloques=data;
+      }
+    )
+  }*/
 }
