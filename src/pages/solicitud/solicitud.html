@@ -12,6 +12,24 @@
 <ion-content padding>
 
     <div *ngIf="visible">
+            <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre,tipo"></ion-searchbar>
+            <div *ngIf="searching" class="spinner-container">
+                <ion-spinner></ion-spinner>
+            </div>
+            <ion-list *ngFor="let item of servicios">
+              <h2>{{item.name}}</h2>
+               <ion-toggle color="secondary" value checked="false"></ion-toggle>
+                        
+            </ion-list>
+            <ion-fab right bottom style="margin-bottom:60px; margin-left:10px">
+                    <button ion-fab color="primary"
+                            (click)="verFecha()">
+                        <ion-icon name="arrow-forward"></ion-icon>
+                      </button>
+                  </ion-fab>
+                  
+        </div>  
+            <div *ngIf="Fechavisible">
         <h4>Seleccione Fecha</h4>
         <ion-item>
             <button ion-button (click)="openDate()" item-start large>
