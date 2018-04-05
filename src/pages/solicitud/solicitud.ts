@@ -78,10 +78,14 @@ export class SolicitudPage {
   }
 
   ionViewDidLoad() {
+    this.setFilteredItems();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
       this.searching = false;
       this.setFilteredItems();
       });
+    this.rate=4;
+  
+    console.log('ionViewDidLoad ServicioPage');
     console.log(this.initDate);
     console.log(this.localDate);
     console.log('ionViewDidLoad SolicitudPage'+this.fecha);
