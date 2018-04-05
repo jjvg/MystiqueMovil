@@ -38,7 +38,7 @@ export class SolicitudPage {
   fecha: any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController) {
-  this.bloques=['8:00 am','9:00 am','11:00 am','1:00 pm','3:00 pm'];
+  this.bloques=['8:00 am','1:00 pm'];
   this.fecha= this.localDate.toLocaleString()
   this.horavisible=false;
   this.empleadovisible=false;
@@ -126,6 +126,13 @@ export class SolicitudPage {
         //this.bloques=data;
         this.horavisible=true;
       }
-    
+    gotoGuardar(){
+      let alert = this.alertCtrl.create({
+        title: 'Confirmacion',
+        subTitle: 'Gracias por escojer nuestros servicios',
+        buttons: ['Cerrar']
+      });
+      alert.present();
+    }
   
 }
