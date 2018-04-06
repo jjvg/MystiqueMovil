@@ -112,6 +112,7 @@ export class SolicitudPage {
                 console.log('Dijo que si');
                 this.horavisible=false;
                 this.visible=false;
+                this.Fechavisible=false;
                 this.empleadovisible=true;
                 console.log(this.empleadovisible);
                   }
