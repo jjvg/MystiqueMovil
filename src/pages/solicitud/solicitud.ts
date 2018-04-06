@@ -2,6 +2,9 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { Component,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DatePickerDirective } from 'ion-datepicker';
+import { ServiciosProvider } from '../../providers/servicios/servicios';
+import 'rxjs/add/operator/debounceTime';
+import { FormControl } from '@angular/forms';
 //import{ FormBuilder, Validators} from '@angular/forms';
 //import {FormGroup } from '@angular/forms/src/model';
 /**
@@ -18,6 +21,13 @@ import { DatePickerDirective } from 'ion-datepicker';
 })
 export class SolicitudPage {
   //solicitudForm:FormGroup;
+  searchTerm: string = '';
+  servicios:any;
+  searchControl: FormControl;
+  searching: any = false;
+  rate:any;
+  servi:any;
+  errorMessage: string;
   
   public serSelec:Array<{}>;
   empleadosDisponibles:any;
@@ -33,15 +43,19 @@ export class SolicitudPage {
   visible : Boolean;
   horavisible: Boolean;
   empleadovisible:Boolean;
+  Fechavisible:Boolean;
   public maxDate: Date = new Date(new Date().setDate(new Date().getDate() + 30));
   public min: Date = new Date()
   fecha: any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController,public dataSer: ServiciosProvider) {
+  this.searchControl = new FormControl();
+  this.rate=0;
   this.bloques=['8:00 am','1:00 pm'];
   this.fecha= this.localDate.toLocaleString()
   this.horavisible=false;
   this.empleadovisible=false;
+  this.Fechavisible=false;
   this.visible=true;
   this.empleadosDisponibles=[
     {
@@ -64,10 +78,29 @@ export class SolicitudPage {
   }
 
   ionViewDidLoad() {
+    this.setFilteredItems();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
+      this.searching = false;
+      this.setFilteredItems();
+      });
+    this.rate=4;
+  
+    console.log('ionViewDidLoad ServicioPage');
     console.log(this.initDate);
     console.log(this.localDate);
     console.log('ionViewDidLoad SolicitudPage'+this.fecha);
   }
+  onSearchInput(){
+    this.searching = true;
+   }
+  setFilteredItems() {
+    this.servicios = this.dataSer.filterItems(this.searchTerm);
+    }
+    verFecha()
+    {
+      this.Fechavisible=true;
+      this.visible=false;
+    }
   openDate(){
     this.datepicker.open();
     this.datepicker.changed.subscribe(() => {
