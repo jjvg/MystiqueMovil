@@ -25,10 +25,6 @@ export class SolicitudPage {
   servicios:any;
   searchControl: FormControl;
   searching: any = false;
-  rate:any;
-  servi:any;
-  errorMessage: string;
-  
   public serSelec:Array<{}>;
   empleadosDisponibles:any;
   bloques:any[];
@@ -40,23 +36,23 @@ export class SolicitudPage {
     weekdays: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
     months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
   };
+    color:{ backgroundcolor:'#fd0087'}
   visible : Boolean;
   horavisible: Boolean;
   empleadovisible:Boolean;
-  Fechavisible:Boolean;
+  Fechavisible
   public maxDate: Date = new Date(new Date().setDate(new Date().getDate() + 30));
   public min: Date = new Date()
   fecha: any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController,public dataSer: ServiciosProvider) {
-  this.searchControl = new FormControl();
-  this.rate=0;
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController, public dataSer: ServiciosProvider) {
   this.bloques=['8:00 am','1:00 pm'];
+  this.searchControl = new FormControl();
   this.fecha= this.localDate.toLocaleString()
   this.horavisible=false;
   this.empleadovisible=false;
-  this.Fechavisible=false;
   this.visible=true;
+  this.Fechavisible=false;
   this.empleadosDisponibles=[
     {
       nombre:'Claudia Moreno',
@@ -83,24 +79,10 @@ export class SolicitudPage {
       this.searching = false;
       this.setFilteredItems();
       });
-    this.rate=4;
-  
-    console.log('ionViewDidLoad ServicioPage');
     console.log(this.initDate);
     console.log(this.localDate);
     console.log('ionViewDidLoad SolicitudPage'+this.fecha);
   }
-  onSearchInput(){
-    this.searching = true;
-   }
-  setFilteredItems() {
-    this.servicios = this.dataSer.filterItems(this.searchTerm);
-    }
-    verFecha()
-    {
-      this.Fechavisible=true;
-      this.visible=false;
-    }
   openDate(){
     this.datepicker.open();
     this.datepicker.changed.subscribe(() => {
@@ -167,5 +149,14 @@ export class SolicitudPage {
       });
       alert.present();
     }
-  
-}
+    onSearchInput(){
+      this.searching = true;
+     }
+    setFilteredItems() {
+      this.servicios = this.dataSer.filterItems(this.searchTerm);
+      }
+      verFecha(){
+        this.visible=false;
+        this.Fechavisible=true;
+      }
+  }

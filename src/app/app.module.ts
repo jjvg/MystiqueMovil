@@ -1,7 +1,4 @@
 
-
-
-
 //Modulos , librerias
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,6 +15,7 @@ import { LoginPage} from '../pages/login/login';
 import { ServicioPage } from '../pages/servicio/servicio';
 import { SolicitudPage } from './../pages/solicitud/solicitud';
 import { PrincipalPage } from './../pages/principal/principal';
+import { HistorialPage } from './../pages/historial/historial';
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
 import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
@@ -38,7 +36,8 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     ServrecomendadoComponent,
     ArtrecomendadoComponent,
     SolicitudPage,
-    PrincipalPage
+    PrincipalPage,
+    HistorialPage
     
   ],
   imports: [
@@ -57,7 +56,8 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     TabsPage,
     ServicioPage,
     SolicitudPage,
-    PrincipalPage
+    PrincipalPage,
+    HistorialPage
    
   ],
   providers: [

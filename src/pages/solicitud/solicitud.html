@@ -12,31 +12,30 @@
 <ion-content padding>
 
     <div *ngIf="visible">
-            
-            <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre,tipo"></ion-searchbar>
+
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre,tipo"></ion-searchbar>
         <div *ngIf="searching" class="spinner-container">
             <ion-spinner></ion-spinner>
         </div>
         <h3>Seleccionar servicios</h3>
         <ion-list>
-        <ion-item *ngFor="let item of servicios">   
+            <ion-item *ngFor="let item of servicios">
                 <div item-content>
-            <h2>{{item.name}}</h2>
-        </div>
-            <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
-        
-        </ion-item>
-    </ion-list>
-   
+                    <h2>{{item.name}}</h2>
+                </div>
+                <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
+
+            </ion-item>
+        </ion-list>
+
         <ion-fab right bottom style="margin-bottom:60px; margin-left:10px">
-                <button ion-fab color="primary"
-                        (click)="verFecha()">
+            <button ion-fab color="primary" (click)="verFecha()">
                     <ion-icon name="arrow-forward"></ion-icon>
                   </button>
-              </ion-fab>
-              
-    </div>  
-            <div *ngIf="Fechavisible">
+        </ion-fab>
+
+    </div>
+    <div *ngIf="Fechavisible">
         <h4>Seleccione Fecha</h4>
         <ion-item>
             <button ion-button (click)="openDate()" item-start large>
@@ -61,11 +60,11 @@
                 </ion-card-content>
             </ion-card>
         </ion-list>
-        <div right>
-            <button ion-button color="primary" (click)="verConfirmacion()" round style="margin-left:150px">
-             Continuar
-          </button>
-        </div>
+        <ion-fab right bottom style="margin-bottom:60px; margin-left:10px">
+            <button ion-fab color="primary" (click)="verConfirmacion()">
+                <ion-icon name="arrow-forward"></ion-icon>
+              </button>
+        </ion-fab>
     </div>
     <div *ngIf="empleadovisible">
         <h3>Selecciona un empleado</h3>
@@ -81,6 +80,6 @@
                 <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
             </ion-item>
         </ion-list>
-        <button ion-button (click)="gotoGuardar()" round style="margin-left:180px"> Enviar</button>
+        <button ion-button (click)="gotoGuardar()" round style="margin-left:190px"> Enviar</button>
     </div>
 </ion-content>
