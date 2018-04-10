@@ -59,6 +59,23 @@
                     <p>Fecha: {{initDate | date:'dd/MM/yyyy'}}</p>
                 </ion-card-content>
             </ion-card>
+            <p>Indique si desea ser atendido por un hombre o una mujer</p>
+            <ion-card>
+                <ion-list>
+                    <ion-item>
+                        <ion-label>Hombre</ion-label>
+                        <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Mujer</ion-label>
+                        <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Indiferente</ion-label>
+                        <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                    </ion-item>
+                </ion-list>
+            </ion-card>
         </ion-list>
         <ion-fab right bottom style="margin-bottom:60px; margin-left:10px">
             <button ion-fab color="primary" (click)="verConfirmacion()">
