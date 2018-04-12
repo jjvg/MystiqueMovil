@@ -12,18 +12,50 @@
 <ion-content padding>
 
     <div *ngIf="visible">
+<<<<<<< HEAD
+=======
+
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre,tipo"></ion-searchbar>
+        <div *ngIf="searching" class="spinner-container">
+            <ion-spinner></ion-spinner>
+        </div>
+        <h3>Seleccionar servicios</h3>
+        <ion-list>
+            <ion-item *ngFor="let item of servicios">
+                <div item-content>
+                    <h2>{{item.name}}</h2>
+                </div>
+                <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
+
+            </ion-item>
+        </ion-list>
+
+        <ion-fab right bottom style="margin-bottom:60px; margin-left:10px">
+            <button ion-fab color="primary" (click)="verFecha()">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                  </button>
+        </ion-fab>
+
+    </div>
+    <div *ngIf="Fechavisible">
+>>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
         <h4>Seleccione Fecha</h4>
         <ion-item>
             <button ion-button (click)="openDate()" item-start large>
                 <ion-icon name="calendar"></ion-icon>
         </button>
+<<<<<<< HEAD
             <span ion-datepicker [(value)]="initDate" [localeStrings]="localeString" [disabledDates]="disabledDates" [min]="initDate" clear class="ScheduleDate" locale="en-US" (ionSeleted)="obtenerBloques()" (ionChange)="obtenerBloques()">
+=======
+            <span ion-datepicker [(value)]="initDate" [headerClasses]="color" [localeStrings]="localeString" [disabledDates]="disabledDates" [min]="initDate" clear class="ScheduleDate" locale="en-US" (ionSeleted)="obtenerBloques()" (ionChange)="obtenerBloques()">
+>>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
                 <h1  style="margin-left:20px">{{initDate |  date:'dd/MM/yyyy'}}</h1>
         </span>
         </ion-item>
     </div>
     <div *ngIf="horavisible">
         <h4>Seleccione Hora de atención</h4>
+<<<<<<< HEAD
         <ion-card>
             <ion-list *ngFor="let item of bloques">
                 <ion-item item-start>
@@ -42,10 +74,46 @@
             <button ion-fab color="primary" (click)="verConfirmacion()">
             <ion-icon name="add"></ion-icon>
           </button>
+=======
+        <ion-list>
+            <ion-card *ngFor="let item of bloques">
+                <ion-item>
+                    <ion-icon name="alarm" item-start></ion-icon>
+                    <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
+                </ion-item>
+                <ion-card-content>
+                    <h2>Hora disponible: {{item}}</h2>
+                    <p>Fecha: {{initDate | date:'dd/MM/yyyy'}}</p>
+                </ion-card-content>
+            </ion-card>
+            <p>Indique si desea ser atendido por un hombre o una mujer</p>
+            <ion-card>
+                <ion-list>
+                    <ion-item>
+                        <ion-label>Hombre</ion-label>
+                        <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Mujer</ion-label>
+                        <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Indiferente</ion-label>
+                        <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+        </ion-list>
+        <ion-fab right bottom style="margin-bottom:60px; margin-left:10px">
+            <button ion-fab color="primary" (click)="verConfirmacion()">
+                <ion-icon name="arrow-forward"></ion-icon>
+              </button>
+>>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
         </ion-fab>
     </div>
     <div *ngIf="empleadovisible">
         <h3>Selecciona un empleado</h3>
+<<<<<<< HEAD
         <ion-list *ngFor="let item of empleadosDisponibles">
             <ion-item>
                 <ion-thumbnail item-start>
@@ -61,5 +129,20 @@
             <ion-icon name="add"></ion-icon>Enviar
           </button>
         </ion-fab>
+=======
+        <ion-list>
+            <ion-item *ngFor="let empe of empleadosDisponibles">
+                <ion-thumbnail item-start>
+                    <img src="{{empe.foto}}">
+                </ion-thumbnail>
+                <div item-content>
+                    <h2 color="primary">{{empe.nombre}}</h2>
+                    <p>Especialidad: {{empe.especialidad}}</p>
+                </div>
+                <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <button ion-button (click)="gotoGuardar()" round style="margin-left:190px"> Enviar</button>
+>>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
     </div>
 </ion-content>

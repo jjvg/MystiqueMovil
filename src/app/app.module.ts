@@ -1,7 +1,10 @@
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
 //Modulos , librerias
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,11 +18,18 @@ import { DatePickerModule } from 'ion-datepicker';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage} from '../pages/login/login';
+<<<<<<< HEAD
 import { HistorialPage } from '../pages/historial/historial';
 import { PresupuestoPage } from '../pages/presupuesto/presupuesto';
 import { ServicioPage } from '../pages/servicio/servicio';
 import { SolicitudPage } from './../pages/solicitud/solicitud';
 import { PrincipalPage } from './../pages/principal/principal';
+=======
+import { ServicioPage } from '../pages/servicio/servicio';
+import { SolicitudPage } from './../pages/solicitud/solicitud';
+import { PrincipalPage } from './../pages/principal/principal';
+import { HistorialPage } from './../pages/historial/historial';
+>>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
 import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
@@ -41,8 +51,12 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     ArtrecomendadoComponent,
     SolicitudPage,
     PrincipalPage,
+<<<<<<< HEAD
     HistorialPage,
     PresupuestoPage
+=======
+    HistorialPage
+>>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
     
   ],
   imports: [
@@ -62,8 +76,12 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     ServicioPage,
     SolicitudPage,
     PrincipalPage,
+<<<<<<< HEAD
     HistorialPage,
     PresupuestoPage
+=======
+    HistorialPage
+>>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
    
   ],
   providers: [
