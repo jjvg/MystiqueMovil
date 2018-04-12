@@ -16,6 +16,11 @@ import { ServicioPage } from '../pages/servicio/servicio';
 import { SolicitudPage } from './../pages/solicitud/solicitud';
 import { PrincipalPage } from './../pages/principal/principal';
 import { HistorialPage } from './../pages/historial/historial';
+import { PresupuestoPage } from '../pages/presupuesto/presupuesto';
+import { TipsPage } from './../pages/tips/tips';
+import { SolicitudesPage } from './../pages/solicitudes/solicitudes';
+import { PromocionesPage } from './../pages/promociones/promociones';
+
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
 import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
@@ -24,6 +29,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //Providers
 import { ServiciosProvider } from '../providers/servicios/servicios';
+import { SolicitudProvider } from '../providers/solicitud/solicitud';
+
 
 
 @NgModule({
@@ -37,7 +44,11 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     ArtrecomendadoComponent,
     SolicitudPage,
     PrincipalPage,
-    HistorialPage
+    HistorialPage,
+    PresupuestoPage,
+    PromocionesPage,
+    TipsPage,
+    SolicitudesPage
     
   ],
   imports: [
@@ -57,7 +68,11 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     ServicioPage,
     SolicitudPage,
     PrincipalPage,
-    HistorialPage
+    HistorialPage,
+    PresupuestoPage,
+    PromocionesPage,
+    TipsPage,
+    SolicitudesPage
    
   ],
   providers: [
@@ -65,6 +80,7 @@ import { ServiciosProvider } from '../providers/servicios/servicios';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServiciosProvider,
+    SolicitudProvider,
    
     
   ]

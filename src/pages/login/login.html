@@ -7,10 +7,10 @@
 <ion-content>
     <form [formGroup]="myForm" (ngSubmit)="loginUser()">
         <ion-list>
-            <ion-item no-lines text-center style="margin-top:70px">
+            <ion-item no-lines text-center style="margin-top:80px">
                 <ion-img class="img" src="assets/imgs/logo-mystique.png"></ion-img>
             </ion-item>
-            <br><br>
+            <br><br><br>
             <ion-item inset>
                 <ion-input formControlName="email" type="text" placeholder="Correo"></ion-input>
             </ion-item>
@@ -19,13 +19,9 @@
                 <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
             </ion-item>
         </ion-list>
+        <br><br><br><br>
         <div padding>
             <button ion-button block type="submit">Ingresar</button>
         </div>
     </form>
-    <div text-center>
-        <a ion-button block clear (click)="goToResetPassword()">
-      ¿Olvide Contraseña?
-    </a>
-    </div>
 </ion-content>

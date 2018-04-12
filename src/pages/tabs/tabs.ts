@@ -1,3 +1,4 @@
+import { PresupuestoPage } from './../presupuesto/presupuesto';
 import { HistorialPage } from './../historial/historial';
 import { Component } from '@angular/core';
 import {IonicPage} from 'ionic-angular';
@@ -15,7 +16,7 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = ServicioPage;
   tab3Root = HistorialPage;
-  tab4Root ='';
+  tab4Root =PresupuestoPage;
  
 
   constructor() {

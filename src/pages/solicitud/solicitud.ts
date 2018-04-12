@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -5,6 +6,7 @@ import { DatePickerDirective } from 'ion-datepicker';
 import { ServiciosProvider } from '../../providers/servicios/servicios';
 import 'rxjs/add/operator/debounceTime';
 import { FormControl } from '@angular/forms';
+import { PrincipalPage } from '../principal/principal';
 //import{ FormBuilder, Validators} from '@angular/forms';
 //import {FormGroup } from '@angular/forms/src/model';
 /**
@@ -123,6 +125,7 @@ export class SolicitudPage {
                 console.log('Dijo que no');
                 //this.asignarAleatorio();
                 //this.guardarSolicitud();
+                this.gotoGuardar();
                  }
               }
           ]
@@ -146,9 +149,18 @@ export class SolicitudPage {
       let alert = this.alertCtrl.create({
         title: 'Confirmacion',
         subTitle: 'Gracias por escojer nuestros servicios',
-        buttons: ['Cerrar']
+        buttons: [{
+          text:'Cerrar',
+        handler:()=>{
+          let navTran=alert.dismiss();
+            navTran.then(()=>{
+              this.navCtrl.setRoot(PrincipalPage);
+            });
+          return false;
+        }
+        }],
       });
-      alert.present();
+      alert.present()
     }
     onSearchInput(){
       this.searching = true;

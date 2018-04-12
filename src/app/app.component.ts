@@ -1,9 +1,13 @@
+import { PrincipalPage } from './../pages/principal/principal';
+import { PromocionesPage } from './../pages/promociones/promociones';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from "../pages/login/login";
 import { PerfilPage } from '../pages/perfil/perfil';
+import { SolicitudesPage } from '../pages/solicitudes/solicitudes';
+import { TipsPage } from '../pages/tips/tips';
 @Component({
   templateUrl: 'app.html'
 })
@@ -15,14 +19,15 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
     this.pages=[
+      {title: 'Inicio', component: PrincipalPage, icon:'home'},
       {title: 'Perfil', component: PerfilPage, icon:'contact'},
       {title: 'Citas', component:'',icon:'calendar'},
       {title: 'Mensajes',component:'',icon:'mail' },
       {title: 'Reclamos',component:'',icon:'filing'},
-      {title: 'Solicitudes',component:'',icon:'paper-plane'},
+      {title: 'Solicitudes',component:SolicitudesPage,icon:'paper-plane'},
       {title: 'Servicios Recibidos',component:'',icon:'list-box'},
-      {title: 'Promociones',component:'',icon:'star'},
-      {title: 'Consejos para Ti',component:'',icon:'megaphone'}
+      {title: 'Promociones',component:PromocionesPage,icon:'star'},
+      {title: 'Consejos',component:TipsPage,icon:'megaphone'}
     ];
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -30,5 +35,13 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    
+
+    }
+    openPage(p){
+      this.nav.setRoot(p.component);
+  }
+  exit(){
+    this.nav.setRoot(LoginPage);
   }
 }
