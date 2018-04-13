@@ -19,6 +19,21 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+<ion-list *ngFor="let item of items">
+    <ion-card>
+        <img src="{{item.img}}" />
+        <ion-card-content>
+            <ion-card-title>
+                {{item.nombre}}
+            </ion-card-title>
+            <h2>{{item.duracion}}</h2>
+            <p>{{item.content}}
+            </p>
+        </ion-card-content>
+        <div text-right>
+            <button class="colorc" ion-button clear>Adquirir</button>
+        </div>
+    </ion-card>
+</ion-list>
 </ion-content>
