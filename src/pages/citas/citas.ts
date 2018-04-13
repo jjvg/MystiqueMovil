@@ -1,5 +1,6 @@
+import { CancelarcitaComponent } from './../../components/cancelarcita/cancelarcita';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the CitasPage page.
@@ -15,11 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CitasPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl:ModalController,) {
+
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CitasPage');
+  }
+  presentProfileModal() {
+    let profileModal = this.modalCtrl.create(CancelarcitaComponent);
+    profileModal.present();
   }
 
 }

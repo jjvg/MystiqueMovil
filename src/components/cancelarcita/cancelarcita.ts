@@ -1,4 +1,7 @@
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component } from '@angular/core';
+import { ViewController, NavController } from 'ionic-angular';
+import { PrincipalPage } from '../../pages/principal/principal';
 
 /**
  * Generated class for the CancelarcitaComponent component.
@@ -15,26 +18,64 @@ export class CancelarcitaComponent {
   text: string;
   items:any;
 
-  constructor() {
+  constructor(public viewCtrl : ViewController,public navCtrl : NavController, public alertCtrl:AlertController) {
   
     this.items=[{
-      "motivo":"Por falta de dinero",
-      "content":"Presupuesto elevado",
-      
+      "motivo":"Falta de dinero",  
     },
   {
-    "motivo":"Por falta de tiempo",
-    "content":"Las fechas disponibles para el servicio no son convenientes",
-    
+    "motivo":"Falta de tiempo",
   },
   {
-    "motivo":"Por otros motivos",
-    "content":"Motivos personales ajenos a la empresa",
-    
+    "motivo":"Otros motivos",    
   }];    
 
     console.log('Hello CancelarcitaComponent Component');
     this.text = 'Hello World';
+  }
+  closeModal(){
+    this.viewCtrl.dismiss();
+  }
+  cancelarcita(){
+      let alert = this.alertCtrl.create({
+        title: '',
+        message: '¿Seguro que desea cancelr su cita?',
+        buttons: [
+          {
+            text: 'SI',
+            handler: () => {
+              console.log('Cancel clicked');
+              this.gotoGuardar();
+              this.navCtrl.setRoot(PrincipalPage);
+            }
+          },
+          {
+            text: 'No',
+            handler: () => {
+              console.log('Buy clicked');
+              this.navCtrl.setRoot(PrincipalPage);
+            }
+          }
+        ]
+      });
+      
+        alert.present(); 
+  } gotoGuardar(){
+    let alert = this.alertCtrl.create({
+      title: 'Confirmacion',
+      subTitle: 'Su cita ha sido Cancelada',
+      buttons: [{
+        text:'Cerrar',
+      handler:()=>{
+        let navTran=alert.dismiss();
+          navTran.then(()=>{
+            this.navCtrl.setRoot(PrincipalPage);
+          });
+        return false;
+      }
+      }],
+    });
+    alert.present()
   }
 
 }

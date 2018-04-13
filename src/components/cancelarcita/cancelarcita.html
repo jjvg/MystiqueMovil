@@ -1,9 +1,26 @@
 <!-- Generated template for the CancelarcitaComponent component -->
-<ion-list *ngFor="let item of items">
-  <ion-card>
-      <div class = "card-title">{{item.motivo}}</div>
-      <div class="card-subtitle">{{item.content}}</div> 
-          
-  </ion-card>
-
-</ion-list>
+<ion-header>
+    <ion-title>Motivos de cancelación</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-header>
+<ion-content>
+    <h3>Seleccione una Opcion</h3>
+    <ion-list *ngFor="let item of items">
+        <ion-card>
+            <ion-item>
+                <h2>{{item.motivo}}</h2>
+                <ion-checkbox checked="isChecked" color="secondary" item-end></ion-checkbox>
+            </ion-item>
+        </ion-card>
+    </ion-list>
+    <div center>
+        <h3>Descripción</h3>
+    </div>
+    <ion-item>
+        <ion-label floating>Especifique Razones</ion-label>
+        <ion-input type="textarea"></ion-input>
+    </ion-item>
+    <button ion-button large (click)="gotoGuardar()">Enviar</button>
+</ion-content>
