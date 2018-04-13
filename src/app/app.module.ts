@@ -26,6 +26,7 @@ import {RechazoPage} from '../pages/rechazo/rechazo';
 import {ReclamosPage} from '../pages/reclamos/reclamos';
 import {ServiciosRPage} from '../pages/servicios-r/servicios-r';
 import {CitasPage} from '../pages/citas/citas';
+import {ReclamogenerarPage} from '../pages/reclamogenerar/reclamogenerar';
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
 import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
@@ -59,7 +60,8 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     RechazoPage,
     ReclamosPage,
     ServiciosRPage,
-    CitasPage
+    CitasPage,
+    ReclamogenerarPage
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,8 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     RechazoPage,
     ReclamosPage,
     ServiciosRPage,
-    CitasPage
+    CitasPage,
+    ReclamogenerarPage
    
   ],
   providers: [
