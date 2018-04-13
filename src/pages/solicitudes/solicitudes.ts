@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { RechazoPage } from './../rechazo/rechazo';
+import { PresupuestoPage } from './../presupuesto/presupuesto';
 /**
  * Generated class for the SolicitudesPage page.
  *
@@ -21,5 +22,12 @@ export class SolicitudesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SolicitudesPage');
   }
-
+  verPresupuesto(){
+    this.navCtrl.push(PresupuestoPage)
+    
+  }
+  verDetalle()
+  {
+    this.navCtrl.push(RechazoPage)
+  }
 }
