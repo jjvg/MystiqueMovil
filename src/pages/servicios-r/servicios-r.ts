@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { ReclamogenerarPage } from './../reclamogenerar/reclamogenerar';
 /**
  * Generated class for the ServiciosRPage page.
  *
@@ -21,5 +21,11 @@ export class ServiciosRPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiciosRPage');
   }
+  Reclamo(){
+    this.navCtrl.push(ReclamogenerarPage)
+  }
 
+  Reclamo1(){
+    this.navCtrl.push(ReclamogenerarPage)
+  }
 }
