@@ -8,6 +8,10 @@ import { LoginPage } from "../pages/login/login";
 import { PerfilPage } from '../pages/perfil/perfil';
 import { SolicitudesPage } from '../pages/solicitudes/solicitudes';
 import { TipsPage } from '../pages/tips/tips';
+import {MensajesPage} from '../pages/mensajes/mensajes';
+import {ReclamosPage} from '../pages/reclamos/reclamos';
+import {ServiciosRPage} from '../pages/servicios-r/servicios-r';
+import {CitasPage} from '../pages/citas/citas';
 @Component({
   templateUrl: 'app.html'
 })
@@ -21,11 +25,11 @@ export class MyApp {
     this.pages=[
       {title: 'Inicio', component: PrincipalPage, icon:'home'},
       {title: 'Perfil', component: PerfilPage, icon:'contact'},
-      {title: 'Citas', component:'',icon:'calendar'},
-      {title: 'Mensajes',component:'',icon:'mail' },
-      {title: 'Reclamos',component:'',icon:'filing'},
+      {title: 'Citas', component:CitasPage,icon:'calendar'},
+      {title: 'Mensajes',component:MensajesPage,icon:'mail' },
+      {title: 'Reclamos',component: ReclamosPage,icon:'filing'},
       {title: 'Solicitudes',component:SolicitudesPage,icon:'paper-plane'},
-      {title: 'Servicios Recibidos',component:'',icon:'list-box'},
+      {title: 'Servicios Recibidos',component: ServiciosRPage,icon:'list-box'},
       {title: 'Promociones',component:PromocionesPage,icon:'star'},
       {title: 'Consejos',component:TipsPage,icon:'megaphone'}
     ];

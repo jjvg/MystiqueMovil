@@ -20,7 +20,12 @@ import { PresupuestoPage } from '../pages/presupuesto/presupuesto';
 import { TipsPage } from './../pages/tips/tips';
 import { SolicitudesPage } from './../pages/solicitudes/solicitudes';
 import { PromocionesPage } from './../pages/promociones/promociones';
-
+import { MensajesPage } from './../pages/mensajes/mensajes';
+import {GarantiaPage} from '../pages/garantia/garantia';
+import {RechazoPage} from '../pages/rechazo/rechazo';
+import {ReclamosPage} from '../pages/reclamos/reclamos';
+import {ServiciosRPage} from '../pages/servicios-r/servicios-r';
+import {CitasPage} from '../pages/citas/citas';
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
 import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
@@ -48,8 +53,13 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     PresupuestoPage,
     PromocionesPage,
     TipsPage,
-    SolicitudesPage
-    
+    SolicitudesPage,
+    MensajesPage,
+    GarantiaPage,
+    RechazoPage,
+    ReclamosPage,
+    ServiciosRPage,
+    CitasPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +82,13 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     PresupuestoPage,
     PromocionesPage,
     TipsPage,
-    SolicitudesPage
+    SolicitudesPage,
+    MensajesPage,
+    GarantiaPage,
+    RechazoPage,
+    ReclamosPage,
+    ServiciosRPage,
+    CitasPage
    
   ],
   providers: [
