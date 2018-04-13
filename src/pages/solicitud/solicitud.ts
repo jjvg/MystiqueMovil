@@ -2,12 +2,9 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { Component,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DatePickerDirective } from 'ion-datepicker';
-<<<<<<< HEAD
-=======
 import { ServiciosProvider } from '../../providers/servicios/servicios';
 import 'rxjs/add/operator/debounceTime';
 import { FormControl } from '@angular/forms';
->>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
 //import{ FormBuilder, Validators} from '@angular/forms';
 //import {FormGroup } from '@angular/forms/src/model';
 /**
@@ -24,14 +21,10 @@ import { FormControl } from '@angular/forms';
 })
 export class SolicitudPage {
   //solicitudForm:FormGroup;
-<<<<<<< HEAD
-  
-=======
   searchTerm: string = '';
   servicios:any;
   searchControl: FormControl;
   searching: any = false;
->>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
   public serSelec:Array<{}>;
   empleadosDisponibles:any;
   bloques:any[];
@@ -43,37 +36,23 @@ export class SolicitudPage {
     weekdays: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
     months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
   };
-<<<<<<< HEAD
-  visible : Boolean;
-  horavisible: Boolean;
-  empleadovisible:Boolean;
-=======
     color:{ backgroundcolor:'#fd0087'}
   visible : Boolean;
   horavisible: Boolean;
   empleadovisible:Boolean;
-  Fechavisible
->>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
+  Fechavisible:Boolean;
   public maxDate: Date = new Date(new Date().setDate(new Date().getDate() + 30));
   public min: Date = new Date()
   fecha: any;
   
-<<<<<<< HEAD
-  constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController) {
-  this.bloques=['8:00 am','9:00 am','11:00 am','1:00 pm','3:00 pm'];
-=======
   constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController, public dataSer: ServiciosProvider) {
   this.bloques=['8:00 am','1:00 pm'];
   this.searchControl = new FormControl();
->>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
   this.fecha= this.localDate.toLocaleString()
   this.horavisible=false;
   this.empleadovisible=false;
   this.visible=true;
-<<<<<<< HEAD
-=======
   this.Fechavisible=false;
->>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
   this.empleadosDisponibles=[
     {
       nombre:'Claudia Moreno',
@@ -95,14 +74,11 @@ export class SolicitudPage {
   }
 
   ionViewDidLoad() {
-<<<<<<< HEAD
-=======
     this.setFilteredItems();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
       this.searching = false;
       this.setFilteredItems();
       });
->>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
     console.log(this.initDate);
     console.log(this.localDate);
     console.log('ionViewDidLoad SolicitudPage'+this.fecha);
@@ -136,10 +112,7 @@ export class SolicitudPage {
                 console.log('Dijo que si');
                 this.horavisible=false;
                 this.visible=false;
-<<<<<<< HEAD
-=======
                 this.Fechavisible=false;
->>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
                 this.empleadovisible=true;
                 console.log(this.empleadovisible);
                   }
@@ -169,11 +142,6 @@ export class SolicitudPage {
         //this.bloques=data;
         this.horavisible=true;
       }
-<<<<<<< HEAD
-    
-  
-}
-=======
     gotoGuardar(){
       let alert = this.alertCtrl.create({
         title: 'Confirmacion',
@@ -193,4 +161,3 @@ export class SolicitudPage {
         this.Fechavisible=true;
       }
   }
->>>>>>> 9d13c177e8340533ad235ff754b4b58761e6d55e
