@@ -42,7 +42,8 @@ export class SolicitudPage {
   visible : Boolean;
   horavisible: Boolean;
   empleadovisible:Boolean;
-  Fechavisible
+  Fechavisible:Boolean;
+  preferenciaAtencion:Boolean;
   public maxDate: Date = new Date(new Date().setDate(new Date().getDate() + 30));
   public min: Date = new Date()
   fecha: any;
@@ -53,8 +54,16 @@ export class SolicitudPage {
   this.fecha= this.localDate.toLocaleString()
   this.horavisible=false;
   this.empleadovisible=false;
-  this.visible=true;
-  this.Fechavisible=false;
+  if (this.navParams.data) {
+    this.visible=false;
+    this.Fechavisible=true;  
+  }else{
+    this.visible=true;
+    this.Fechavisible=false;
+  }
+  this.preferenciaAtencion=false;
+  
+  
   this.empleadosDisponibles=[
     {
       nombre:'Claudia Moreno',
@@ -115,6 +124,7 @@ export class SolicitudPage {
                 this.horavisible=false;
                 this.visible=false;
                 this.Fechavisible=false;
+                this.preferenciaAtencion=false;
                 this.empleadovisible=true;
                 console.log(this.empleadovisible);
                   }
@@ -171,5 +181,10 @@ export class SolicitudPage {
       verFecha(){
         this.visible=false;
         this.Fechavisible=true;
+      }
+      verPreferencia(){
+        this.Fechavisible=false;
+        this.horavisible=false;
+        this.preferenciaAtencion=true;
       }
   }
