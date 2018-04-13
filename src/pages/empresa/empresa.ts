@@ -4,15 +4,15 @@ import { ModalController, Platform, NavParams, ViewController } from 'ionic-angu
 
 
 @Component({
-  selector: 'page-perfil',
-  templateUrl: 'perfil.html'
+  selector: 'page-empresa',
+  templateUrl: 'empresa.html'
 })
-export class PerfilPage {
+export class EmpresaPage {
   constructor(public modalCtrl: ModalController) {}
 
-  openModal() {
+  openModal(characterNum) {
 
-    //let modal = this.modalCtrl.create(ModalContentPage, characterNum);
+   // let modal = this.modalCtrl.create(ModalContentPage, characterNum);
     //modal.present();
   }
 }

@@ -1,7 +1,7 @@
 <!-- Generated template for the CancelarcitaComponent component -->
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title>Motivos de cancelación</ion-title>
+        <ion-title>Motivos de Rechazo</ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="closeModal()"><ion-icon name="close"></ion-icon></button>
         </ion-buttons>
@@ -15,12 +15,13 @@
         <br>
         <ion-label>Motivo</ion-label>
         <ion-select [(ngModel)]="motivo">
-            <ion-option value="1">Tiempo</ion-option>
-            <ion-option value="2">Dinero</ion-option>
-            <ion-option value="3">Otros</ion-option>
+            <ion-option value="1">Costo</ion-option>
+            <ion-option value="2">No podra Acudir</ion-option>
+            <ion-option value="3">Acudira a Otro Lugar</ion-option>
+            <ion-option value="4">Otros</ion-option>
         </ion-select>
     </ion-item>
-    <br> <br>
+    <br><br>
     <div text-center>
         <h3>Descripción</h3>
     </div>
@@ -31,10 +32,9 @@
     </ion-item>
     <br><br>
     <ion-row>
-        <ion-col col-8>
-        </ion-col>
+        <ion-col col-8></ion-col>
         <ion-col col-4>
-            <button ion-button (click)="gotoGuardar()">Enviar</button>
+            <button ion-button (click)="GuardarRechazo()">Enviar</button>
         </ion-col>
     </ion-row>
 </ion-content>

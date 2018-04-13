@@ -1,3 +1,6 @@
+import { RechazoComponent } from './../components/rechazo/rechazo';
+import { CancelarcitaComponent } from './../components/cancelarcita/cancelarcita';
+
 
 //Modulos , librerias
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -26,7 +29,11 @@ import {RechazoPage} from '../pages/rechazo/rechazo';
 import {ReclamosPage} from '../pages/reclamos/reclamos';
 import {ServiciosRPage} from '../pages/servicios-r/servicios-r';
 import {CitasPage} from '../pages/citas/citas';
+import { CalificarPage } from './../pages/calificar/calificar';
 import {ReclamogenerarPage} from '../pages/reclamogenerar/reclamogenerar';
+import { PerfilPage } from './../pages/perfil/perfil';
+import { EmpresaPage } from './../pages/empresa/empresa';
+
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
 import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
@@ -46,8 +53,6 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     LoginPage,
     TabsPage,
     ServicioPage,
-    ServrecomendadoComponent,
-    ArtrecomendadoComponent,
     SolicitudPage,
     PrincipalPage,
     HistorialPage,
@@ -61,7 +66,15 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     ReclamosPage,
     ServiciosRPage,
     CitasPage,
-    ReclamogenerarPage
+    ReclamogenerarPage,
+    CalificarPage,
+    EmpresaPage,
+    PerfilPage,
+    ArtrecomendadoComponent,
+    CancelarcitaComponent,
+    RechazoComponent,
+    ServrecomendadoComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -91,7 +104,16 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     ReclamosPage,
     ServiciosRPage,
     CitasPage,
-    ReclamogenerarPage
+    ReclamogenerarPage,
+    CalificarPage,
+    EmpresaPage,
+    PerfilPage,
+    ArtrecomendadoComponent,
+    CancelarcitaComponent,
+    RechazoComponent,
+    ServrecomendadoComponent
+   
+
    
   ],
   providers: [

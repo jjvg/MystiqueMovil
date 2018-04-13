@@ -14,8 +14,12 @@ import { IonicPage, NavController, NavParams} from 'ionic-angular';
   templateUrl: 'mensajes.html',
 })
 export class MensajesPage {
-
+  mensajes:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.mensajes=[
+      {titulo:"Eres importante", contenido:"Tu sugerencia ha sido tomada muy importante y estamos trabajando en ello "},
+      {titulo:"Eres Bueno", contenido:"Gracias por darnos esa sugerencia tan util podrias ayudarnos a elevar nuestro prestigio"}
+    ]
   }
 
   ionViewDidLoad() {

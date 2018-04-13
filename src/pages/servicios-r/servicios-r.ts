@@ -1,3 +1,4 @@
+import { CalificarPage } from './../calificar/calificar';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ReclamogenerarPage } from './../reclamogenerar/reclamogenerar';
@@ -27,5 +28,8 @@ export class ServiciosRPage {
 
   Reclamo1(){
     this.navCtrl.push(ReclamogenerarPage)
+  }
+  calificar(){
+    this.navCtrl.push(CalificarPage)
   }
 }

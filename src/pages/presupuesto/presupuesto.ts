@@ -1,6 +1,7 @@
 import { SolicitudProvider } from './../../providers/solicitud/solicitud';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { RechazoComponent } from '../../components/rechazo/rechazo';
 
 /**
  * Generated class for the PresupuestoPage page.
@@ -15,6 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'presupuesto.html',
 })
 export class PresupuestoPage {
+  
   total:any;
   ser:any;
 solicitud:{
@@ -23,7 +25,7 @@ solicitud:{
   empleado:string;
   servicios:Array<{nombre:string, costo:Number}>
 }
-  constructor(public navCtrl: NavController, public navParams: NavParams, public dataSolicitud: SolicitudProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dataSolicitud: SolicitudProvider,public modalCtrl: ModalController) {
     this.solicitud={
       fecha:'',
       hora:'',
@@ -53,6 +55,12 @@ solicitud:{
        suma = suma + array[i].costo;
     }
     return suma;
+    
+  }
+  rechazar(){
+ 
+      let profileModal = this.modalCtrl.create(RechazoComponent);
+      profileModal.present();
     
   }
 }

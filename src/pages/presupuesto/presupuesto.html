@@ -6,11 +6,11 @@
 -->
 <ion-header>
 
-        <ion-navbar color="primary">
-            <ion-title>Presupuesto</ion-title>
-        </ion-navbar>
-    
-    </ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Presupuesto</ion-title>
+    </ion-navbar>
+
+</ion-header>
 <ion-content>
     <ion-card>
         <ion-item>
@@ -20,8 +20,7 @@
             </p>
             <p><strong>Estilista:</strong> {{solicitud.empleado}}
             </p>
-            <p><strong>Total:</strong> {{total}}Bs.
-            </p>
+
         </ion-item>
         <div text-center>
             <h2>Servicios Solicitados</h2>
@@ -36,6 +35,11 @@
                 </p>
             </ion-item>
         </ion-list>
+        <div text-center>
+            <h1>
+                <strong>Total:</strong> {{total}}Bs.
+            </h1>
+        </div>
         <ion-card-content>
             <div class="form-group">
                 <ion-row center>
@@ -44,7 +48,7 @@
                     </ion-col>
                     <ion-col col-3></ion-col>
                     <ion-col col-3>
-                        <button ion-button type="submit">Rechazar</button>
+                        <button ion-button type="submit" (click)="rechazar()">Rechazar</button>
                     </ion-col>
                 </ion-row>
             </div>

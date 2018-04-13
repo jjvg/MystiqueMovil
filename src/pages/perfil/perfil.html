@@ -1,18 +1,38 @@
-<!--
-  Generated template for the PerfilPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>perfil</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+                <ion-icon name="menu"></ion-icon>
+           </button>
+        <ion-title>Perfil</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only>
+        <ion-icon name="notifications"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
+<ion-content>
 
-
-<ion-content padding>
-
+    <ion-list>
+        <ion-list-header>
+            Mis Datos de Perfil
+        </ion-list-header>
+        <a ion-item>
+        Datos Personales
+      </a>
+        <a ion-item>
+        Datos de Rostro
+      </a>
+        <a ion-item>
+        Datos de Cabello
+      </a>
+        <a ion-item>
+       Mis Gustos
+        </a>
+    </ion-list>
+    <div text-center>
+        <button ion-button>Actualizar Preferencias</button>
+    </div>
 </ion-content>

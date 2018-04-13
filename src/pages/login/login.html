@@ -6,15 +6,14 @@
 
 <ion-content>
     <form [formGroup]="myForm" (ngSubmit)="loginUser()">
-        <ion-list>
+        <ion-list inset>
             <ion-item no-lines text-center style="margin-top:80px">
                 <ion-img class="img" src="assets/imgs/logo-mystique.png"></ion-img>
             </ion-item>
             <br><br><br>
-            <ion-item inset>
+            <ion-item>
                 <ion-input formControlName="email" type="text" placeholder="Correo"></ion-input>
             </ion-item>
-            <br>
             <ion-item>
                 <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
             </ion-item>

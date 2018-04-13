@@ -1,42 +1,30 @@
-import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component } from '@angular/core';
-import { ViewController, NavController } from 'ionic-angular';
+import { AlertController, NavController, ViewController } from 'ionic-angular';
 import { PrincipalPage } from '../../pages/principal/principal';
 
 /**
- * Generated class for the CancelarcitaComponent component.
+ * Generated class for the RechazoComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
 @Component({
-  selector: 'cancelarcita',
-  templateUrl: 'cancelarcita.html'
+  selector: 'rechazo',
+  templateUrl: 'rechazo.html'
 })
-export class CancelarcitaComponent {
+export class RechazoComponent {
 
   text: string;
-  items:any;
-  motivo:string
+ motivo:string;
   constructor(public viewCtrl : ViewController,public navCtrl : NavController, public alertCtrl:AlertController) {
-  
-    this.items=[{
-      "motivo":"Falta de dinero",  
-    },
-  {
-    "motivo":"Falta de tiempo",
-  },
-  {
-    "motivo":"Otros motivos",    
-  }];    
-
-    console.log('Hello CancelarcitaComponent Component');
+    console.log('Hello RechazoComponent Component');
     this.text = 'Hello World';
+
   }
   closeModal(){
     this.viewCtrl.dismiss();
   }
-  cancelarcita(){
+  confirmar(){
       let alert = this.alertCtrl.create({
         title: '',
         message: '¿Seguro que desea cancelr su cita?',
@@ -45,7 +33,7 @@ export class CancelarcitaComponent {
             text: 'SI',
             handler: () => {
               console.log('Cancel clicked');
-              this.gotoGuardar();
+              this.GuardarRechazo();
               this.navCtrl.setRoot(PrincipalPage);
             }
           },
@@ -60,10 +48,11 @@ export class CancelarcitaComponent {
       });
       
         alert.present(); 
-  } gotoGuardar(){
+  } 
+  GuardarRechazo(){
     let alert = this.alertCtrl.create({
       title: 'Confirmacion',
-      subTitle: 'Su cita ha sido Cancelada',
+      subTitle: 'Continuaremos Trabajando para usted, Gracias',
       buttons: [{
         text:'Cerrar',
       handler:()=>{

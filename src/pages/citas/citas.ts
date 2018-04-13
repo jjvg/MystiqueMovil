@@ -24,7 +24,7 @@ export class CitasPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CitasPage');
   }
-  presentProfileModal() {
+  cancelarCita() {
     let profileModal = this.modalCtrl.create(CancelarcitaComponent);
     profileModal.present();
   }
