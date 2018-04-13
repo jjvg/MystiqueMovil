@@ -39,7 +39,7 @@ export class SolicitudPage {
     months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
   };
     color:{ backgroundcolor:'#fd0087'}
-  visible : Boolean;
+  visible : Boolean=true;
   horavisible: Boolean;
   empleadovisible:Boolean;
   Fechavisible:Boolean;
@@ -51,14 +51,15 @@ export class SolicitudPage {
   constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController, public dataSer: ServiciosProvider) {
   this.bloques=['8:00 am','1:00 pm'];
   this.searchControl = new FormControl();
-  this.fecha= this.localDate.toLocaleString()
+  this.fecha = this.localDate.toLocaleString()
   this.horavisible=false;
   this.empleadovisible=false;
-  if (this.navParams.data) {
+  console.log(this.navParams.data)
+  if (this.navParams.data.tipo=="promocion") {
+    console.log(this.navParams.data)
     this.visible=false;
     this.Fechavisible=true;  
   }else{
-    this.visible=true;
     this.Fechavisible=false;
   }
   this.preferenciaAtencion=false;
@@ -132,6 +133,11 @@ export class SolicitudPage {
               {
                 text: 'NO',
                 handler:()=>{
+                  this.horavisible=false;
+                  this.visible=true;
+                  this.Fechavisible=false;
+                  this.preferenciaAtencion=false;
+                  this.empleadovisible=false;
                 console.log('Dijo que no');
                 //this.asignarAleatorio();
                 //this.guardarSolicitud();
