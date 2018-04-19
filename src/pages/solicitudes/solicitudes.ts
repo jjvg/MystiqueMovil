@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { RechazoPage } from './../rechazo/rechazo';
 import { PresupuestoPage } from './../presupuesto/presupuesto';
+import { SolicitudPage } from '../solicitud/solicitud';
 /**
  * Generated class for the SolicitudesPage page.
  *
@@ -15,8 +16,8 @@ import { PresupuestoPage } from './../presupuesto/presupuesto';
   templateUrl: 'solicitudes.html',
 })
 export class SolicitudesPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public loading:Loading;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -29,5 +30,12 @@ export class SolicitudesPage {
   verDetalle()
   {
     this.navCtrl.push(RechazoPage)
+  }
+  gotoSolicitud(){
+    this.navCtrl.push(SolicitudPage)
+    this.loading = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+    this.loading.present();
   }
 }

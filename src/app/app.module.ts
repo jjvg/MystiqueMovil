@@ -33,6 +33,7 @@ import { CalificarPage } from './../pages/calificar/calificar';
 import {ReclamogenerarPage} from '../pages/reclamogenerar/reclamogenerar';
 import { PerfilPage } from './../pages/perfil/perfil';
 import { EmpresaPage } from './../pages/empresa/empresa';
+import {AgendaPage} from './../pages/agenda/agenda';
 
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
@@ -43,6 +44,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //Providers
 import { ServiciosProvider } from '../providers/servicios/servicios';
 import { SolicitudProvider } from '../providers/solicitud/solicitud';
+import { SugerenciasPage } from '../pages/sugerencias/sugerencias';
 
 
 
@@ -73,7 +75,9 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     ArtrecomendadoComponent,
     CancelarcitaComponent,
     RechazoComponent,
-    ServrecomendadoComponent
+    ServrecomendadoComponent,
+    AgendaPage,
+    SugerenciasPage
    
   ],
   imports: [
@@ -108,10 +112,12 @@ import { SolicitudProvider } from '../providers/solicitud/solicitud';
     CalificarPage,
     EmpresaPage,
     PerfilPage,
+    AgendaPage,
     ArtrecomendadoComponent,
     CancelarcitaComponent,
     RechazoComponent,
-    ServrecomendadoComponent
+    ServrecomendadoComponent,
+    SugerenciasPage
    
 
    

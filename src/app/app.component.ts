@@ -12,6 +12,7 @@ import {MensajesPage} from '../pages/mensajes/mensajes';
 import {ReclamosPage} from '../pages/reclamos/reclamos';
 import {ServiciosRPage} from '../pages/servicios-r/servicios-r';
 import {CitasPage} from '../pages/citas/citas';
+import {SugerenciasPage} from '../pages/sugerencias/sugerencias';
 @Component({
   templateUrl: 'app.html'
 })
@@ -26,10 +27,10 @@ export class MyApp {
       {title: 'Inicio', component: PrincipalPage, icon:'home'},
       {title: 'Perfil', component: PerfilPage, icon:'contact'},
       {title: 'Citas', component:CitasPage,icon:'calendar'},
-      {title: 'Mensajes',component:MensajesPage,icon:'mail' },
-      {title: 'Reclamos',component: ReclamosPage,icon:'filing'},
       {title: 'Solicitudes',component:SolicitudesPage,icon:'paper-plane'},
+      {title: 'Reclamos',component: ReclamosPage,icon:'filing'},
       {title: 'Servicios Recibidos',component: ServiciosRPage,icon:'list-box'},
+      {title: 'Buzon de Comentarios',component:SugerenciasPage,icon:'mail' },
       {title: 'Promociones',component:PromocionesPage,icon:'star'},
       {title: 'Consejos',component:TipsPage,icon:'megaphone'}
     ];

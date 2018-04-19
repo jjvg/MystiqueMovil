@@ -29,38 +29,21 @@ export class SolicitudPage {
   searching: any = false;
   public serSelec:Array<{}>;
   empleadosDisponibles:any;
-  bloques:any[];
-  @ViewChild(DatePickerDirective) private datepicker: DatePickerDirective;
-  public localDate: Date = new Date();
-  public initDate: Date = new Date();
-  public localeString = {
-    monday: true,
-    weekdays: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
-    months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-  };
-    color:{ backgroundcolor:'#fd0087'}
-  visible : Boolean=true;
-  horavisible: Boolean;
-  empleadovisible:Boolean;
-  Fechavisible:Boolean;
-  preferenciaAtencion:Boolean;
-  public maxDate: Date = new Date(new Date().setDate(new Date().getDate() + 30));
-  public min: Date = new Date()
-  fecha: any;
+ visible:Boolean=true;
+ preferenciaAtencion:Boolean;
+ empleadovisible:Boolean;
   
   constructor(public navCtrl: NavController, public navParams: NavParams ,public alertCtrl: AlertController, public dataSer: ServiciosProvider) {
-  this.bloques=['8:00 am','1:00 pm'];
+  
   this.searchControl = new FormControl();
-  this.fecha = this.localDate.toLocaleString()
-  this.horavisible=false;
-  this.empleadovisible=false;
+ 
   console.log(this.navParams.data)
   if (this.navParams.data.tipo=="promocion") {
     console.log(this.navParams.data)
     this.visible=false;
-    this.Fechavisible=true;  
+    this.empleadovisible=true;  
   }else{
-    this.Fechavisible=false;
+    this.empleadovisible=false;
   }
   this.preferenciaAtencion=false;
   
@@ -91,27 +74,12 @@ export class SolicitudPage {
       this.searching = false;
       this.setFilteredItems();
       });
-    console.log(this.initDate);
-    console.log(this.localDate);
-    console.log('ionViewDidLoad SolicitudPage'+this.fecha);
-  }
-  openDate(){
-    this.datepicker.open();
-    this.datepicker.changed.subscribe(() => {
-      this.horavisible=true;
-      console.log(this.horavisible);
-      console.log('test')
-    });
+
+    console.log('ionViewDidLoad SolicitudPage');
   }
 
-  public event(data: Date): void {
-    this.localDate = data;
-  }
-  setDate(date: Date) {
-    console.log(date);
-    this.initDate = date;
-    this.fecha=this.initDate.toLocaleString();
-  };
+
+  
   verConfirmacion()
   {
     let confir= this.alertCtrl.create({
@@ -122,9 +90,7 @@ export class SolicitudPage {
                 text:'SI',
                 handler:()=>{
                 console.log('Dijo que si');
-                this.horavisible=false;
                 this.visible=false;
-                this.Fechavisible=false;
                 this.preferenciaAtencion=false;
                 this.empleadovisible=true;
                 console.log(this.empleadovisible);
@@ -133,9 +99,8 @@ export class SolicitudPage {
               {
                 text: 'NO',
                 handler:()=>{
-                  this.horavisible=false;
+                
                   this.visible=true;
-                  this.Fechavisible=false;
                   this.preferenciaAtencion=false;
                   this.empleadovisible=false;
                 console.log('Dijo que no');
@@ -155,12 +120,7 @@ export class SolicitudPage {
     }
     return acum;
   }*/
-  obtenerBloques(){
-    //this.dataAgenda.getBloquesDispo(this.initDate).subscribe(
-      //(data)=>{
-        //this.bloques=data;
-        this.horavisible=true;
-      }
+ 
     gotoGuardar(){
       let alert = this.alertCtrl.create({
         title: 'Confirmacion',
@@ -170,7 +130,7 @@ export class SolicitudPage {
         handler:()=>{
           let navTran=alert.dismiss();
             navTran.then(()=>{
-              this.navCtrl.setRoot(PrincipalPage);
+              this.navCtrl.popToRoot();
             });
           return false;
         }
@@ -186,11 +146,9 @@ export class SolicitudPage {
       }
       verFecha(){
         this.visible=false;
-        this.Fechavisible=true;
       }
       verPreferencia(){
-        this.Fechavisible=false;
-        this.horavisible=false;
+        this.visible=false;
         this.preferenciaAtencion=true;
       }
   }

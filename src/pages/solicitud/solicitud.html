@@ -29,44 +29,11 @@
         </ion-list>
 
         <ion-fab right bottom style="margin-bottom:10px; margin-left:10px">
-            <button ion-fab color="primary" (click)="verFecha()">
+            <button ion-fab color="primary" (click)="verPreferencia()">
                     <ion-icon name="arrow-forward"></ion-icon>
                   </button>
         </ion-fab>
 
-    </div>
-    <div *ngIf="Fechavisible">
-        <h4>Seleccione Fecha</h4>
-        <ion-item>
-            <button ion-button (click)="openDate()" item-start large>
-                <ion-icon name="calendar"></ion-icon>
-        </button>
-            <span ion-datepicker [(value)]="initDate" [headerClasses]="color" [localeStrings]="localeString" [disabledDates]="disabledDates" [min]="initDate" clear class="ScheduleDate" locale="en-US" (ionSeleted)="obtenerBloques()" (ionChange)="obtenerBloques()">
-                <h1  style="margin-left:20px">{{initDate |  date:'dd/MM/yyyy'}}</h1>
-        </span>
-        </ion-item>
-    </div>
-    <div *ngIf="horavisible">
-        <h4>Seleccione Hora de atención</h4>
-        <ion-list>
-            <ion-card *ngFor="let item of bloques">
-                <ion-item>
-                    <ion-icon name="alarm" item-start></ion-icon>
-                    <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
-                </ion-item>
-                <ion-card-content>
-                    <h2>Hora disponible: {{item}}</h2>
-                    <p>Fecha: {{initDate | date:'dd/MM/yyyy'}}</p>
-                </ion-card-content>
-            </ion-card>
-        </ion-list>
-        <div style="margin-top:10px">
-            <ion-fab right bottom style="margin-bottom:10px; margin-left:10px">
-                <button ion-fab color="primary" (click)="verPreferencia()">
-                <ion-icon name="arrow-forward"></ion-icon>
-              </button>
-            </ion-fab>
-        </div>
     </div>
     <div *ngIf="preferenciaAtencion">
         <h4>Indique si desea ser atendido por un hombre o una mujer</h4>

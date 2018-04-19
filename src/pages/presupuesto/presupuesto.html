@@ -44,11 +44,10 @@
             <div class="form-group">
                 <ion-row center>
                     <ion-col col-4>
-                        <button ion-button type="submit">Aceptar</button>
+                        <button ion-button type="submit" (click)="agendar()">Aceptar</button>
                     </ion-col>
-                    <ion-col col-3></ion-col>
-                    <ion-col col-3>
-                        <button ion-button type="submit" (click)="rechazar()">Rechazar</button>
+                    <ion-col col-4>
+                        <button ion-button color="dark-gray" type="submit" (click)="rechazar()">Rechazar</button>
                     </ion-col>
                 </ion-row>
             </div>

@@ -2,6 +2,7 @@ import { SolicitudProvider } from './../../providers/solicitud/solicitud';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { RechazoComponent } from '../../components/rechazo/rechazo';
+import { AgendaPage } from '../agenda/agenda';
 
 /**
  * Generated class for the PresupuestoPage page.
@@ -62,5 +63,8 @@ solicitud:{
       let profileModal = this.modalCtrl.create(RechazoComponent);
       profileModal.present();
     
+  }
+  agendar(){
+    this.navCtrl.push(AgendaPage);
   }
 }

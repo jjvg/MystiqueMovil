@@ -27,21 +27,21 @@ export class RechazoComponent {
   confirmar(){
       let alert = this.alertCtrl.create({
         title: '',
-        message: '¿Seguro que desea cancelr su cita?',
+        message: '¿Seguro que desea Rechazar?',
         buttons: [
           {
             text: 'SI',
             handler: () => {
               console.log('Cancel clicked');
               this.GuardarRechazo();
-              this.navCtrl.setRoot(PrincipalPage);
+              this.viewCtrl.dismiss();
             }
           },
           {
             text: 'No',
             handler: () => {
               console.log('Buy clicked');
-              this.navCtrl.setRoot(PrincipalPage);
+              this.viewCtrl.dismiss();
             }
           }
         ]

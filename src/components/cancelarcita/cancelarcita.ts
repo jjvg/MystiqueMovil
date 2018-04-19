@@ -46,14 +46,14 @@ export class CancelarcitaComponent {
             handler: () => {
               console.log('Cancel clicked');
               this.gotoGuardar();
-              this.navCtrl.setRoot(PrincipalPage);
+              this.viewCtrl.dismiss();
             }
           },
           {
             text: 'No',
             handler: () => {
               console.log('Buy clicked');
-              this.navCtrl.setRoot(PrincipalPage);
+              this.viewCtrl.dismiss();
             }
           }
         ]

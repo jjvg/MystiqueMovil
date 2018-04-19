@@ -1,6 +1,6 @@
 import { CalificarPage } from './../calificar/calificar';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ReclamogenerarPage } from './../reclamogenerar/reclamogenerar';
 /**
  * Generated class for the ServiciosRPage page.
@@ -16,20 +16,27 @@ import { ReclamogenerarPage } from './../reclamogenerar/reclamogenerar';
 })
 export class ServiciosRPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  servicios:string = "calificar";
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiciosRPage');
   }
   Reclamo(){
-    this.navCtrl.push(ReclamogenerarPage)
+    let alert = this.alertCtrl.create({
+      title: 'Aviso!',
+      subTitle: 'Por Favor Califica nuestros Servicios para poder realizar un reclamo, Gracias',
+      buttons: ['Cerrar']
+    });
+    alert.present();
   }
 
-  Reclamo1(){
-    this.navCtrl.push(ReclamogenerarPage)
-  }
-  calificar(){
+  
+  calificar(id: number){
     this.navCtrl.push(CalificarPage)
+  }
+  Reclamo1(){
+    this.navCtrl.push(ReclamogenerarPage);
   }
 }

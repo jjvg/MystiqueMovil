@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
 /**
  * Generated class for the CalificarPage page.
@@ -14,12 +14,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'calificar.html',
 })
 export class CalificarPage {
+  calificacion: any;
+  color: { backgroundcolor: '#fd0087' };
+  visible: Boolean = true;
+  Serviciovisible: Boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.calificacion = {
+      lugar: null,
+      ambientacion: null,
+      infraestructura: null,
+      secado: null,
+      tinte: null
+    };
   }
 
+
   ionViewDidLoad() {
+
     console.log('ionViewDidLoad CalificarPage');
   }
 
+  verServicio() {
+    this.visible = false;
+    this.Serviciovisible = true;
+  }
 }
+
