@@ -103,7 +103,7 @@ text2:Boolean=false;
   guardar(){
     let alert = this.alertCtrl.create({
         title: 'Hola!!',
-        subTitle: 'Gracias por tu Comentario, TLo estaremos atendiendo',
+        subTitle: 'Gracias por tu Comentario, Lo estaremos atendiendo',
         buttons: [{
           text:'Cerrar',
         handler:()=>{
