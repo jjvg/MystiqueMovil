@@ -35,9 +35,12 @@ import { PerfilPage } from './../pages/perfil/perfil';
 import { EmpresaPage } from './../pages/empresa/empresa';
 import {AgendaPage} from './../pages/agenda/agenda';
 
+
 //Componentes
 import { ServrecomendadoComponent } from '../components/servrecomendado/servrecomendado';
-import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado'
+import { ArtrecomendadoComponent} from '../components/artrecomendado/artrecomendado';
+import { ListempleadoComponent} from '../components/listempleado/listempleado';
+import { ListservicioComponent} from '../components/listservicio/listservicio';
 // Nativos
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -45,7 +48,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ServiciosProvider } from '../providers/servicios/servicios';
 import { SolicitudProvider } from '../providers/solicitud/solicitud';
 import { SugerenciasPage } from '../pages/sugerencias/sugerencias';
-
+import {  ComentarPage} from '../pages/comentar/comentar';
+import { ServiciosPage } from '../pages/servicios/servicios';
+import { EmpleadosPage } from '../pages/empleados/empleados';
+import { ComentarioProvider } from '../providers/comentario/comentario';
 
 
 @NgModule({
@@ -77,7 +83,12 @@ import { SugerenciasPage } from '../pages/sugerencias/sugerencias';
     RechazoComponent,
     ServrecomendadoComponent,
     AgendaPage,
-    SugerenciasPage
+    SugerenciasPage,
+    ListservicioComponent,
+    ListempleadoComponent,
+    ComentarPage,
+    ServiciosPage,
+    EmpleadosPage
    
   ],
   imports: [
@@ -117,7 +128,12 @@ import { SugerenciasPage } from '../pages/sugerencias/sugerencias';
     CancelarcitaComponent,
     RechazoComponent,
     ServrecomendadoComponent,
-    SugerenciasPage
+    SugerenciasPage,
+    ListservicioComponent,
+    ListempleadoComponent,
+    ComentarPage,
+    ServiciosPage,
+    EmpleadosPage
    
 
    
@@ -128,6 +144,7 @@ import { SugerenciasPage } from '../pages/sugerencias/sugerencias';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServiciosProvider,
     SolicitudProvider,
+    ComentarioProvider,
    
     
   ]

@@ -4,6 +4,8 @@ import { ServrecomendadoComponent } from './servrecomendado/servrecomendado';
 import { ArtrecomendadoComponent } from './artrecomendado/artrecomendado';
 import { CancelarcitaComponent } from './cancelarcita/cancelarcita';
 import { RechazoComponent } from './rechazo/rechazo';
+import {ListempleadoComponent} from './listempleado/listempleado';
+import  {ListservicioComponent} from './listservicio/listservicio';
 
 @NgModule({
 	declarations: [
@@ -12,6 +14,8 @@ import { RechazoComponent } from './rechazo/rechazo';
     ArtrecomendadoComponent,
     CancelarcitaComponent,
     RechazoComponent,
+    ListempleadoComponent,
+    ListservicioComponent,
     ],
 	imports: [],
 	exports: [
@@ -21,6 +25,8 @@ import { RechazoComponent } from './rechazo/rechazo';
     ArtrecomendadoComponent,
     CancelarcitaComponent,
     RechazoComponent,
+    ListservicioComponent,
+    ListempleadoComponent,
     ]
 })
 export class ComponentsModule {}

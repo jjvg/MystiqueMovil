@@ -26,7 +26,9 @@ export class ServiciosProvider {
 
  
   }
-  
+  getServicios(){
+    return this.servs;
+  }
   filterItems(searchTerm){
     return this.servs.filter((item) => {
      return item.name.toLowerCase().

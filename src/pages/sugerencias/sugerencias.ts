@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {ComentarPage} from '../comentar/comentar';
 /**
  * Generated class for the SugerenciasPage page.
  *
@@ -35,5 +35,7 @@ export class SugerenciasPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SugerenciasPage');
   }
-
+  gotoNuevoComentario(){
+    this.navCtrl.push(ComentarPage);
+  }
 }
