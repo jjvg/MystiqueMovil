@@ -52,6 +52,7 @@ import {  ComentarPage} from '../pages/comentar/comentar';
 import { ServiciosPage } from '../pages/servicios/servicios';
 import { EmpleadosPage } from '../pages/empleados/empleados';
 import { ComentarioProvider } from '../providers/comentario/comentario';
+import { AuthProvider } from '../providers/auth/auth';
 
 
 @NgModule({
@@ -145,6 +146,7 @@ import { ComentarioProvider } from '../providers/comentario/comentario';
     ServiciosProvider,
     SolicitudProvider,
     ComentarioProvider,
+    AuthProvider,
    
     
   ]

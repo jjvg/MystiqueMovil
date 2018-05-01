@@ -20,7 +20,7 @@
         </ion-list>
         <br><br><br><br>
         <div padding>
-            <button ion-button block type="submit">Ingresar</button>
+            <button ion-button block type="submit" [disabled]="!myForm.valid">Ingresar</button>
         </div>
     </form>
 </ion-content>

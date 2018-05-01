@@ -5,6 +5,7 @@ LoadingController, AlertController } from 'ionic-angular';
 import{ FormBuilder, Validators} from '@angular/forms';
 import {FormGroup } from '@angular/forms/src/model';
 import { Loading } from 'ionic-angular/components/loading/loading';
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 
@@ -23,30 +24,49 @@ import { Loading } from 'ionic-angular/components/loading/loading';
 export class LoginPage {
   myForm:FormGroup;
   public loading:Loading
-
+  creden:{
+    correo:String;
+    contrasenia:String;
+  };
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public authService: AuthProvider
   ) {
     this.myForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      correo: ['', [Validators.required,Validators.email]],
+      contrasenia: ['', Validators.required]
     });
   }
   loginUser(){
-    this.navCtrl.setRoot(PrincipalPage);
-
-    this.loading = this.loadingCtrl.create({
-      dismissOnPageChange: true,
-    });
-    this.loading.present();
-  }
-  goToResetPassword(){
-    this.navCtrl.push('ResetPasswordPage');
-  }
+    this.creden.correo=this.myForm.value.email;
+    this.creden.contrasenia=this.myForm.value.password;
+    this.authService.login(this.creden).subscribe(
+      (data)=>{
+        localStorage.setItem('id_user',data['id']);
+        localStorage.setItem('auth_token', data['token'])
+        this.navCtrl.setRoot(PrincipalPage);
+        this.loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+        });
+          this.loading.present();
+      },(error)=>{
+       let alert= this.alertCtrl.create({
+          subTitle:'Las Credenciales Fallaron',
+          buttons: [{
+          text:'Cerrar',
+            handler:()=>{
+              let navran=alert.dismiss();
+            }
+          }]
+        })
+        alert.present()
+        })
+ }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
