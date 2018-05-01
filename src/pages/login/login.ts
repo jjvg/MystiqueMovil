@@ -36,16 +36,21 @@ export class LoginPage {
     public formBuilder: FormBuilder,
     public authService: AuthProvider
   ) {
+    this.creden= {
+      correo:'',
+      contrasenia:''
+    }
     this.myForm = this.formBuilder.group({
       correo: ['', [Validators.required,Validators.email]],
       contrasenia: ['', Validators.required]
     });
   }
   loginUser(){
-    this.creden.correo=this.myForm.value.email;
-    this.creden.contrasenia=this.myForm.value.password;
+    this.creden.correo=this.myForm.value.correo;
+    this.creden.contrasenia=this.myForm.value.contrasenia;
     this.authService.login(this.creden).subscribe(
       (data)=>{
+        console.log(data);
         localStorage.setItem('id_user',data['id']);
         localStorage.setItem('auth_token', data['token'])
         this.navCtrl.setRoot(PrincipalPage);
@@ -59,7 +64,7 @@ export class LoginPage {
           buttons: [{
           text:'Cerrar',
             handler:()=>{
-              let navran=alert.dismiss();
+              alert.dismiss();
             }
           }]
         })

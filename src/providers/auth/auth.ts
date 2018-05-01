@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-const API_URL = 'http://localhost:3000/api/';
+const API_URL = 'http://192.168.32.1:3000/api/';
 
 /*
   Generated class for the AuthProvider provider.
