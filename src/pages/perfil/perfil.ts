@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
-import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
+import { ClienteProvider} from '../../providers/cliente/cliente';
+import { ModalController, Platform, NavParams, NavController } from 'ionic-angular';
 
 
 @Component({
@@ -8,7 +8,14 @@ import { ModalController, Platform, NavParams, ViewController } from 'ionic-angu
   templateUrl: 'perfil.html'
 })
 export class PerfilPage {
-  constructor(public modalCtrl: ModalController) {}
+	user:any;
+  constructor(
+  	public modalCtrl: ModalController,
+  	public navCtrl: NavController, 
+  	public navParams:NavParams,
+  	private clienteService:  ClienteProvider) {
+  	this.user=this.clienteService.getCliente();
+  }
 
   openModal() {
 

@@ -53,6 +53,7 @@ import { ServiciosPage } from '../pages/servicios/servicios';
 import { EmpleadosPage } from '../pages/empleados/empleados';
 import { ComentarioProvider } from '../providers/comentario/comentario';
 import { AuthProvider } from '../providers/auth/auth';
+import { ClienteProvider } from '../providers/cliente/cliente';
 
 
 @NgModule({
@@ -147,6 +148,7 @@ import { AuthProvider } from '../providers/auth/auth';
     SolicitudProvider,
     ComentarioProvider,
     AuthProvider,
+    ClienteProvider,
    
     
   ]

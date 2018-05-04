@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import {ComentarPage} from '../../pages/comentar/comentar';
 /**
  * Generated class for the ListempleadoComponent component.
@@ -36,7 +36,7 @@ export class ListempleadoComponent {
       foto :'assets/imgs/peluquera3.jpg',
       especialidad:'Quimicos Capilares',
       codigo:'0002'
-    },
+    }
   ]
   }
   Cerrar(data){

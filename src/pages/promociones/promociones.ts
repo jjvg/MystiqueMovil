@@ -2,6 +2,7 @@ import { SolicitudesPage } from './../solicitudes/solicitudes';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SolicitudPage } from '../solicitud/solicitud';
+import {PromocionProvider} from '../../providers/promocion/promocion';
 
 /**
  * Generated class for the PromocionesPage page.
@@ -16,9 +17,11 @@ import { SolicitudPage } from '../solicitud/solicitud';
   templateUrl: 'promociones.html',
 })
 export class PromocionesPage {
-	items:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-   this.items=[{
+  items:any;
+  promociones: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public promocionService: PromocionProvider) {
+   this.promocion();
+    this.items=[{
       "nombre":"Promocion 2x1",
       "content":"Existe una nueva tecnica para realizar masajes capilares a nuestros clientes enterate mas aqui",
       "img":"assets/imgs/Promocion.jpg",
@@ -40,9 +43,19 @@ export class PromocionesPage {
     'tipo':'promocion'
   }];
   }
-
+  promocion(){
+    this.promocionService.getPromocion().subscribe(
+      (data)=>{
+        this.promociones=data['data'];
+      },(error)=>{console.log(error)}
+    );
+  
+  }
+    
   ionViewDidLoad() {
     console.log('ionViewDidLoad PromocionesPage');
+    this.promocion();
+    console.log(this.promociones);
   }
   adquirirPromo(data){
     this.navCtrl.push(SolicitudPage,data)

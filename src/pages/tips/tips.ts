@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import{ConsejoProvider} from '../../providers/consejo/consejo';
 /**
  * Generated class for the TipsPage page.
  *
@@ -14,8 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tips.html',
 })
 export class TipsPage {
+  tips:any;
   items:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public consejoService: ConsejoProvider) {
+    this.consejo();
     this.items=[{
       "nombre":"Masaje Capilar",
       "content":"Existe una nueva tecnica para realizar masajes capilares a nuestros clientes enterate mas aqui",
@@ -32,9 +34,20 @@ export class TipsPage {
     "img":"assets/imgs/exfoliante.png"
   }];    
   }
+consejo(){
+  this.consejoService.getConsejo().subscribe(
+    (data)=>{
+      this.tips=data['data'];
+      console.log(this.tips)
+    },(error)=>{console.log(error)}
+    
+  );
 
+}
   ionViewDidLoad() {
+   this.consejo();
     console.log('ionViewDidLoad TipsPage');
+  console.log(this.tips);
   }
-
+  
 }

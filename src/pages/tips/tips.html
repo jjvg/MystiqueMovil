@@ -20,14 +20,16 @@
 
 
 <ion-content>
-    <ion-list *ngFor="let item of items">
+       
+    <ion-list *ngFor="let item of tips">
         <ion-card>
-            <img src="{{item.img}}" />
+                
             <ion-card-content>
+                    <img mat-card-image src= "/assets/imgs/alisado.jpg" >
                 <ion-card-title>
-                    {{item.nombre}}
+                    {{item.titulo}}
                 </ion-card-title>
-                <p>{{item.content}}
+                <p>{{item.descripcion}}
                 </p>
             </ion-card-content>
             <div text-left>

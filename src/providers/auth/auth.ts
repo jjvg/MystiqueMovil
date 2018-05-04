@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-const API_URL = 'http://192.168.32.1:3000/api/';
+const API_URL = 'http://localhost:3000/api/';
 
 /*
   Generated class for the AuthProvider provider.
@@ -11,7 +11,7 @@ const API_URL = 'http://192.168.32.1:3000/api/';
 @Injectable()
 export class AuthProvider {
   user:any;
-  url_login:String='signin';
+  url_login : 'signin/';
   perfil:any;
   token:any;
   id_user_token:any;
@@ -20,10 +20,20 @@ export class AuthProvider {
     console.log('Hello AuthProvider Provider');
   }
   login(cred){
-    return this.http.post(API_URL+this.url_login,cred);
+    console.log(API_URL+'signin')
+    return this.http.post(API_URL+'signin',cred);
   }
   ApiUrl(){
     return API_URL;
   }
-  
 }
+
+
+
+
+
+
+
+
+
+

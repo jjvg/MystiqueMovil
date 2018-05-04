@@ -20,15 +20,15 @@
 
 
 <ion-content>
-    <ion-list *ngFor="let item of items">
+    <ion-list *ngFor="let item of promociones">
         <ion-card>
-            <img src="{{item.img}}" />
+            <img mat-card-image src= "http://localhost:3000/files/promocion/{{item.id}}.{{item.imagen}}" >
             <ion-card-content>
                 <ion-card-title>
                     {{item.nombre}}
                 </ion-card-title>
-                <h2>{{item.duracion}}</h2>
-                <p>{{item.content}}
+                <h2>{{item.descripcion}}</h2>
+               <p></p> <p>Porcentaje de descuento {{item.porcentaje_descuento}}
                 </p>
             </ion-card-content>
             <div text-left>

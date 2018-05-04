@@ -2,7 +2,7 @@ import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { DatePickerDirective } from 'ion-datepicker';
 import 'rxjs/add/operator/debounceTime';
-import {PrincipalPage} from '../principal/principal';
+//import {PrincipalPage} from '../principal/principal';
 /**
  * Generated class for the AgendaPage page.
  *

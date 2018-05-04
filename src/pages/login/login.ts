@@ -1,3 +1,4 @@
+import { ClienteProvider } from './../../providers/cliente/cliente';
 import { PrincipalPage } from './../principal/principal';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,
@@ -34,7 +35,8 @@ export class LoginPage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
-    public authService: AuthProvider
+    public authService: AuthProvider,
+    public clienteService: ClienteProvider,
   ) {
     this.creden= {
       correo:'',
@@ -48,11 +50,14 @@ export class LoginPage {
   loginUser(){
     this.creden.correo=this.myForm.value.correo;
     this.creden.contrasenia=this.myForm.value.contrasenia;
+    console.log(this.creden);
     this.authService.login(this.creden).subscribe(
       (data)=>{
         console.log(data);
-        localStorage.setItem('id_user',data['id']);
-        localStorage.setItem('auth_token', data['token'])
+        localStorage.setItem('id_user',data['data'].id);
+        localStorage.setItem('auth_token', data['data'].token)
+        this.getUser(data['data'].id),
+        this.clienteService.setCorreo(this.creden.correo);
         this.navCtrl.setRoot(PrincipalPage);
         this.loading = this.loadingCtrl.create({
         dismissOnPageChange: true,
@@ -64,17 +69,25 @@ export class LoginPage {
           buttons: [{
           text:'Cerrar',
             handler:()=>{
-              alert.dismiss();
+              this.navCtrl.popToRoot();
             }
           }]
         })
         alert.present()
         })
  }
+ getUser(id){
+  this.clienteService.getUser(id).subscribe((data)=>{
+    console.log(data);
+    this.clienteService.setCliente(data['data']);
+    this.clienteService.setClienteAuth();
+    this.clienteService.setPerfil();
+  },(error)=>{
+    console.log(error)
+  })
+ }
   
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
 }

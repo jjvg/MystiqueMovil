@@ -15,24 +15,21 @@
 </ion-header>
 <ion-content>
 
-    <ion-list>
-        <ion-list-header>
-            Mis Datos de Perfil
-        </ion-list-header>
-        <a ion-item>
-        Datos Personales
-      </a>
-        <a ion-item>
-        Datos de Rostro
-      </a>
-        <a ion-item>
-        Datos de Cabello
-      </a>
-        <a ion-item>
-       Mis Gustos
-        </a>
-    </ion-list>
+    <ion-card>
+        <ion-item>
+        <ion-avatar item-start>
+        <img src="assets/imgs/gmascu.jpeg">
+        </ion-avatar>
+        <h2>Nombre: {{user.nombre}}  {{user.apellido}}</h2>
+            <p>{{user.correo}}</p>
+        </ion-item>
+        <img src="maculino.png">
+    </ion-card>
+     <ion-item>
+         <p>Telefono: {{user.telefono}}</p>
+         <p>Dirección {{user.direccion}}</p>
+     </ion-item>
     <div text-center>
-        <button ion-button>Actualizar Preferencias</button>
+        <button ion-button >Actualizar Preferencias</button>
     </div>
 </ion-content>
