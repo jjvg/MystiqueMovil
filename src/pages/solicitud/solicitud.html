@@ -10,21 +10,27 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-
-    <div *ngIf="visible">
-
-        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre,tipo"></ion-searchbar>
+    <div *ngIf="catego">
+    <ion-list>
+        <ion-list-header>
+            <h2>Seleccione una categoria</h2>
+        </ion-list-header> 
+        <button ion-item *ngFor="let item of categoria,let i=index " (click)="siguiente(i)"> {{item.nombre}}</button>
+        <button ion-item (click)="verlist()">Todos</button>     
+    </ion-list>
+    </div>
+    <div *ngIf="visible" >
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre"></ion-searchbar>
         <div *ngIf="searching" class="spinner-container">
             <ion-spinner></ion-spinner>
         </div>
         <h3>Seleccionar servicios</h3>
         <ion-list>
-            <ion-item *ngFor="let item of servicios">
+            <ion-item *ngFor="let item of servicios ,let i=index ">
                 <div item-content>
-                    <h2>{{item.name}}</h2>
+                    <h2>{{item.nombre}}</h2>
                 </div>
-                <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
-
+                <ion-toggle [(ngModel)]="servicios[i].select" (ngModelChange)="ver(i)" color="secondary" checked="false" item-end></ion-toggle> 
             </ion-item>
         </ion-list>
 
@@ -63,9 +69,9 @@
         <h3>Selecciona un empleado</h3>
         <ion-list>
             <ion-item *ngFor="let empe of empleadosDisponibles">
-                <ion-thumbnail item-start>
+                <!--<ion-thumbnail item-start>
                     <img src="{{empe.foto}}">
-                </ion-thumbnail>
+                </ion-thumbnail>-->
                 <div item-content>
                     <h2 color="primary">{{empe.nombre}}</h2>
                     <p>Especialidad: {{empe.especialidad}}</p>

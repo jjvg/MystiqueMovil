@@ -8,7 +8,6 @@ import { LoginPage } from "../pages/login/login";
 import { PerfilPage } from '../pages/perfil/perfil';
 import { SolicitudesPage } from '../pages/solicitudes/solicitudes';
 import { TipsPage } from '../pages/tips/tips';
-import {MensajesPage} from '../pages/mensajes/mensajes';
 import {ReclamosPage} from '../pages/reclamos/reclamos';
 import {ServiciosRPage} from '../pages/servicios-r/servicios-r';
 import {CitasPage} from '../pages/citas/citas';

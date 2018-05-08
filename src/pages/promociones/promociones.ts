@@ -1,4 +1,4 @@
-import { SolicitudesPage } from './../solicitudes/solicitudes';
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SolicitudPage } from '../solicitud/solicitud';

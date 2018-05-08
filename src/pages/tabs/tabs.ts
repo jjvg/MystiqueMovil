@@ -1,4 +1,4 @@
-import { PresupuestoPage } from './../presupuesto/presupuesto';
+
 import { HistorialPage } from './../historial/historial';
 import { Component } from '@angular/core';
 import {IonicPage} from 'ionic-angular';

@@ -1,6 +1,6 @@
 import { CancelarcitaComponent } from './../../components/cancelarcita/cancelarcita';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 /**
  * Generated class for the CitasPage page.

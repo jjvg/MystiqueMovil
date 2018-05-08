@@ -18,12 +18,14 @@
     <ion-card>
         <ion-item>
         <ion-avatar item-start>
-        <img src="assets/imgs/gmascu.jpeg">
+        <img *ngIf="hombre" src="assets/imgs/gmascu.jpeg">
+        <img  *ngIf="mujer" src="assets/imgs/gfeme.jpeg">
         </ion-avatar>
         <h2>Nombre: {{user.nombre}}  {{user.apellido}}</h2>
             <p>{{user.correo}}</p>
         </ion-item>
-        <img src="maculino.png">
+        <img *ngIf="hombre" src="assests/imgs/masculino.png">
+        <img *ngIf="mujer" src="assests/imgs/femenino.png">
     </ion-card>
      <ion-item>
          <p>Telefono: {{user.telefono}}</p>

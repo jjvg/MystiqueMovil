@@ -1,5 +1,4 @@
 
-import { HomePage } from './../home/home';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';

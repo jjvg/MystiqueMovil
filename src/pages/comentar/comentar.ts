@@ -3,7 +3,6 @@ import { ComentarioProvider } from './../../providers/comentario/comentario';
 import { EmpleadosPage } from './../empleados/empleados';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SugerenciasPage } from '../sugerencias/sugerencias';
 import { ServiciosPage } from '../servicios/servicios';
 
 

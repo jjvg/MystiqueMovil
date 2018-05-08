@@ -56,8 +56,8 @@ export class LoginPage {
         console.log(data);
         localStorage.setItem('id_user',data['data'].id);
         localStorage.setItem('auth_token', data['data'].token)
-        this.getUser(data['data'].id),
-        this.clienteService.setCorreo(this.creden.correo);
+        this.getUser(data['data'].id);
+        this.clienteService.setCorreo(this.myForm.value.correo);
         this.navCtrl.setRoot(PrincipalPage);
         this.loading = this.loadingCtrl.create({
         dismissOnPageChange: true,
@@ -80,11 +80,17 @@ export class LoginPage {
   this.clienteService.getUser(id).subscribe((data)=>{
     console.log(data);
     this.clienteService.setCliente(data['data']);
+    this.getCliente(data['data'].id);
     this.clienteService.setClienteAuth();
     this.clienteService.setPerfil();
   },(error)=>{
     console.log(error)
   })
+ }
+ getCliente(id){
+   this.clienteService.getClient(id).subscribe((data)=>{
+     console.log(data);
+   })
  }
   
   ionViewDidLoad() {

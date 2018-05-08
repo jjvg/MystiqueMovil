@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { GarantiaPage } from './../garantia/garantia';
 import {AgendaPage} from './../agenda/agenda';
 /**
  * Generated class for the ReclamosPage page.

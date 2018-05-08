@@ -54,6 +54,11 @@ import { EmpleadosPage } from '../pages/empleados/empleados';
 import { ComentarioProvider } from '../providers/comentario/comentario';
 import { AuthProvider } from '../providers/auth/auth';
 import { ClienteProvider } from '../providers/cliente/cliente';
+import { ConsejoProvider} from '../providers/consejo/consejo';
+import { PromocionProvider} from '../providers/promocion/promocion';
+import { ParametrosProvider } from '../providers/parametros/parametros';
+import { TiposProvider } from '../providers/tipos/tipos';
+import { EmpleadoProvider } from '../providers/empleado/empleado';
 
 
 @NgModule({
@@ -149,6 +154,11 @@ import { ClienteProvider } from '../providers/cliente/cliente';
     ComentarioProvider,
     AuthProvider,
     ClienteProvider,
+    PromocionProvider,
+    ConsejoProvider,
+    ParametrosProvider,
+    TiposProvider,
+    EmpleadoProvider,
    
     
   ]

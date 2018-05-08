@@ -15,8 +15,9 @@ export class ClienteProvider {
   url_perfil:string = 'perfil/'
   perfil:any;
 
+  correo_cliente:string;
   cliente:{
-    id:string,
+    id:number,
     nombre:string,
     apellido:string,
     cedula:string,
@@ -32,7 +33,7 @@ export class ClienteProvider {
   }
   constructor(public http: HttpClient, public authService:AuthProvider) {
     this.cliente={
-      id:'',
+      id:null,
       nombre:'',
       apellido:'',
       cedula:'',
@@ -41,7 +42,7 @@ export class ClienteProvider {
       id_ciudad:0,
       fecha_nacimiento:'',
       tipo_cliente:'',
-      id_usuario:0,
+      id_usuario:null,
       estatus:'',
       auth:false,
       correo:'',
@@ -49,11 +50,15 @@ export class ClienteProvider {
     }
     console.log('Hello ClienteProvider Provider');
   }
+  getClient(i){
+    return this.http.get(this.authService.ApiUrl()+'vista_cliente/'+i)
+  }
   getUser(id){
     return this.http.get(this.authService.ApiUrl()+'cliente/'+id)
   }
   setCliente(user){
     this.cliente=user;
+    this.cliente.correo=this.correo_cliente;
   }
   setClienteAuth(){
     this.cliente.auth=true;
@@ -78,7 +83,8 @@ export class ClienteProvider {
       return this.perfil;
     }
     setCorreo(correo){
-      this.cliente.correo=correo;
+      console.log(correo);
+      this.correo_cliente=correo;
     }
 
 
