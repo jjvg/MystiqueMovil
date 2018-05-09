@@ -77,5 +77,5 @@ export class ServiciosProvider {
       item.id_tipo_servicio.valueOf() > -1;;
      });
     }
-    
+  
 }

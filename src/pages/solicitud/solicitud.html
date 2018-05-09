@@ -11,15 +11,15 @@
 </ion-header>
 <ion-content padding>
     <div *ngIf="catego">
-    <ion-list>
-        <ion-list-header>
-            <h2>Seleccione una categoria</h2>
-        </ion-list-header> 
-        <button ion-item *ngFor="let item of categoria,let i=index " (click)="siguiente(i)"> {{item.nombre}}</button>
-        <button ion-item (click)="verlist()">Todos</button>     
-    </ion-list>
+        <ion-list>
+            <ion-list-header>
+                <h2>Seleccione una categoria</h2>
+            </ion-list-header>
+            <button ion-item *ngFor="let item of categoria,let i=index " (click)="siguiente(i)"> {{item.nombre}}</button>
+            <button ion-item (click)="verlist()">Todos</button>
+        </ion-list>
     </div>
-    <div *ngIf="visible" >
+    <div *ngIf="visible">
         <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre"></ion-searchbar>
         <div *ngIf="searching" class="spinner-container">
             <ion-spinner></ion-spinner>
@@ -30,7 +30,7 @@
                 <div item-content>
                     <h2>{{item.nombre}}</h2>
                 </div>
-                <ion-toggle [(ngModel)]="servicios[i].select" (ngModelChange)="ver(i)" color="secondary" checked="false" item-end></ion-toggle> 
+                <ion-toggle [(ngModel)]="servicios[i].select" (ngModelChange)="ver(i)" color="secondary" checked="false" item-end></ion-toggle>
             </ion-item>
         </ion-list>
 
@@ -68,7 +68,7 @@
     <div *ngIf="empleadovisible">
         <h3>Selecciona un empleado</h3>
         <ion-list>
-            <ion-item *ngFor="let empe of empleadosDisponibles">
+            <ion-item *ngFor="let empe of empleados">
                 <!--<ion-thumbnail item-start>
                     <img src="{{empe.foto}}">
                 </ion-thumbnail>-->

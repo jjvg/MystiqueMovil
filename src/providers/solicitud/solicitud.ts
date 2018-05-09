@@ -1,3 +1,4 @@
+import { AuthProvider } from './../auth/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -11,7 +12,7 @@ import { Injectable } from '@angular/core';
 export class SolicitudProvider {
   solicitud:any
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public authService: AuthProvider) {
     this.solicitud={
       fecha:'10/10/2018',
       hora:'8:00 am',
@@ -27,5 +28,8 @@ export class SolicitudProvider {
   getSolicitud(){
     return this.solicitud;
   }
+   saveSolicitud(sol,){
+     return this.http.post(this.authService.ApiUrl()+'solicitu',sol)
+   }
 
 }

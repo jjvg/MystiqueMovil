@@ -1,3 +1,4 @@
+import { SolicitudProvider } from './../../providers/solicitud/solicitud';
 
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component} from '@angular/core';
@@ -8,6 +9,7 @@ import { EmpleadoProvider} from '../../providers/empleado/empleado';
 import { ServiciosProvider } from '../../providers/servicios/servicios';
 import 'rxjs/add/operator/debounceTime';
 import { FormControl } from '@angular/forms';
+
 //import { PrincipalPage } from '../principal/principal';
 //import{ FormBuilder, Validators} from '@angular/forms';
 //import {FormGroup } from '@angular/forms/src/model';
@@ -33,7 +35,8 @@ export class SolicitudPage {
   solicitud:{
     id_cliente:number,
     id_promocion:number,
-    empleados:any[],
+    empleadosPelu:number,
+    empleadosMaqui:number
     servicios:any[],
   };
   //........................
@@ -64,7 +67,8 @@ export class SolicitudPage {
     public dataSer: ServiciosProvider,
     public tipoService: TiposProvider,
     public clientService: ClienteProvider,
-    public empleSrvce: EmpleadoProvider
+    public empleSrvce: EmpleadoProvider,
+    public soliService:SolicitudProvider,
     ) {
     this.getCategorias();
 
@@ -72,7 +76,8 @@ export class SolicitudPage {
    this.solicitud={
     id_cliente:null,
     id_promocion:null,
-    empleados:[],
+    empleadosPelu:null,
+    empleadosMaqui:null,
     servicios:[],
   };
   this.solicitud.servicios= [];
@@ -86,6 +91,7 @@ export class SolicitudPage {
   }
   this.preferenciaAtencion=false;
   this.empleados=[]
+  this.setEmplea();
   }
 
   ionViewDidLoad() {
@@ -95,7 +101,7 @@ export class SolicitudPage {
       this.searching = false;
       this.setFilteredItems();
       });
-    this.setEmplea();
+    
     console.log('ionViewDidLoad SolicitudPage');
   }
 
@@ -124,6 +130,7 @@ export class SolicitudPage {
                   this.visible=true;
                   this.preferenciaAtencion=false;
                   this.empleadovisible=false;
+                  this.newSolicitu(this.solicitud);
                 console.log('Dijo que no');
                 //this.asignarAleatorio();
                 //this.guardarSolicitud();
@@ -210,4 +217,12 @@ export class SolicitudPage {
             console.log(error);
           })
       }
+      newSolicitu(soli){
+        this.soliService.saveSolicitud(soli).subscribe((soli)=>{
+          console.log(soli);
+        },(error)=>{
+          console.log(error);
+        })
+      }
+
   }
