@@ -15,7 +15,7 @@
             <ion-list-header>
                 <h2>Seleccione una categoria</h2>
             </ion-list-header>
-            <button ion-item *ngFor="let item of categoria,let i=index " (click)="siguiente(i)"> {{item.nombre}}</button>
+            <button ion-item *ngFor="let item of categoria,let i=index " (click)="siguiente(item.id)"> {{item.nombre}}</button>
             <button ion-item (click)="verlist()">Todos</button>
         </ion-list>
     </div>
@@ -26,7 +26,7 @@
         </div>
         <h3>Seleccionar servicios</h3>
         <ion-list>
-            <ion-item *ngFor="let item of servicios ,let i=index ">
+            <ion-item *ngFor="let item of serviciosmostrar ,let i=index ">
                 <div item-content>
                     <h2>{{item.nombre}}</h2>
                 </div>
@@ -45,16 +45,13 @@
         <h4>Indique si desea ser atendido por un hombre o una mujer</h4>
         <ion-list>
             <ion-item>
-                <ion-label>Hombre</ion-label>
-                <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                <button ion-button color="secondary" item-end  (click)="Sexo('hombre')" block>Hombre</button>
             </ion-item>
             <ion-item>
-                <ion-label>Mujer</ion-label>
-                <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                <button ion-button color="secondary" item-end  (click)="Sexo('hombre')" block>Mujer</button>
             </ion-item>
             <ion-item>
-                <ion-label>Indiferente</ion-label>
-                <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+                <button ion-button color="secondary" item-end (click)="Sexo('cualquiera')" block>Cualquiera</button>
             </ion-item>
         </ion-list>
         <div style="margin-top:10px">
@@ -68,13 +65,13 @@
     <div *ngIf="empleadovisible">
         <h3>Selecciona un empleado</h3>
         <ion-list>
-            <ion-item *ngFor="let empe of empleados">
+            <ion-item *ngFor="let empe of emple">
                 <!--<ion-thumbnail item-start>
                     <img src="{{empe.foto}}">
                 </ion-thumbnail>-->
                 <div item-content>
                     <h2 color="primary">{{empe.nombre}}</h2>
-                    <p>Especialidad: {{empe.especialidad}}</p>
+                    <p>Telefono: {{empe.telefono}}</p>
                 </div>
                 <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
             </ion-item>
@@ -88,4 +85,4 @@
         </ion-row>
 
     </div>
-</ion-content>
+</ion-content>s

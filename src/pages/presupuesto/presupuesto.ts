@@ -34,9 +34,9 @@ solicitud:{
       servicios:[],
       
     };
-    this.cargarSolicitud();
-    this.total=this.calTotal();
-    this.ser=this.solicitud['servicios'];
+   // this.cargarSolicitud();
+   // this.total=this.calTotal();
+   // this.ser=this.solicitud['servicios'];
   }
 
   ionViewDidLoad() {
@@ -46,7 +46,7 @@ solicitud:{
     
   }
   cargarSolicitud(){
-    this.solicitud=this.dataSolicitud.getSolicitud();
+    //this.solicitud=this.dataSolicitud.getSolicitud();
   }
   calTotal():Number{
     var suma :Number=0;

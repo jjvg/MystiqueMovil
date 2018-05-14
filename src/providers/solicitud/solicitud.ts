@@ -10,26 +10,17 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class SolicitudProvider {
-  solicitud:any
+  solicitudes:any
 
   constructor(public http: HttpClient, public authService: AuthProvider) {
-    this.solicitud={
-      fecha:'10/10/2018',
-      hora:'8:00 am',
-      empleado:'Montes Ana',
-      servicios:[
-        {nombre:'Secado', costo:10000},
-        {nombre:'Planchado', costo:30000},
-        {nombre:'Keratina Especial', costo:50000}
-      ]}
     console.log('Hello SolicitudProvider Provider');
-    console.log(this.solicitud);
+
   }
-  getSolicitud(){
-    return this.solicitud;
+  getSolicitud(id_cliente){
+    return this.http.get(this.authService.ApiUrl()+'vista_solicitudes'+id_cliente);
   }
-   saveSolicitud(sol,){
-     return this.http.post(this.authService.ApiUrl()+'solicitu',sol)
+   saveSolicitud(sol){
+     return this.http.post(this.authService.ApiUrl()+'solicitud',sol)
    }
 
 }

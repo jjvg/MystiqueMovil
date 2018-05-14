@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { RechazoPage } from './../rechazo/rechazo';
@@ -17,6 +18,7 @@ import { SolicitudPage } from '../solicitud/solicitud';
 })
 export class SolicitudesPage {
   public loading:Loading;
+  solicitudes:any[];
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
   }
 
@@ -37,5 +39,8 @@ export class SolicitudesPage {
       dismissOnPageChange: true,
     });
     this.loading.present();
+  }
+  getSolicitudes(){
+
   }
 }

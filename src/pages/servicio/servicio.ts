@@ -47,7 +47,7 @@ export class ServicioPage {
     this.searching = true;
    }
   setFilteredItems() {
-    this.servicios = this.dataSer.filterItems(this.searchTerm);
+    this.servicios = this.dataSer.getServicios();
     }
     gotoSolicitud(){
       this.navCtrl.push(SolicitudPage)

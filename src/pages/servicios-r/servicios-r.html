@@ -6,71 +6,72 @@
 -->
 <ion-header>
 
-    <ion-navbar color="primary" no-border-bottom>
-        <button ion-button menuToggle>
-              <ion-icon name="menu"></ion-icon>
-         </button>
-        <ion-title>Servicios Recibidos</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only>
-      <ion-icon name="notifications"></ion-icon>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Servicios Recibidos</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="notifications"></ion-icon>
       </button>
-        </ion-buttons>
-    </ion-navbar>
-    <ion-toolbar color="primary" no-border-top>
-        <ion-segment [(ngModel)]="servicios">
-          <ion-segment-button style="color:white" value="calificar">
-            Por Calificar
-          </ion-segment-button>
-          <ion-segment-button style="color:white" value="garantia">
-            En Garantia
-          </ion-segment-button>
-        </ion-segment>
-      </ion-toolbar>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar color="primary" no-border-top>
+
+    <ion-segment [(ngModel)]="pestana">
+      <ion-segment-button style="color:white" value="calificar">
+        Por Calificar
+      </ion-segment-button>
+      <ion-segment-button style="color:white" value="garantia">
+        En Garantia
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-    <div  [ngSwitch]="servicios">
+  <div [ngSwitch]="pestana">
     <ion-list *ngSwitchCase="'calificar'">
-        <ion-item>
-            <h2>Corte de cabello</h2>
-            <p>Jueves • 12/04/2018 3:00 pm</p>
-            <button ion-button small color="primary"(click)="calificar()">
-            <div>Calificar</div>
-            </button>
-            <button ion-button clear small color="secondary" (click)="Reclamo()">
-            <div>Reclamar</div>
-            </button>
-        </ion-item>
-        <ion-item>
-            <h2>Extensiones</h2>
-            <p>Miercoles• 02/08/2017 1:30 pm</p>
-            <button ion-button small color="primary" (click)="calificar()">
-            <div>Calificar</div>
-            </button>
-            <button ion-button clear small color="secondary" (click)="Reclamo()">
-                <div>Reclamar</div>
-                </button>
-        </ion-item>
+      <ion-item *ngFor="let servicio of servicios">
+        <h2>{{servicio.nombre}}</h2>
+        <p>{{servicio.fecha}}</p>
+        <button ion-button small color="primary" (click)="calificar(servicio.id_detalle_servicio)">
+          <div>Calificar</div>
+        </button>
+        <button ion-button clear small color="secondary" (click)="Reclamo()">
+          <div>Reclamar</div>
+        </button>
+      </ion-item>
+      <ion-item>
+        <h2>Extensiones</h2>
+        <p>Miercoles• 02/08/2017 1:30 pm</p>
+        <button ion-button small color="primary" (click)="calificar()">
+          <div>Calificar</div>
+        </button>
+        <button ion-button clear small color="secondary" (click)="Reclamo()">
+          <div>Reclamar</div>
+        </button>
+      </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'garantia'">
-        <ion-item>
-            <h2>Maquillaje de novia</h2>
-            <p>Lunes • 11/04/2018 4:30 pm</p>
-            <button ion-button icon-left clear small color="secondary" (click)="Reclamo1()">
-                <ion-icon name=""></ion-icon>
-                <div>Reclamar</div>
-            </button>
-        </ion-item>
-        <ion-item>
-            <h2>Corte</h2>
-            <p>Jueves• 03/07/2017 5:15 pm</p>
-        </ion-item>
-        <ion-item>
-            <h2>Alisado</h2>
-            <p> Martes• 10/02/2017 3:30 pm</p>
-        </ion-item>
+      <ion-item>
+        <h2>Maquillaje de novia</h2>
+        <p>Lunes • 11/04/2018 4:30 pm</p>
+        <button ion-button icon-left clear small color="secondary" (click)="Reclamo1()">
+          <ion-icon name=""></ion-icon>
+          <div>Reclamar</div>
+        </button>
+      </ion-item>
+      <ion-item>
+        <h2>Corte</h2>
+        <p>Jueves• 03/07/2017 5:15 pm</p>
+      </ion-item>
+      <ion-item>
+        <h2>Alisado</h2>
+        <p> Martes• 10/02/2017 3:30 pm</p>
+      </ion-item>
     </ion-list>
-</div>
+  </div>
 </ion-content>

@@ -42,7 +42,6 @@ export class ServiciosProvider {
    visible:false,
    select:false}
    ];
-    this.setServicios();
     console.log('Hello ServiciosProvider Provider');
 
  
@@ -53,29 +52,15 @@ export class ServiciosProvider {
   getServicio(id){
     return this.http.get(this.auth.ApiUrl()+'servicio/'+id)
   }
-  //getTiposServicios(){
-  //  return this.http.get(this.auth.ApiUrl()+'tipo_servicio/')
-   // }
+  getServiciosconCategoria(){
+    return this.http.get(this.auth.ApiUrl()+'vista_servicios_categoria/')
+  }
+  getOneServicioconCategoria(it){
+    return this.http.get(this.auth.ApiUrl()+'vista_servicios_categoria/'+it);
+  }
 
 
-  setServicios(){
-    this.getServicios().subscribe(
-      (data)=>{
-        this.servs=data['data'];
-        console.log(this.servs);
-      },(error)=>{
-        console.log(error)
-      });
-  }
-  returnServicios(){
-    return this.servs;
-  }
-  filterItems(searchTerm){
-    return this.servs.filter((item) => {
-     return item.nombre.toLowerCase().
-     indexOf(searchTerm.toLowerCase()) > -1 ||
-      item.id_tipo_servicio.valueOf() > -1;;
-     });
-    }
+  
+  
   
 }
