@@ -44,7 +44,7 @@ var EmpleadosPage = /** @class */ (function () {
         ];
     }
     EmpleadosPage.prototype.Cerrar = function (data) {
-        this.comentProvider.setEmpleado(data);
+       // this.comentProvider.setEmpleado(data);
         this.navCtrl.push(ComentarPage, data);
     };
     EmpleadosPage.prototype.ionViewDidLoad = function () {

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ComentarPage} from '../comentar/comentar';
+import { ComentarioProvider } from './../../providers/comentario/comentario';
+import { ClienteProvider } from './../../providers/cliente/cliente';
+
 /**
  * Generated class for the SugerenciasPage page.
  *
@@ -14,11 +17,22 @@ import {ComentarPage} from '../comentar/comentar';
   templateUrl: 'sugerencias.html',
 })
 export class SugerenciasPage {
-
+  id_cli:number;
+  id_comen : any;
+  tcomentarios:any;
+  Sugerencias:any;
+  RSugerencias:any;
+  Comentario:any;
+  lista: Array<{id_co: number }>=[];
+  respuesta:any;
   historico:any[]=[];
   respuestas:any[]=[];
+ 
   comentarios:string='historico';
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public comenProvider: ComentarioProvider, public cliProvider: ClienteProvider ) {
+   this.Respuestas();
+   this.comentario();
+   this.tcomentario();
     this.historico=[
       {id_comentario:'0001',id_tipo_comentario:'1',descripcionTipo:'Queja',area:'Ambiente',contenido:'Las paredes estan siempre muy sucias',fecha:'18/04/2018',estatus:'en espera'},
       {id_comentario:'0003',id_tipo_comentario:'2',descripcionTipo:'Sugerencia',area:'Servicio',contenido:'Me gustaria que empiecen a ofertar cortes para Afro', fecha:'16/04/2018',estatus:'en espera'},
@@ -31,9 +45,47 @@ export class SugerenciasPage {
     
     ]
   }
+  comentario(){
+   this.id_cli=this.cliProvider.getCliente().id;
+    this.comenProvider.getComentario().subscribe(
+      (data)=>{
+        this.Comentario=data['data'];
+        console.log(this.Comentario)
+      },(error)=>{console.log(error)}
+      
+    );
+  }
+  tcomentario(){
+    this.comenProvider.getTComentario().subscribe(
+      (data)=>{
+        this.tcomentarios=data['data'];
+        console.log(this.tcomentarios)
+      },(error)=>{console.log(error)}
+      
+    );
+  
+  }
+  Respuestas(){
+    
+    this.comenProvider.getRSugerencia().subscribe(
+      (data)=>{
+        this.RSugerencias=data['data'];
+        this.id_comen=this.RSugerencias.id_comentario;
+        console.log(this.RSugerencias)
+  },(error)=>{console.log(error)}
+      
+);
+    
+  }
+
+  
 
   ionViewDidLoad() {
+    this.Respuestas();
+    this.comentario();
+    this.tcomentario();
     console.log('ionViewDidLoad SugerenciasPage');
+    console.log(this.RSugerencias);
   }
   gotoNuevoComentario(){
     this.navCtrl.push(ComentarPage);

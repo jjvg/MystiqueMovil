@@ -4,7 +4,9 @@ import { EmpleadosPage } from './../empleados/empleados';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ServiciosPage } from '../servicios/servicios';
+import { ClienteProvider } from './../../providers/cliente/cliente';
 
+//import{ConsejoProvider} from '../../providers/consejo/consejo';
 
 /**
  * Generated class for the ComentarPage page.
@@ -19,6 +21,7 @@ import { ServiciosPage } from '../servicios/servicios';
   templateUrl: 'comentar.html',
 })
 export class ComentarPage {
+tcomentarios:any;
 visibleE: Boolean=false;
 visibleS: Boolean=false;
 visibleEm: Boolean=false;
@@ -28,58 +31,67 @@ tipos:string = "";
 item:any;
 dir:any;
 comen:{
-  tipo:string,
-  nombre:string,
+
+  id_cliente : number,
+  id_tipo_comentario:number,
+  descripcion:string,
+  
 }
+
 coment:any
+cliente:any
 text:Boolean=false;
 text2:Boolean=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public comenProvider: ComentarioProvider, public alertCtrl:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public comenProvider: ComentarioProvider,  public cliProvider: ClienteProvider, public alertCtrl:AlertController) {
+  this.tcomentario();
+  console.log(this.tcomentarios)
   console.log(this.direccion);
   this.comen={
-    tipo:'',
-    nombre:'',
+    id_cliente: this.cliProvider.getCliente().id_usuario,
+    id_tipo_comentario: 0,
+    descripcion: "",
+    
   };
+//this.comen.id_cliente=1;
+//this.comen.id_tipo_comentario=1;
   this.coment=this.comenProvider.getComent();
-  //if(this.comen.tipo != ""){
-    //this.ver=false
-  //}
-  this.item={
-    nombre:"",
-    codigo:'',
-  };
-  this.item.nombre=this.navParams.data.nombre;
-  this.item.codigo=this.navParams.data.codigo;
-  console.log(this.item);
+  }
+
+
+  tcomentario(){
+    this.comenProvider.getTComentario().subscribe(
+      (data)=>{
+        this.tcomentarios=data['data'];
+        console.log(this.tcomentarios)
+      },(error)=>{console.log(error)}
+      
+    );
+  
   }
 
   ionViewDidLoad() {
-  	console.log(this.direccion)
-    console.log('ionViewDidLoad ComentarPage');
-    console.log (this.dir);
-    this.tipos=this.coment.tipo;
     this.direccion=this.coment.dirigido;
+    this.tcomentario();
+    console.log(this.tcomentarios);
   }
   ionViewWillEnter(){
-    console.log(this.navParams.data);
     this.coment=this.comenProvider.getComent();
-    console.log(this.coment)
+    
   } 
   cambiar(){
   	 if(this.direccion === 'e'){
-       //this.ver=false;
       this.visibleE=true;
       this.visibleS=false;
-      this.comenProvider.setValor(this.tipos,this.direccion);
+      this.comenProvider.setValor(this.tipos);//,this.direccion);
       
 		 }else{
        if(this.direccion === 's'){
-        this.comenProvider.setValor(this.tipos,this.direccion);
+        this.comenProvider.setValor(this.tipos);//,this.direccion);
         this.visibleE=false;
        this.visibleS=true;     
        }else{
          if(this.direccion === 'em'){
-          this.comenProvider.setValor(this.tipos,this.direccion);
+          this.comenProvider.setValor(this.tipos);//,this.direccion);
            this.visibleEm=true;
            this.visibleE=false;
            this.visibleS=false; 
@@ -89,17 +101,14 @@ text2:Boolean=false;
      console.log(this.direccion);
      console.log(this.navParams.data);
   }
-  selecEmpleado(){
-    this.navCtrl.push(EmpleadosPage);
-    this.visibleE=false
-    this.text=true;
-  }
-  selecServicio(){
-    this.navCtrl.push(ServiciosPage);
-    this.visibleS=false;
-    this.text2=true;
-  }
+ 
   guardar(){
+    console.log(this.comen);
+   this.comenProvider.Ncomentario(this.comen).subscribe((data)=>{
+     console.log(data);
+   },(error)=>{
+     console.log(error);
+   })
     let alert = this.alertCtrl.create({
         title: 'Hola!!',
         subTitle: 'Gracias por tu Comentario, Lo estaremos atendiendo',
@@ -116,6 +125,7 @@ text2:Boolean=false;
       });
       alert.present()
     }
+
 
  }
   

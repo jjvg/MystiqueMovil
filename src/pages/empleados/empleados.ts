@@ -40,7 +40,7 @@ empleados:any;
     ]
   }
   Cerrar(data){
-   this.comentProvider.setEmpleado(data);
+   //this.comentProvider.setEmpleado(data);
     this.navCtrl.push(ComentarPage,data);
   }
 
