@@ -29,6 +29,9 @@ export class TiposProvider {
    getValorParametro(){
      return this.http.get(this.auth.ApiUrl()+'valor_parametro')
    }
+   getEspeciali(){
+     return this.http.get(this.auth.ApiUrl()+'especialidad')
+   }
 
 
 }
