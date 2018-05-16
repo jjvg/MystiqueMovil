@@ -29,7 +29,7 @@ var ServiciosPage = /** @class */ (function () {
         console.log('ionViewDidLoad ServiciosPage');
     };
     ServiciosPage.prototype.Cerrar = function (data) {
-        this.comentService.setServicio(data);
+        //this.comentService.setServicio(data);
         this.navCtrl.pop();
     };
     ServiciosPage = __decorate([

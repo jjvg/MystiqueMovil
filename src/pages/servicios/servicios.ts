@@ -26,8 +26,15 @@ export class ServiciosPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiciosPage');
   }
+<<<<<<< HEAD
  // Cerrar(data){
    // this.comentService.setServicio(data);
    // this.navCtrl.pop();
  //s }
+=======
+  Cerrar(data){
+    //this.comentService.setServicio(data);
+    this.navCtrl.pop();
+  }
+>>>>>>> 4b46be66f9aa469d5a9299827c862ac47be2b1f9
 }
