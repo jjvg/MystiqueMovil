@@ -32,7 +32,14 @@ export class ServiciosRPage {
       }, []);
     }
 
-    this.serviciosProvider.getServiciosRecibidos().subscribe(
+    this.serviciosProvider.getServiciosRecibidos(1).subscribe(
+      (data)=>{
+        this.servicios=data['data'];
+        },(error)=>{
+          console.log(error)
+      });
+
+    this.serviciosProvider.getServiciosRecibidos(1).subscribe(
       result => {
 
         if (result.error) {

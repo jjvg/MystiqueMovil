@@ -55,6 +55,9 @@ export class ServiciosProvider {
   getServiciosconCategoria(){
     return this.http.get(this.auth.ApiUrl()+'vista_servicios_categoria/')
   }
+  getServiciosRecibidos(it){
+    return this.http.get(this.auth.ApiUrl()+'vista_cliente_orden/'+it);
+  }
   getOneServicioconCategoria(it){
     return this.http.get(this.auth.ApiUrl()+'vista_servicios_categoria/'+it);
   }
