@@ -12,52 +12,20 @@
 
 </ion-header>
 <ion-content padding>
-    <div *ngIf="ver">
-        <ion-item>
-            <ion-label> Tipo de comentario</ion-label>
-            <ion-select [(ngModel)]="tipos" multiple="False">
-                <ion-option value="sugerencia">Sugerencia</ion-option>
-                <ion-option value="inquietud">Inquietud</ion-option>
-                <ion-option value="queja">Queja</ion-option>
-            </ion-select>
-        </ion-item>
+    
+    <ion-item>
+        <ion-label>Tipo de comentario</ion-label>
+        <ion-select [(ngModel)]="comen.id_tipo_comentario" name="tipo"multiple="False">
+          <ion-option *ngFor="let C of tcomentarios" [value] = "C.id" >{{C.nombre}}</ion-option>
+        </ion-select>
 
-        <ion-item>
-            <ion-label>Hacia que va tu comentario</ion-label>
-            <ion-select [(ngModel)]="direccion" multiple="False" (ionChange)="cambiar(item)">
-                <ion-option value="e">Empleado</ion-option>
-                <ion-option value="s">Servicio</ion-option>
-                <ion-option value="em">Empresa</ion-option>
-                <ion-option value="o">Otro</ion-option>
-            </ion-select>
-        </ion-item>
-    </div>
-    <div *ngIf="visibleE">
-        <ion-item>
-            <p item-start>Seleccione: </p>
-            <button ion-button item-end small (click)="selecEmpleado()">Empleado</button>
-        </ion-item>
-    </div>
-    <div *ngIf="text">
-        <ion-item>
-            <p>Selección : {{coment.empleado}}</p>
-        </ion-item>
-    </div>
-    <div *ngIf="visibleS">
-        <ion-item>
-            <p item-start>Seleccione: </p>
-            <button ion-button item-end small (click)="selecServicio()">Servicio</button>
-        </ion-item>
-    </div>
-    <div *ngIf="text2">
-        <ion-item>
-            <p>Selección : {{coment.servicio}}</p>
-        </ion-item>
-    </div>
+      </ion-item>
+
     <br>
     <div text-center>
-        <textarea name="comentarios" rows="15" cols="40"></textarea>
+        <ion-textarea [(ngModel)]="comen.descripcion" name="comentario" rows="15" cols="40"></ion-textarea>
         <br><br>
         <button ion-button block (click)="guardar()">Enviar</button>
     </div>
+
 </ion-content>

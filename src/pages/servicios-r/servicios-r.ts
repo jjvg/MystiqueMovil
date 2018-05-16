@@ -32,7 +32,7 @@ export class ServiciosRPage {
       }, []);
     }
 
-    this.serviciosProvider.getServiciosRecibidos().subscribe(
+   /* this.serviciosProvider.getServiciosRecibidos().subscribe(
       result => {
 
         if (result.error) {
@@ -57,8 +57,8 @@ export class ServiciosRPage {
     );
 
 
+  } */
   }
-
   Reclamo() {
     let alert = this.alertCtrl.create({
       title: 'Aviso!',

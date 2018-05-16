@@ -39,10 +39,10 @@ empleados:any;
       },
     ]
   }
-  Cerrar(data){
-   this.comentProvider.setEmpleado(data);
-    this.navCtrl.push(ComentarPage,data);
-  }
+ // Cerrar(data){
+  // this.comentProvider.setEmpleado(data);
+   // this.navCtrl.push(ComentarPage,data);
+ // }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EmpleadosPage');

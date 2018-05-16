@@ -17,10 +17,12 @@
         </button>
     </ion-card>
     <ion-item-group>
-        <ion-item-divider><h3>Descubre nuestras promociones</h3></ion-item-divider>
+        <ion-item-divider>
+            <h3>Descubre nuestras promociones</h3>
+        </ion-item-divider>
         <ion-card>
             <button ion-item>
-                <img src="assets/imgs/Promocion.jpg">
+                <img src="{{url_api}}files/promocion/{{promo.id}}.{{promo.imagen}}">
             </button>
         </ion-card>
         <ion-item-divider><strong color="other">Servicios especiales para ti</strong></ion-item-divider>

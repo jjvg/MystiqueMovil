@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-const API_URL= "http://localhost:3000/api/" 
+import { AuthProvider } from '../auth/auth';
+
 /*
   Generated class for the ConsejoProvider provider.
 
@@ -10,11 +11,11 @@ const API_URL= "http://localhost:3000/api/"
 @Injectable()
 export class ConsejoProvider {
 URL_consejo= "consejo"
-  constructor(public http: HttpClient) {
-    console.log('Hello ConsejoProvider Provider');
+  constructor(public http: HttpClient,public authService:AuthProvider) {
+    
   }
 
 getConsejo(){
-  return this.http.get(API_URL+this.URL_consejo);
+  return this.http.get(this.authService.ApiUrl()+this.URL_consejo);
 }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+const API_URL= "http://localhost:3000/api/" 
 /*
   Generated class for the ComentarioProvider provider.
 
@@ -9,35 +9,52 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class ComentarioProvider {
-  comentario:{
-    tipo:string,
-    dirigido:string,
+  URL_comentario= "comentario"
+  URL_tipoc= "tipo_comentario"
+  URL_RSugerencia ="respuesta_comentario"
+  URL_TRSugerencia = "tipo_respuesta_comentario"
+  comentarios:{
+    idC : number,
+    tipo:number,
     contenido:string,
-    empleado:string,
-    servicio:string,
+    estatus:string,
+    fechaC:string,
   }
   constructor(public http: HttpClient) {
-   this.comentario={
-      tipo:"",
-      dirigido:"",
-      contenido:"",
-      empleado:"",
-      servicio:""
+   this.comentarios={
+    idC : 0,
+    tipo:0,
+    contenido:"",
+    estatus:"",
+    fechaC: "",
     } 
     console.log('Hello ComentarioProvider Provider');
   }
-  setValor(tipo,dir){
-    this.comentario.tipo=tipo;
-    this.comentario.dirigido=dir;
+  setValor(tipo){//,dir){
+    this.comentarios.tipo=tipo;
+    //this.comentarios.dirigido=dir;
   }
   getComent(){
-    return this.comentario;
+    return this.comentarios;
   }
-  setEmpleado(data){
-    this.comentario.empleado=data;
+  
+  Ncomentario(comentarios){
+    console.log(API_URL+'comentario')
+    return this.http.post(API_URL+'comentario',comentarios);
   }
-  setServicio(data){
-    this.comentario.servicio=data;
+  getComentario(){
+    return this.http.get(API_URL+this.URL_comentario);
   }
-
+  getTComentario(){
+    return this.http.get(API_URL+this.URL_tipoc);
+  }
+  getRSugerencia(){
+    return this.http.get(API_URL+this.URL_RSugerencia);
+  }
+  getTRSugerencia(){
+    return this.http.get(API_URL+this.URL_TRSugerencia);
+  }
+  ApiUrl(){
+    return API_URL;
+  }
 }
