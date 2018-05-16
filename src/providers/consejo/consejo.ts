@@ -11,14 +11,8 @@ import { AuthProvider } from '../auth/auth';
 @Injectable()
 export class ConsejoProvider {
 URL_consejo= "consejo"
-<<<<<<< HEAD
   constructor(public http: HttpClient,public authService:AuthProvider) {
     
-=======
-
-  constructor(public http: HttpClient) {
-    console.log('Hello ConsejoProvider Provider');
->>>>>>> 4b46be66f9aa469d5a9299827c862ac47be2b1f9
   }
 
 getConsejo(){
