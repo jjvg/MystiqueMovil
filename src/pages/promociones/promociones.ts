@@ -20,6 +20,7 @@ import {PromocionProvider} from '../../providers/promocion/promocion';
 export class PromocionesPage {
   url_api:any
   promociones: any;
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public promocionService: PromocionProvider,
   public authService: AuthProvider) {

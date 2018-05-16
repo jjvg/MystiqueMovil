@@ -20,7 +20,20 @@ export class ServiciosRPage {
 
   pestana: string = "calificar";
   servicios: any = [];
-
+  cliente:{
+    i;
+    nombre,
+    apellio,
+    ceula,
+    telefono,
+    irecion,
+    fecha_nacimiento,
+    tipo_cliente,
+    estatus,
+    orenes:Array<{i:string,i_soliciut,estao:string}>
+  }
+  oreenes_no_calificaa:any[];
+  orene_calificaas:any[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public serviciosProvider: ServiciosProvider) {
   }
 
@@ -30,8 +43,21 @@ export class ServiciosRPage {
       return arr.reduce(function (flat, toFlatten) {
         return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
       }, []);
+    
     }
-
+    this.llenarArray();  
+  }
+    llenarArray(){
+    for (let i = 0; i < this.cliente.orenes.length; i++) {
+      if(this.cliente.orenes[i].estao==='R'){
+        this.oreenes_no_calificaa.push(this.cliente.orenes[i]);
+      }else{
+        if(this.cliente.orenes[i].estao==='C'){
+          this.orene_calificaas.push(this.cliente.orenes[i].estao);
+        }
+      }
+    }
+  }
    /* this.serviciosProvider.getServiciosRecibidos().subscribe(
       result => {
 
@@ -58,7 +84,6 @@ export class ServiciosRPage {
 
 
   } */
-  }
   Reclamo() {
     let alert = this.alertCtrl.create({
       title: 'Aviso!',
@@ -67,12 +92,9 @@ export class ServiciosRPage {
     });
     alert.present();
   }
-
-
   calificar(id: number) {
     this.navCtrl.push(CalificarPage,id)
   }
-
   Reclamo1() {
     this.navCtrl.push(ReclamogenerarPage);
   }
