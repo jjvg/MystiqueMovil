@@ -33,10 +33,9 @@ export class SolicitudPage {
   solicitud:{
     id_cliente:number,
     id_promocion:number,
-    empleado_pelu:number,
-    empleado_maqui:number,
     preferencia_antencion:string,
     servicio:any[],
+    empleados:number[],
   };
   //........................
   //DEfinicion de arreglo de objeto servicios
@@ -89,10 +88,9 @@ export class SolicitudPage {
    this.solicitud={
     id_cliente:null,
     id_promocion:null,
-    empleado_pelu:null,
-    empleado_maqui:null,
     preferencia_antencion:'',
     servicio:[],
+    empleados:[],
   };
   
   console.log(this.navParams.data)
@@ -162,6 +160,7 @@ export class SolicitudPage {
         buttons: [{
           text:'Cerrar',
         handler:()=>{
+          this.newSolicitu(this.solicitud);
           let navTran=alert.dismiss();
             navTran.then(()=>{
               this.navCtrl.popToRoot();
@@ -285,6 +284,9 @@ export class SolicitudPage {
           Sexo(val){
             console.log(val);
             this.solicitud.preferencia_antencion=val;
+          }
+          AsignarEmpleado(id){
+            this.solicitud.empleados.push(id);
           }
 
   }

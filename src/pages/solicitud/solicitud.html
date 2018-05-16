@@ -45,10 +45,10 @@
         <h4>Indique si desea ser atendido por un hombre o una mujer</h4>
         <ion-list>
             <ion-item>
-                <button ion-button color="secondary" item-end  (click)="Sexo('hombre')" block>Hombre</button>
+                <button ion-button color="secondary" item-end (click)="Sexo('hombre')" block>Hombre</button>
             </ion-item>
             <ion-item>
-                <button ion-button color="secondary" item-end  (click)="Sexo('hombre')" block>Mujer</button>
+                <button ion-button color="secondary" item-end (click)="Sexo('hombre')" block>Mujer</button>
             </ion-item>
             <ion-item>
                 <button ion-button color="secondary" item-end (click)="Sexo('cualquiera')" block>Cualquiera</button>
@@ -63,17 +63,17 @@
         </div>
     </div>
     <div *ngIf="empleadovisible">
-        <h3>Selecciona un empleado</h3>
+        <h3>Selecciona empleado</h3>
         <ion-list>
             <ion-item *ngFor="let empe of emple">
-                <!--<ion-thumbnail item-start>
-                    <img src="{{empe.foto}}">
+                <ion-thumbnail item-start>
+                    <img src="{{url_files}}empleado/{{empe.id}}.{{empe.imagen}}">
                 </ion-thumbnail>-->
                 <div item-content>
                     <h2 color="primary">{{empe.nombre}}</h2>
                     <p>Telefono: {{empe.telefono}}</p>
                 </div>
-                <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
+                <ion-toggle color="secondary" checked="false" (change)="AsignarEmpleado(empe.id)" item-end></ion-toggle>
             </ion-item>
         </ion-list>
         <ion-row>

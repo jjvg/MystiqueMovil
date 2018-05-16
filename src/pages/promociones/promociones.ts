@@ -20,7 +20,7 @@ import {PromocionProvider} from '../../providers/promocion/promocion';
 export class PromocionesPage {
   url_api:any
   promociones: any;
- 
+  url_files:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public promocionService: PromocionProvider,
   public authService: AuthProvider) {
@@ -45,6 +45,7 @@ export class PromocionesPage {
   ionViewDidLoad() {
     this.promociones=[]
     this.url_api= this.authService.ApiUrl();
+    this.url_files=this.authService.ApiFile();
     this.getPromociones();
    
    
