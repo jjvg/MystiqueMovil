@@ -1,7 +1,7 @@
 import { AuthProvider } from './../auth/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+const  url_cliente = 'usuario/cliente/'
 
 /*
   Generated class for the ClienteProvider provider.
@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class ClienteProvider {
-  url_user : string = 'cliente/'
+ 
   url_perfil:string = 'perfil/'
   perfil:any;
 
@@ -48,13 +48,11 @@ export class ClienteProvider {
       correo:'',
       
     }
-    console.log('Hello ClienteProvider Provider');
+    
   }
-  getClient(i){
-    return this.http.get(this.authService.ApiUrl()+'vista_cliente/'+i)
-  }
+ 
   getUser(id){
-    return this.http.get(this.authService.ApiUrl()+'cliente/'+id)
+    return this.http.get(this.authService.ApiUrl()+url_cliente+id)
   }
   setCliente(user){
     this.cliente=user;
@@ -67,7 +65,7 @@ export class ClienteProvider {
     return this.cliente;
   }
   getPerfilUser(){
-    return this.http.get(this.authService.ApiUrl()+'perfil/'+this.cliente.id)
+    return this.http.get(this.authService.ApiUrl()+'vista_cliente_perfil/'+this.cliente.id)
   }
   setPerfil(){
       this.getPerfilUser().subscribe(

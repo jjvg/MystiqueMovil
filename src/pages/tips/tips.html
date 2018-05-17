@@ -17,26 +17,18 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-
-
 <ion-content>
-    
-       
     <ion-list *ngFor="let item of tips">
         <ion-card>
-                
+
             <ion-card-content>
-                    <img mat-card-image src= "/assets/imgs/alisado.jpg" >
+                <img src="{{url_api}}files/consejo/{{item.id}}.{{item.imagen}}">
                 <ion-card-title>
                     {{item.titulo}}
                 </ion-card-title>
                 <p>{{item.descripcion}}
                 </p>
             </ion-card-content>
-            <div text-left>
-                <button class="colorc" ion-button clear>Detalle</button>
-            </div>
-
         </ion-card>
 
     </ion-list>

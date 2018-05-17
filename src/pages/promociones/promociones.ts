@@ -1,3 +1,4 @@
+import { AuthProvider } from './../../providers/auth/auth';
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -17,33 +18,14 @@ import {PromocionProvider} from '../../providers/promocion/promocion';
   templateUrl: 'promociones.html',
 })
 export class PromocionesPage {
-  items:any;
+  url_api:any
   promociones: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public promocionService: PromocionProvider) {
-   this.promocion();
-    this.items=[{
-      "nombre":"Promocion 2x1",
-      "content":"Existe una nueva tecnica para realizar masajes capilares a nuestros clientes enterate mas aqui",
-      "img":"assets/imgs/Promocion.jpg",
-      'duracion':'2 semanas',
-      'tipo':'promocion'
-    },
-  {
-    "nombre":"Promocion 2x1",
-    "content":"En ocaciones la clave tener un bello rostro es seguir una rutina de belleza ",
-    "img":"assets/imgs/Promocion.jpg",
-    'duracion':'2 semanas',
-    'tipo':'promocion'
-  },
-  {
-    "nombre":"Promocion 2x1",
-    "content":"Perfecto para un rostro un poco grasoso, es importante utilizar exfoliantes para eliminar de nuestra piel las inpuresas que dia a dia recogemos en las calles ",
-    "img":"assets/imgs/Promocion.jpg",
-    'duracion': '2 semanas',
-    'tipo':'promocion'
-  }];
+ 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  public promocionService: PromocionProvider,
+  public authService: AuthProvider) {
   }
-  promocion(){
+  getPromociones(){
     this.promocionService.getPromocion().subscribe(
       (data)=>{
         this.promociones=data['data'];
@@ -51,10 +33,21 @@ export class PromocionesPage {
     );
   
   }
-    
+  doRefresh(refresher){
+    this.promocionService.getPromocion().subscribe(
+      (data)=>{
+        this.promociones=data['data'];
+        if(refresher != 0)
+        refresher.complete();
+      },(error)=>{console.log(error)}
+    );
+  }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PromocionesPage');
-    this.promocion();
+    this.promociones=[]
+    this.url_api= this.authService.ApiUrl();
+    this.getPromociones();
+   
+   
     console.log(this.promociones);
   }
   adquirirPromo(data){
