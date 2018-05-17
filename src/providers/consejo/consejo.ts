@@ -10,7 +10,7 @@ import { AuthProvider } from '../auth/auth';
 */
 @Injectable()
 export class ConsejoProvider {
-URL_consejo= "consejo"
+URL_consejo= "vista_todos_consejos"
   constructor(public http: HttpClient,public authService:AuthProvider) {
     
   }

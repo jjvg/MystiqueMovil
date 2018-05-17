@@ -21,15 +21,11 @@ export class ServiciosProvider {
    duracion:number,
    status:string,
    visible:boolean,
+   destalle_servicio:any[];
    select:boolean}>;
 
   constructor(public http: HttpClient,public auth : AuthProvider) {
-    /*this.servs=[
-      {name: 'Corte bajo', descripcion:'Corte hecho con maquinas',categoria: 'Peluqueria',url:'assets/imgs/Peinado1.png',rate:3},
-      {name: 'Trensado especial', descripcion:'Perfecto para salir de noche',categoria: 'Peluqueria',url:'assets/imgs/peinado2.png',rate:2},
-      {name: 'Maquillaje Ecologico', descripcion:'Facil de Remover',categoria: 'Maquillaje',url: 'assets/imgs/maquilla.png',rate:4},
-      {name: 'Ojos Brillantes', descripcion:'Para resaltar tu mirada',categoria: 'Maquillaje',url:'assets/imgs/maquillaje2.png',rate:5}
-    ]*/
+   
     this.servs=[
   {id:null,
    imagen:'',
@@ -40,23 +36,23 @@ export class ServiciosProvider {
    duracion:0,
    status:'',
    visible:false,
+   destalle_servicio:[],
    select:false}
    ];
     console.log('Hello ServiciosProvider Provider');
-
  
   }
   getServicios(){
-    return this.http.get(this.auth.ApiUrl()+'servicio');
+    return this.http.get(this.auth.ApiUrl()+'vista_todos_servicios');
   }
   getServicio(id){
     return this.http.get(this.auth.ApiUrl()+'servicio/'+id)
   }
   getServiciosconCategoria(){
-    return this.http.get(this.auth.ApiUrl()+'vista_servicios_categoria/')
+    return this.http.get(this.auth.ApiUrl()+'vista_servicio_categoria/')
   }
   getOneServicioconCategoria(it){
-    return this.http.get(this.auth.ApiUrl()+'vista_servicios_categoria/'+it);
+    return this.http.get(this.auth.ApiUrl()+'vista_servicio_categoria/'+it);
   }
 
 

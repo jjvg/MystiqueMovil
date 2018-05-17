@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ServiciosProvider } from '../../providers/servicios/servicios';
 import 'rxjs/add/operator/debounceTime';
 import { FormControl } from '@angular/forms';
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the ServicioPage page.
  *
@@ -22,55 +23,56 @@ export class ServicioPage {
     searchControl: FormControl;
     searching: any = false;
     rate:any;
-    servi:any;
+    servi:any[];
     errorMessage: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public dataSer: ServiciosProvider) {
+    url_file:string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dataSer: ServiciosProvider,
+  public authService:AuthProvider) {
 
     this.searchControl = new FormControl();
     this.rate=0;
+    this.url_file=this.authService.ApiFile();
   }
-
+  doRefresh(refresher){
+    this.getServis();
+    setTimeout(() => {
+      refresher.complete();
+    }, 3000);
+  }
   ionViewDidLoad() {
-    this.setFilteredItems();
+    this.getServis();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
       this.searching = false;
-      this.setFilteredItems();
+      this.getServis();
       });
-    //this.getCiudad();
    
-    this.rate=4;
-  
-    console.log('ionViewDidLoad ServicioPage');
-    //console.log(this.servi); 
+    this.rate=4; 
   }
   onSearchInput(){
     this.searching = true;
    }
-  setFilteredItems() {
-    this.servicios = this.dataSer.getServicios();
-    }
+   getServis(){
+     this.dataSer.getServicios().subscribe((ser)=>{
+       this.servi=ser['data'];
+       console.log(this.servi);
+       this.servi=this.filterItems(this.searchTerm);
+     },(error)=>{
+       console.log(error);
+     })
+   }
+  //setFilteredItems(ser) {
+   // this.servi = ser
+   // }
     gotoSolicitud(){
       this.navCtrl.push(SolicitudPage)
     }
-   /* filterItems2(searchTerm){
+   filterItems(searchTerm){
       return this.servi.filter((item) => {
-       return item.name.toLowerCase().
-       indexOf(searchTerm.toLowerCase()) > -1 ||
-          item.capital.toLowerCase().
-          indexOf(searchTerm.toLowerCase()) > -1;;
+       return item.nombre.toLowerCase().
+       indexOf(searchTerm.toLowerCase()) > -1;// ||
+          //item.capital.toLowerCase().
+          //indexOf(searchTerm.toLowerCase()) > -1;;
        });
-      }*/
-     /* getCiudad(){
-        this.dataSer.getCountries().subscribe(
-          (data)=>{
-            this.servi = data;
-            console.log(this.servi);
-            this.setFilteredItems();
-            this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
-              this.searching = false;
-              this.setFilteredItems();
-              });
-          },(error) =>{ 
-            this.errorMessage=<any>error});
-      }*/
+      }
+     
 }

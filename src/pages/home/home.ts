@@ -24,7 +24,7 @@ promo:{
 };
 promociones:any[];
 longitu:number;
-url_api:string;
+url_files:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public promoService:PromocionProvider,
   public authService: AuthProvider) {
@@ -40,7 +40,7 @@ url_api:string;
       id:'',
       imagen:''
     }
-    this.url_api=this.authService.ApiUrl();
+    this.url_files=this.authService.ApiFile();
     this.getPromociones();
     console.log('ionViewDidLoad HomePage');
   }

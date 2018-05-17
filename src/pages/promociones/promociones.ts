@@ -37,10 +37,11 @@ export class PromocionesPage {
     this.promocionService.getPromocion().subscribe(
       (data)=>{
         this.promociones=data['data'];
-        if(refresher != 0)
-        refresher.complete();
       },(error)=>{console.log(error)}
     );
+    setTimeout(() => {
+      refresher.complete();
+    }, 3000);
   }
   ionViewDidLoad() {
     this.promociones=[]

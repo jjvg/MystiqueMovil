@@ -10,12 +10,12 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class PromocionProvider {
-  URL_promocion='v_promocion_detalle'
+  URL_promocion='vista_todas_promociones'
   constructor(public http: HttpClient, public authPro: AuthProvider) {
     
   }
   getPromocion(){
   return this.http.get(this.authPro.ApiUrl()+this.URL_promocion);
 }
-
+ 
 }

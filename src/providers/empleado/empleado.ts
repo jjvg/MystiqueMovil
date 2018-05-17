@@ -17,4 +17,7 @@ export class EmpleadoProvider {
   getEmpleados(){
   	return this.http.get(this.authSvce.ApiUrl()+'empleado')
   }
+  getEmpleCatego(i){
+    return this.http.get(this.authSvce.ApiUrl()+'vista_empleados_categoria/'+i)
+  }
 }

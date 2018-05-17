@@ -18,16 +18,12 @@ import { ComentarioProvider } from '../../providers/comentario/comentario';
 export class ServiciosPage {
   serv:any
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public dataSer: ServiciosProvider,
-    public comentService:ComentarioProvider) {
+    public dataSer: ServiciosProvider) {
     this.serv=this.dataSer.getServicios();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ServiciosPage');
   }
- // Cerrar(data){
-   // this.comentService.setServicio(data);
-   // this.navCtrl.pop();
- //s }
+
 }
