@@ -59,6 +59,8 @@ import { PromocionProvider} from '../providers/promocion/promocion';
 import { ParametrosProvider } from '../providers/parametros/parametros';
 import { TiposProvider } from '../providers/tipos/tipos';
 import { EmpleadoProvider } from '../providers/empleado/empleado';
+import { ServicioRProvider } from '../providers/servicio-r/servicio-r';
+import { CalificarProvider } from '../providers/calificar/calificar';
 
 
 @NgModule({
@@ -159,6 +161,8 @@ import { EmpleadoProvider } from '../providers/empleado/empleado';
     ParametrosProvider,
     TiposProvider,
     EmpleadoProvider,
+    ServicioRProvider,
+    CalificarProvider,
    
     
   ]
