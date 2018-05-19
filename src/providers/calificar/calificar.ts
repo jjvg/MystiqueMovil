@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthProvider } from '../auth/auth';
+const port = '3000';
+const API_URL = 'http://localhost:'+port+'/api/';
 
 /*
   Generated class for the CalificarProvider provider.
@@ -10,9 +12,15 @@ import { AuthProvider } from '../auth/auth';
 */
 @Injectable()
 export class CalificarProvider {
-
-  constructor(public http: HttpClient) {
-    console.log('Hello CalificarProvider Provider');
+  url_calificar : '/gestion_calificacion';
+   
+  calificar:{
+    id_orden_servicio:number,
+    servicios
   }
 
-}
+  constructor(public http: HttpClient) {
+
+    }
+  }
+
