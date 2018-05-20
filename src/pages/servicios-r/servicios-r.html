@@ -18,6 +18,7 @@
         </ion-buttons>
     </ion-navbar>
     <ion-toolbar color="primary" no-border-top>
+
         <ion-segment [(ngModel)]="pestana">
             <ion-segment-button style="color:white" value="calificar">
                 Por Calificar
@@ -28,6 +29,7 @@
         </ion-segment>
     </ion-toolbar>
 </ion-header>
+
 <ion-content padding>
     <div [ngSwitch]="pestana">
         <ion-list *ngSwitchCase="'calificar'">
@@ -41,15 +43,22 @@
                         <p>{{item.fecha_servicio_solicitado}}</p>
                     </ion-item>
                 </ion-card>
-                <button ion-button small color="primary" (click)="calificar(servicio)">Calificar</button>
-                <button ion-button clear small color="secondary" (click)="Reclamo()">Solicitar Garantia</button>
+                <button ion-button small color="primary" (click)="calificar(servicio)">
+          <div>Calificar</div>
+        </button>
+                <button ion-button clear small color="secondary" (click)="Reclamo()">
+          <div>Reclamar</div>
+        </button>
             </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'garantia'">
             <ion-item>
                 <h2>Maquillaje de novia</h2>
                 <p>Lunes • 11/04/2018 4:30 pm</p>
-                <button ion-button icon-left clear small color="secondary" (click)="Reclamo1()">Solicitar Garantia</button>
+                <button ion-button icon-left clear small color="secondary" (click)="Reclamo1()">
+          <ion-icon name=""></ion-icon>
+          <div>Reclamar</div>
+        </button>
             </ion-item>
             <ion-item>
                 <h2>Corte</h2>
