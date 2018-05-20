@@ -1,7 +1,7 @@
 import { AuthProvider } from './../../providers/auth/auth';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import { SolicitudPage } from '../solicitud/solicitud';
 import {PromocionProvider} from '../../providers/promocion/promocion';
 
@@ -33,7 +33,7 @@ export class PromocionesPage {
     );
   
   }
-  doRefresh(refresher){
+  doRefresh(refresher: Refresher){
     this.promocionService.getPromocion().subscribe(
       (data)=>{
         this.promociones=data['data'];
@@ -41,7 +41,7 @@ export class PromocionesPage {
     );
     setTimeout(() => {
       refresher.complete();
-    }, 3000);
+    }, 5000);
   }
   ionViewDidLoad() {
     this.promociones=[]

@@ -9,25 +9,32 @@ import  {TiposProvider} from '../../providers/tipos/tipos';
   templateUrl: 'perfil.html'
 })
 export class PerfilPage {
-	user:any;
-  perfil:any;
+	user:any
+  perfilgustos:any[];
+  perfilcaracteristicas:any[];
+  perfilbasico:any[];
   parametros:any;
   tipo_parametro:any;
   valor_parametros:any[];
+  perfil:any[];
+  sexo:string;
   constructor(
   	public modalCtrl: ModalController,
   	public navCtrl: NavController, 
   	public navParams:NavParams,
   	private clienteService:  ClienteProvider,
     private tipoService: TiposProvider) {
+      this.sexo='';
   	this.user=this.clienteService.getCliente();
     this.perfil=this.clienteService.getPerfil();
     this.obtTipo_Parametros();
     this.optParametros();
     this.obtValorParametro();
     console.log(this.user);
-     console.log(this.perfil);
-
+  }
+  ionViewDidLoad(){
+    this.clasificarParametros();
+    this.determinarSexo();
   }
   obtTipo_Parametros(){
     this.tipoService.getTipos_parametro().subscribe((data)=>{
@@ -55,6 +62,40 @@ export class PerfilPage {
 
     //let modal = this.modalCtrl.create(ModalContentPage, characterNum);
     //modal.present();
+  }
+  clasificarParametros(){
+    this.perfilbasico=[];
+    this.perfilcaracteristicas=[];
+    this.perfilgustos=[];
+    for (let i = 0; i < this.perfil.length; i++) {
+        if(this.perfil[i].clasificacion === 'DB'){
+          this.perfilbasico.push(this.perfil[i])
+        }else{
+          if(this.perfil[i].clasificacion === 'CA'){
+            this.perfilcaracteristicas.push(this.perfil[i]);
+          }else{
+            if(this.perfil[i].clasificacion === 'GP'){
+              this.perfilgustos.push(this.perfil[i])
+            }
+          }
+        }
+      
+    }
+    console.log(this.perfilbasico);
+    console.log(this.perfilcaracteristicas);
+    console.log(this.perfilgustos);
+  }
+  determinarSexo(){
+    for (let i = 0; i < this.perfilbasico.length; i++) {
+      if(this.perfilbasico[i].valor==='mujer'){
+        this.sexo='mujer';
+      }else{
+        if(this.perfilbasico[i].valor==='hombre'){
+          this.sexo='hombre';
+        }
+      }
+    }
+    console.log(this.sexo);
   }
 }
 

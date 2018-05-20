@@ -29,12 +29,12 @@ export class ServiciosRPage {
     nombre:string,
     apellido:string,
     cedula:string,
-    telefono:number,
+    telefono:string,
     direccion:string,
     tipo_cliente:string,
     ordenes:Array<{
-      id:string,
-      id_solicitud,
+      id:number,
+      id_solicitud:number,
       estado:string}>
   }
   ordenes_no_calificadas:any[];
@@ -49,7 +49,7 @@ export class ServiciosRPage {
       nombre:'',
       apellido:'',
       cedula:'',
-      telefono:0,
+      telefono:'',
       direccion:'',
       tipo_cliente:'',
       ordenes:[]
@@ -59,12 +59,10 @@ export class ServiciosRPage {
   }
   
   ionViewDidLoad() {
-    function flatten(arr) {
-      return arr.reduce(function (flat, toFlatten) {
-        return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
-      }, []);
-    
-    }
+    //function flatten(arr) {
+    //  return arr.reduce(function (flat, toFlatten) {
+     //   return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+     // }, []);
 
     this.url_api= this.authService.ApiUrl();
     console.log(this.serviciosr);

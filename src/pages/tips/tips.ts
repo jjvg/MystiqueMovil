@@ -1,6 +1,6 @@
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import{ConsejoProvider} from '../../providers/consejo/consejo';
 /**
  * Generated class for the TipsPage page.
@@ -33,17 +33,15 @@ consejo(){
   );
   
 }
-doRefresh(refresher){
+doRefresh(refresher: Refresher){
   this.consejoService.getConsejo().subscribe(
     (data)=>{
       this.tips=data['data'];
-      //if(refresher != 0)
-      //refresher.complete();
     },(error)=>{console.log(error)}
   );
   setTimeout(() => {
     refresher.complete();
-  }, 3000);
+  }, 5000);
 }
   ionViewDidLoad() {
     this.url_api= this.authService.ApiUrl();

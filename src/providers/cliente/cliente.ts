@@ -13,7 +13,7 @@ const  url_cliente = 'usuario/cliente/'
 export class ClienteProvider {
  
   url_perfil:string = 'perfil/'
-  perfil:any;
+  perfil:any[];
 
   correo_cliente:string;
   cliente:{
@@ -70,7 +70,7 @@ export class ClienteProvider {
   setPerfil(){
       this.getPerfilUser().subscribe(
         (data)=>{
-          this.perfil=data['data']
+          this.perfil=data['data'].perfil
           console.log(this.perfil);
         },(error)=>{
         console.log(error);

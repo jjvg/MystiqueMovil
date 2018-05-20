@@ -1,6 +1,6 @@
 import { SolicitudPage } from './../solicitud/solicitud';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import { ServiciosProvider } from '../../providers/servicios/servicios';
 import 'rxjs/add/operator/debounceTime';
 import { FormControl } from '@angular/forms';
@@ -33,11 +33,17 @@ export class ServicioPage {
     this.rate=0;
     this.url_file=this.authService.ApiFile();
   }
-  doRefresh(refresher){
-    this.getServis();
+  doRefresh(refresher: Refresher){
+    this.dataSer.getServicios().subscribe((ser)=>{
+      this.servi=ser['data'];
+      console.log(this.servi);
+      this.servi=this.filterItems(this.searchTerm);
+    },(error)=>{
+      console.log(error);
+    })
     setTimeout(() => {
       refresher.complete();
-    }, 3000);
+    }, 5000);
   }
   ionViewDidLoad() {
     this.getServis();

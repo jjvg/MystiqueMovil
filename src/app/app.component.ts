@@ -1,7 +1,7 @@
 import { PrincipalPage } from './../pages/principal/principal';
 import { PromocionesPage } from './../pages/promociones/promociones';
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from "../pages/login/login";
@@ -16,11 +16,12 @@ import {SugerenciasPage} from '../pages/sugerencias/sugerencias';
   templateUrl: 'app.html'
 })
 export class MyApp {
+
   @ViewChild(Nav) nav: Nav;
   rootPage:any = LoginPage;
   pages: Array<{title: string, component: any,icon:string }>
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public loadingCtrl:LoadingController) {
 
     this.pages=[
       {title: 'Inicio', component: PrincipalPage, icon:'home'},
@@ -42,9 +43,24 @@ export class MyApp {
     
 
     }
-    openPage(p){
-      this.nav.setRoot(p.component);
-  }
+    Loading(p) {
+      let loading = this.loadingCtrl.create({
+        spinner: 'crescent',
+      });
+    
+      loading.present();
+    
+      setTimeout(() => {
+        this.nav.setRoot(p.component);
+      }, 1000);
+    
+      setTimeout(() => {
+        loading.dismiss();
+      }, 5000);
+    }
+    //openPage(p){
+     // this.nav.setRoot(p.component);
+ // }
   exit(){
     this.nav.setRoot(LoginPage);
   }

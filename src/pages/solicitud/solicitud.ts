@@ -34,9 +34,9 @@ export class SolicitudPage {
   solicitud:{
     id_cliente:number,
     id_promocion:number,
-    preferencia_antencion:string,
-    servicio:any[],
-    empleados:number[],
+    sexo:string,
+    servicio:number[],
+    empleado:number[],
   };
   //........................
   //DEfinicion de arreglo de objeto servicios
@@ -153,15 +153,16 @@ ele:boolean
        id_categoria_servicio:0,
        categoria_servicio:'',
        select:false}];
+
     this.getCategorias();
     this.getServicios();
-  this.searchControl = new FormControl();
-   this.solicitud={
+    this.searchControl = new FormControl();
+    this.solicitud={
     id_cliente:null,
     id_promocion:null,
-    preferencia_antencion:'',
+    sexo:'',
     servicio:[],
-    empleados:[],
+    empleado:[],
   };this.url_file=this.authService.ApiFile();
   
   console.log(this.navParams.data)
@@ -220,7 +221,7 @@ ele:boolean
                   telefono:'',
                   visible:false,
                   ele:false}];
-                this.EmpleaosSexo(this.solicitud.preferencia_antencion);
+                this.EmpleaosSexo(this.solicitud.sexo);
                 this.visible=false;
                 this.preferenciaAtencion=false;
                 this.empleadovisible=true;
@@ -251,6 +252,7 @@ ele:boolean
         buttons: [{
           text:'Cerrar',
         handler:()=>{
+          console.log(this.solicitud);
           this.newSolicitu(this.solicitud);
           let navTran=alert.dismiss();
             navTran.then(()=>{
@@ -272,16 +274,14 @@ ele:boolean
         this.visible=false;
       }
       verPreferencia(){
-        let j=0;
         this.solicitud.servicio=[];
         this.solicitud.id_cliente=this.clientService.getCliente().id
         for (let i=0;  i < this.servicios.length;  ++i) {
           if(this.servicios[i].select===true){
-            this.solicitud.servicio[j]=this.servicios[i].id;
-            ++j; 
+            this.solicitud.servicio.push(this.servicios[i].id)
           }
         }
-        
+        console.log(this.solicitud.servicio);
         this.visible=false;
         this.preferenciaAtencion=true;
       }
@@ -305,26 +305,14 @@ ele:boolean
         this.catego=false;
       }
       siguiente(item){
-
         console.log(this.servicios);
             for (let h = 0; h < this.servicios.length; h++) {
               if(item === this.servicios[h].categoria_servicio){
                 this.serviciosmostrar.push(this.servicios[h]);
-              }  
-                
+              }      
             }
-            console.log(this.especi);
-            this.emplePromo(item);
-          /*  
-        for(let j=0; j< this.especi.length; ++j){
-          if(item === this.especi[j].id_categoria_servicio){
-            for(let k=0; k<this.empleados.length; ++k){
-              if(this.especi[j].id_empleado===this.empleados[k].id){
-                this.emple.push(this.empleados[k])
-              }
-            }
-          }
-        }*/
+        console.log(this.especi);
+        this.emplePromo(item);
         this.setFilteredItems();
          console.log(this.serviciosmostrar);
          console.log(this.emple);
@@ -338,7 +326,7 @@ ele:boolean
         this.empleSrvce.getEmpleados().subscribe(
           (e)=>{
             this.empleados=e['data'];
-            console.log(this.empleados)
+           
           },(error)=>{
             console.log(error);
           })
@@ -354,7 +342,6 @@ ele:boolean
       getServicios(){
         this.dataSer.getServiciosconCategoria().subscribe((ser)=>{
           this.servicios=ser['data'];
-          console.log(this.servicios);
            
         },(error)=>{
           console.log(error);
@@ -377,14 +364,12 @@ ele:boolean
             })
           }
           Sexo(val){
-            console.log(val);
-            this.solicitud.preferencia_antencion=val;
-            console.log(this.solicitud.preferencia_antencion);
+            this.solicitud.sexo=val;
             this.verConfirmacion();
           }
           AsignarEmpleado(id,i){
-            this.solicitud.empleados.push(id);
-            this.emplever.splice(i,1);
+            this.solicitud.empleado.push(id);
+            //this.emplever.splice(i,1);
           }
           EmpleaosSexo(sexo){
             console.log(sexo);
