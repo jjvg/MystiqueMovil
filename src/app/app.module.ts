@@ -1,3 +1,5 @@
+import { GustosPreferenciasPage } from './../pages/gustos-preferencias/gustos-preferencias';
+import { ActualizarPerfilPage } from './../pages/actualizar-perfil/actualizar-perfil';
 import { RechazoComponent } from './../components/rechazo/rechazo';
 import { CancelarcitaComponent } from './../components/cancelarcita/cancelarcita';
 
@@ -98,7 +100,9 @@ import { PresupuestoProvider } from '../providers/presupuesto/presupuesto';
     ListempleadoComponent,
     ComentarPage,
     ServiciosPage,
-    EmpleadosPage
+    EmpleadosPage,
+    ActualizarPerfilPage,
+    GustosPreferenciasPage
    
   ],
   imports: [
@@ -143,7 +147,9 @@ import { PresupuestoProvider } from '../providers/presupuesto/presupuesto';
     ListempleadoComponent,
     ComentarPage,
     ServiciosPage,
-    EmpleadosPage
+    EmpleadosPage,
+    ActualizarPerfilPage,
+    GustosPreferenciasPage
    
 
    

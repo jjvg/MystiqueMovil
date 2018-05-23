@@ -13,13 +13,14 @@
         <ion-refresher-content pullingText="suelta para actualizar" pullingIcon="arrow-dropdown" refreshingSpinner="crescent" refreshingText="..cargando">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-list *ngFor="let item of servi">
+    <ion-list *ngFor="let item of servicios_mostrar">
         <ion-card>
             <img src="{{url_file}}servicio/{{item.id}}.{{item.imagen}}">
             <ion-card-content>
                 <h2>{{item.nombre}}</h2>
                 <p>{{item.descripcion}}</p>
             </ion-card-content>
+            <button ion-button (click)="solicitar(item)">Solicitar</button>
         </ion-card>
     </ion-list>
 </ion-content>

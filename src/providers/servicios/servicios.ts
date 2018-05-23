@@ -51,4 +51,10 @@ export class ServiciosProvider {
   getServiciosconCategoria(){
     return this.http.get(this.auth.ApiUrl()+'vista_servicio_categoria')
   } 
+  reservarServicio(ser){
+    this.servs=ser;
+  }
+  retornarServicios(){
+    return this.servs;
+  }
 }

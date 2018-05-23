@@ -100,7 +100,8 @@ telefono:string,
 visible:boolean,
 ele:boolean
   }>;
-  url_file:string
+  url_file:string;
+  hear:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, 
     public dataSer: ServiciosProvider,
@@ -166,16 +167,23 @@ ele:boolean
   };this.url_file=this.authService.ApiFile();
   
   console.log(this.navParams.data)
-  if (this.navParams.data.tipo=="promocion") {
+
+  if (this.navParams.data.pro==="servi") {
     console.log(this.navParams.data)
     this.visible=false;
-    this.empleadovisible=true;  
-  }else{
-    this.empleadovisible=false;
+    this.catego=false;
+    this.preferenciaAtencion=true;
+    this.solicitud.servicio.push(this.navParams.data.item.id);
+  }
+    if(this.navParams.data.pro==="promo"){
+    this.visible=false;
+    this.catego=false;
+    this.preferenciaAtencion=true;
+    this.solicitud.servicio.push(this.navParams.data.item.id_servicio);
   }
   this.setEmplea();
   this.getEspeciali();
-  this.preferenciaAtencion=false;
+  //this.preferenciaAtencion=false;
   //this.setEmplea();
   this.tipos=[];
   this.emple=[];

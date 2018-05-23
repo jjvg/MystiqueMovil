@@ -19,20 +19,20 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
   rootPage:any = LoginPage;
-  pages: Array<{title: string, component: any,icon:string }>
+  pages: Array<{title: string, component: any,icon:string, bage:number}>
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public loadingCtrl:LoadingController) {
 
     this.pages=[
-      {title: 'Inicio', component: PrincipalPage, icon:'home'},
-      {title: 'Perfil', component: PerfilPage, icon:'contact'},
-      {title: 'Citas', component:CitasPage,icon:'calendar'},
-      {title: 'Solicitudes',component:SolicitudesPage,icon:'paper-plane'},
-      {title: 'Reclamos',component: ReclamosPage,icon:'filing'},
-      {title: 'Servicios Recibidos',component: ServiciosRPage,icon:'list-box'},
-      {title: 'Buzon de Comentarios',component:SugerenciasPage,icon:'mail' },
-      {title: 'Promociones',component:PromocionesPage,icon:'star'},
-      {title: 'Consejos',component:TipsPage,icon:'megaphone'}
+      {title: 'Inicio', component: PrincipalPage, icon:'home', bage:null},
+      {title: 'Perfil', component: PerfilPage, icon:'contact', bage:null},
+      {title: 'Citas', component:CitasPage,icon:'calendar', bage:null},
+      {title: 'Solicitudes',component:SolicitudesPage,icon:'paper-plane', bage:null},
+      {title: 'Reclamos',component: ReclamosPage,icon:'filing',bage:null},
+      {title: 'Servicios Recibidos',component: ServiciosRPage,icon:'list-box', bage:null},
+      {title: 'Buzon de Comentarios',component:SugerenciasPage,icon:'mail', bage:null},
+      {title: 'Promociones',component:PromocionesPage,icon:'star', bage:null},
+      {title: 'Consejos',component:TipsPage,icon:'megaphone', bage:null}
     ];
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

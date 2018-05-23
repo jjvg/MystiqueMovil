@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ClienteProvider} from '../../providers/cliente/cliente';
-import { ModalController, NavParams, NavController } from 'ionic-angular';
+import { ModalController, NavParams, NavController, LoadingController } from 'ionic-angular';
 import  {TiposProvider} from '../../providers/tipos/tipos';
+import { ActualizarPerfilPage } from '../actualizar-perfil/actualizar-perfil';
 
 
 @Component({
@@ -23,46 +24,20 @@ export class PerfilPage {
   	public navCtrl: NavController, 
   	public navParams:NavParams,
   	private clienteService:  ClienteProvider,
-    private tipoService: TiposProvider) {
+    private tipoService: TiposProvider,
+    private loadCtrl:LoadingController) {
       this.sexo='';
   	this.user=this.clienteService.getCliente();
     this.perfil=this.clienteService.getPerfil();
-    this.obtTipo_Parametros();
-    this.optParametros();
-    this.obtValorParametro();
     console.log(this.user);
   }
   ionViewDidLoad(){
     this.clasificarParametros();
     this.determinarSexo();
+    this.perfil=this.clienteService.getPerfil();
   }
-  obtTipo_Parametros(){
-    this.tipoService.getTipos_parametro().subscribe((data)=>{
-      console.log(data);
-      this.tipo_parametro=data['data'];
-    },(error)=>{
-      console.log(error);
-    })
-  }
-  optParametros(){
-    this.tipoService.getParametros().subscribe((data)=>{
-      this.parametros=data['data'];
-      console.log(this.parametros);
-    },(error)=>{
-      console.log(error);
-    })
-  }
-  obtValorParametro(){
-    this.tipoService.getValorParametro().subscribe((data)=>{
-      this.valor_parametros= data['data'];
-      console.log(this.valor_parametros);
-    })
-  }
-  openModal() {
 
-    //let modal = this.modalCtrl.create(ModalContentPage, characterNum);
-    //modal.present();
-  }
+
   clasificarParametros(){
     this.perfilbasico=[];
     this.perfilcaracteristicas=[];
@@ -96,6 +71,22 @@ export class PerfilPage {
       }
     }
     console.log(this.sexo);
+  }
+  actualizar(){
+    let loading = this.loadCtrl.create({
+      spinner: 'crescent',
+    });
+  
+    loading.present();
+  
+    setTimeout(() => {
+      this.navCtrl.push(ActualizarPerfilPage,this.perfilgustos); 
+    }, 1000);
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
+    
   }
 }
 

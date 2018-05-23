@@ -16,7 +16,7 @@ export class CalificarProvider {
    
   calificar:{
     id_orden_servicio:number,
-    servicios
+    //servicios
   }
 
   constructor(public http: HttpClient) {
