@@ -10,7 +10,8 @@ import { AuthProvider } from '../auth/auth';
 */
 @Injectable()
 export class ConsejoProvider {
-URL_consejo= "vista_todos_consejos"
+URL_consejo= "vista_todos_consejos";
+consejos:any[];
   constructor(public http: HttpClient,public authService:AuthProvider) {
     
   }
@@ -18,5 +19,11 @@ URL_consejo= "vista_todos_consejos"
 getConsejo(){
   return this.http.get(this.authService.ApiUrl()+this.URL_consejo);
 }
+reservarConsejos(consejos){
+  this.consejos=consejos
 
+  }
+  retornarConsejos(){
+    return this.consejos;
+  }
 }

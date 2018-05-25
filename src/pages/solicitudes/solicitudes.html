@@ -18,14 +18,17 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingText="suelta para actualizar" pullingIcon="arrow-dropdown" refreshingSpinner="crescent" refreshingText="..cargando">
+        </ion-refresher-content>
+    </ion-refresher>
     <div *ngFor="let item of solicitudes">
         <ion-card *ngIf="item.estado=='P'">
             <ion-card-content>
                 <p><strong>Servicio Solicitado</strong></p>
                 <h4>Su solicitud del servicio esta por atener</h4>
                 <p>{{item.fecha_creacion | date:'dd/MM/yyyy'}}</p>
-                <p>Cantidad de servicios: {{item.cardad_servicios}}</p>
-                <button ion-button clear small color="secondary" (click)="verPresupuesto(item)" right>Presupuesto</button>
+                <p>Cantidad de servicios: {{item.cantidad_servicios}}</p>
             </ion-card-content>
         </ion-card>
         <ion-card *ngIf="item.estado=='E'">
@@ -33,7 +36,7 @@
                 <p><strong>Servicio Solicitado</strong></p>
                 <h4>Su solicitud del servicio ha sido aprobada</h4>
                 <p>{{item.fecha_creacion | date:'dd/MM/yyyy'}}</p>
-                <p>Cantidad de servicios: {{item.cardad_servicios}}</p>
+                <p>Cantidad de servicios: {{item.cantidad_servicios}}</p>
                 <button ion-button clear small color="secondary" (click)="verPresupuesto(item)" right>Presupuesto</button>
             </ion-card-content>
         </ion-card>
@@ -45,10 +48,10 @@
                 <button ion-button clear small color="secondary" (click)="verDetalle(item)" right>Ver detalles</button>
             </ion-card-content>
         </ion-card>
-        <ion-fab right bottom style="margin-bottom:5px">
-            <button ion-fab color="primary" (click)="gotoSolicitud()">
+    </div>
+    <ion-fab right bottom style="margin-bottom:5px">
+        <button ion-fab color="primary" (click)="gotoSolicitud()">
             <ion-icon name="add"></ion-icon>
           </button>
-        </ion-fab>
-    </div>
+    </ion-fab>
 </ion-content>

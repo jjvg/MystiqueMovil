@@ -1,3 +1,5 @@
+import { GustosPreferenciasPage } from './../pages/gustos-preferencias/gustos-preferencias';
+import { ActualizarPerfilPage } from './../pages/actualizar-perfil/actualizar-perfil';
 import { RechazoComponent } from './../components/rechazo/rechazo';
 import { CancelarcitaComponent } from './../components/cancelarcita/cancelarcita';
 
@@ -61,6 +63,7 @@ import { TiposProvider } from '../providers/tipos/tipos';
 import { EmpleadoProvider } from '../providers/empleado/empleado';
 import { ServicioRProvider } from '../providers/servicio-r/servicio-r';
 import { CalificarProvider } from '../providers/calificar/calificar';
+import { PresupuestoProvider } from '../providers/presupuesto/presupuesto';
 
 
 @NgModule({
@@ -97,7 +100,9 @@ import { CalificarProvider } from '../providers/calificar/calificar';
     ListempleadoComponent,
     ComentarPage,
     ServiciosPage,
-    EmpleadosPage
+    EmpleadosPage,
+    ActualizarPerfilPage,
+    GustosPreferenciasPage
    
   ],
   imports: [
@@ -142,7 +147,9 @@ import { CalificarProvider } from '../providers/calificar/calificar';
     ListempleadoComponent,
     ComentarPage,
     ServiciosPage,
-    EmpleadosPage
+    EmpleadosPage,
+    ActualizarPerfilPage,
+    GustosPreferenciasPage
    
 
    
@@ -163,6 +170,7 @@ import { CalificarProvider } from '../providers/calificar/calificar';
     EmpleadoProvider,
     ServicioRProvider,
     CalificarProvider,
+    PresupuestoProvider,
    
     
   ]

@@ -13,7 +13,7 @@
     <div *ngIf="catego">
         <ion-list>
             <ion-list-header>
-                <h2 text-center>Seleccione una categoria</h2>
+                <p text-center>Seleccione una categoria</p>
             </ion-list-header>
             <button ion-item *ngFor="let item of categoria,let i=index " (click)="siguiente(item.id)"> {{item.nombre}}</button>
             <button ion-item (click)="verlist()">Todos</button>
@@ -24,7 +24,7 @@
         <div *ngIf="searching" class="spinner-container">
             <ion-spinner></ion-spinner>
         </div>
-        <h2 text-center>Seleccionar servicios</h2>
+        <p text-center>Seleccionar servicios</p>
         <ion-list>
             <ion-item *ngFor="let item of serviciosmostrar ,let i=index ">
                 <div item-content>
@@ -42,17 +42,21 @@
 
     </div>
     <div *ngIf="preferenciaAtencion">
-        <h2 text-center>Indique si desea ser atendido por un hombre o una mujer</h2>
+        <p text-center>Indique su preferencia de atencion</p>
         <ion-list>
-            <button ion-button color="secondary" (click)="Sexo('h')" block>Hombre</button>
-
-            <button ion-button color="secondary" (click)="Sexo('m')" block>Mujer</button>
-
-            <button ion-button color="secondary" (click)="Sexo('c')" block>Cualquiera</button>
+            <div padding>
+                <button ion-button color="secondary" (click)="Sexo('hombre')" block>Hombre</button>
+            </div>
+            <div padding>
+                <button ion-button color="secondary" (click)="Sexo('mujer')" block>Mujer</button>
+            </div>
+            <div padding>
+                <button ion-button color="secondary" (click)="Sexo('cualquiera')" block>Cualquiera</button>
+            </div>
         </ion-list>
     </div>
     <div *ngIf="empleadovisible">
-        <h2 text-center>Selecciona empleado</h2>
+        <p text-center>Selecciona empleado</p>
         <ion-list>
             <ion-item *ngFor="let empe of emplever;let i=index">
                 <ion-thumbnail item-start>

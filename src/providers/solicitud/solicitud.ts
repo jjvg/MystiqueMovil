@@ -20,7 +20,7 @@ export class SolicitudProvider {
     return this.http.get(this.authService.ApiUrl()+'vista_cliente_solicitud/'+id_cliente);
   }
    saveSolicitud(sol){
-     return this.http.post(this.authService.ApiUrl()+'solicitud',sol)
+     return this.http.post(this.authService.ApiUrl()+'agregar_solicitud',sol)
    }
 
 }

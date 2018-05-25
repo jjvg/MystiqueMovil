@@ -10,28 +10,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 /**
- * Generated class for the ReclamogenerarPage page.
+ * Generated class for the CalificarPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ReclamogenerarPage = /** @class */ (function () {
-    function ReclamogenerarPage(navCtrl, navParams) {
+var CalificarPage = /** @class */ (function () {
+    function CalificarPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.visible = true;
+        this.calificacion = {
+            lugar: null,
+            ambientacion: null,
+            infraestructura: null,
+            secado: null,
+            tinte: null
+        };
     }
-    ReclamogenerarPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ReclamogenerarPage');
+    CalificarPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad CalificarPage');
     };
-    ReclamogenerarPage = __decorate([
+    CalificarPage.prototype.verServicio = function () {
+        this.visible = false;
+        this.Serviciovisible = true;
+    };
+    CalificarPage = __decorate([
         IonicPage(),
         Component({
-            selector: 'page-reclamogenerar',
-            templateUrl: 'reclamogenerar.html',
+            selector: 'page-calificar',
+            templateUrl: 'calificar.html',
         }),
         __metadata("design:paramtypes", [NavController, NavParams])
-    ], ReclamogenerarPage);
-    return ReclamogenerarPage;
+    ], CalificarPage);
+    return CalificarPage;
 }());
-export { ReclamogenerarPage };
-//# sourceMappingURL=reclamogenerar.js.map
+export { CalificarPage };
+//# sourceMappingURL=calificar.js.map

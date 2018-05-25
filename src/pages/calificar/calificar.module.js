@@ -6,21 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { MensajesPage } from './mensajes';
-var MensajesPageModule = /** @class */ (function () {
-    function MensajesPageModule() {
+import { CalificarPage } from './calificar';
+var CalificarPageModule = /** @class */ (function () {
+    function CalificarPageModule() {
     }
-    MensajesPageModule = __decorate([
+    CalificarPageModule = __decorate([
         NgModule({
             declarations: [
-                MensajesPage,
+                CalificarPage,
             ],
             imports: [
-                IonicPageModule.forChild(MensajesPage),
+                IonicPageModule.forChild(CalificarPage),
             ],
         })
-    ], MensajesPageModule);
-    return MensajesPageModule;
+    ], CalificarPageModule);
+    return CalificarPageModule;
 }());
-export { MensajesPageModule };
-//# sourceMappingURL=mensajes.module.js.map
+export { CalificarPageModule };
+//# sourceMappingURL=calificar.module.js.map

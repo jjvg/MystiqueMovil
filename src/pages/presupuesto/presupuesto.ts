@@ -1,3 +1,5 @@
+import { EmpleadoProvider } from './../../providers/empleado/empleado';
+import { PresupuestoProvider } from './../../providers/presupuesto/presupuesto';
 import { SolicitudProvider } from './../../providers/solicitud/solicitud';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
@@ -21,50 +23,91 @@ export class PresupuestoPage {
   total:any;
   ser:any;
 solicitud:{
-  fecha:string;
-  hora:string;
-  empleado:string;
-  servicios:Array<{nombre:string, costo:Number}>
-}
-  constructor(public navCtrl: NavController, public navParams: NavParams, public dataSolicitud: SolicitudProvider,public modalCtrl: ModalController) {
+  apellido:string,
+cantidad_servicios:number,
+empleado:any[],
+estado:string
+fecha_creacion:Date,
+id:number,
+id_cliente:number,
+id_promocion:number,
+nombre:string,
+servicios_solicitados:any[],
+sexo:string
+};
+presupuesto:{
+  id:number,
+  id_solicitud:number,
+  monto_total:number,
+  fecha_creacion:Date,
+  estado:string
+};
+empleaos:any[];
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public dataSolicitud: SolicitudProvider,public modalCtrl: ModalController,
+    public presuService:PresupuestoProvider,
+  public empleadoService:EmpleadoProvider) {
     this.solicitud={
-      fecha:'',
-      hora:'',
-      empleado:'',
-      servicios:[],
-      
+      apellido:'',
+      cantidad_servicios:null,
+      empleado:[],
+      estado:'',
+      fecha_creacion:null,
+      id:null,
+      id_cliente:null,
+      id_promocion:null,
+      nombre:'',
+      servicios_solicitados:[],
+      sexo:''
+      };
+    this.solicitud=this.navParams.data
+    this.empleaos=[];
+    this.presupuesto={
+      id:null,
+      id_solicitud:null,
+      monto_total:null,
+      fecha_creacion:null,
+      estado:''
     };
-   // this.cargarSolicitud();
-   // this.total=this.calTotal();
-   // this.ser=this.solicitud['servicios'];
   }
 
   ionViewDidLoad() {
+    console.log(this.solicitud)
     console.log('ionViewDidLoad PresupuestoPage');
-    this.cargarSolicitud();
-    //
-    
+    this.cargarPresupuesto();
+    this.cargarEmple();    
+    this.solicitud.servicios_solicitados.reverse();
   }
-  cargarSolicitud(){
-    //this.solicitud=this.dataSolicitud.getSolicitud();
-  }
-  calTotal():Number{
-    var suma :Number=0;
-    let array:any[]= this.solicitud['servicios'];
-    console.log(array[0].costo);
-    for (let i = 0; i < array.length; i++) {
-       suma = suma + array[i].costo;
+  cargarPresupuesto(){
+    this.presuService.getPresupuesto(this.solicitud.id).subscribe((ata)=>{
+      this.presupuesto=ata['data'];
+      console.log(this.presupuesto)
+    },(error)=>{
+      console.log(error);
+    })
+  } 
+  cargarEmple(){
+    for (let i = 0; i < this.solicitud.empleado.length; i++) {
+      this.empleadoService.getEmpleado(this.solicitud.empleado[i]).subscribe((empe)=>{
+        this.empleaos.push(empe['data']);
+        console.log(this.empleaos)
+      },(error)=>{
+        console.log(error);
+      })
     }
-    return suma;
-    
   }
   rechazar(){
- 
+    this.presuService.setPresu(this.presupuesto);
       let profileModal = this.modalCtrl.create(RechazoComponent);
       profileModal.present();
-    
-  }
+    }
   agendar(){
+    this.presupuesto.estado='A',
+    this.presuService.updatedPresupuesto(this.presupuesto).subscribe((pre)=>{
+      console.log(pre);
+    },(error)=>{
+      console.log(error);
+    });
     this.navCtrl.push(AgendaPage);
   }
 }

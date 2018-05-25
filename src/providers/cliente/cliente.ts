@@ -13,8 +13,8 @@ const  url_cliente = 'usuario/cliente/'
 export class ClienteProvider {
  
   url_perfil:string = 'perfil/'
-  perfil:any;
-
+  perfil:any[];
+  sexo:string;
   correo_cliente:string;
   cliente:{
     id:number,
@@ -48,6 +48,7 @@ export class ClienteProvider {
       correo:'',
       
     }
+    this.sexo='';
     
   }
  
@@ -70,7 +71,7 @@ export class ClienteProvider {
   setPerfil(){
       this.getPerfilUser().subscribe(
         (data)=>{
-          this.perfil=data['data']
+          this.perfil=data['data'].perfil
           console.log(this.perfil);
         },(error)=>{
         console.log(error);
@@ -84,6 +85,17 @@ export class ClienteProvider {
       console.log(correo);
       this.correo_cliente=correo;
     }
-
-
+    setSexoCliente(sexo){
+      this.sexo=sexo
+    }
+    getSexoCliente(){
+      return this.sexo;
+    }
+    actualizarPerfil(perfil){
+      console.log(perfil);
+      return this.http.put(this.authService.ApiUrl()+'perfil/'+ perfil.id_perfil,perfil);
+    }
+    agregarPerfil(perfil){
+      return this.http.post(this.authService.ApiUrl()+'perfil',perfil);
+    }
 }
