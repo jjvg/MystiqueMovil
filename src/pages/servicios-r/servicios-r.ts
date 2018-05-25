@@ -106,8 +106,8 @@ export class ServiciosRPage {
     });
     alert.present();
   }
-  calificar(id: number) {
-    this.navCtrl.push(CalificarPage, {id: id})
+  calificar(i) {
+    this.navCtrl.push(CalificarPage,i)
   }
   Reclamo1() {
     this.navCtrl.push(ReclamogenerarPage);

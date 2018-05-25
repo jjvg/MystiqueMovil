@@ -34,13 +34,13 @@
     <div [ngSwitch]="pestana">
         <ion-list *ngSwitchCase="'calificar'">
             <ion-item *ngFor="let servicio of ordenes_no_calificadas; let i=index">
-                <h2>Servicios recibidos por orden</h2>
+                <h2>Servicios recibidos</h2>
                 <p>¡Calificalos!</p>
                 <ion-card *ngFor="let item of servicio.servicios_realizados">
                     <ion-item>
-                        <p>{{item.el_tipo }}</p>
+                        <p><strong><h2>{{item.el_tipo }}</h2></strong></p>
                         <p>{{item.nombre_servicio}}</p>
-                        <p>{{item.fecha_servicio_solicitado}}</p>
+                        <p>{{item.fecha_servicio_solicitado | date: 'dd/MM/yyyy H:mm'}}</p>
                     </ion-item>
                 </ion-card>
                 <button ion-button small color="primary" (click)="calificar(servicio)">
