@@ -32,32 +32,44 @@
 <ion-content padding>
   <div [ngSwitch]="comentarios">
   <ion-list *ngSwitchCase="'historico'">
-    <ion-card *ngFor="let c of historico">
-        <ion-item>
-          <h2>Tipo: {{c.descripcionTipo}}</h2>
-          <p>Fecha: {{c.fecha}}</p>
-          </ion-item>
-      <ion-card-content>
-        <p>Contenido: {{c.contenido}}</p>
-        <ion-item>
-          <p item-end>Estatus: {{c.estatus}}</p>
-        </ion-item>
-      </ion-card-content>
+    <ion-card *ngFor="let come of Comentario">
+        <div *ngIf= "come.id_cliente==id_cli">
+             <div *ngFor="let t of tcomentarios">
+                <div *ngIf= "come.id_tipo_comentario==t.id">
+                  <ion-item>
+                   <h2>Tipo: {{t.nombre}}</h2>
+                   <p>Fecha: {{come.fecha_creacion | date: 'dd/MM/yyyy   H:mm' }}</p>
+                   </ion-item>
+                      <ion-card-content>
+                       <p>Contenido: {{come.descripcion}}</p>
+                      <ion-item>
+                      <p item-end>Estatus: {{come.estatus}}</p>
+                     </ion-item>
+                     </ion-card-content>
+                </div>
+             </div>
+        </div>
     </ion-card>
   </ion-list>
   <ion-list *ngSwitchCase="'respuestas'">
-      <ion-card *ngFor="let r of respuestas" >
-          <ion-item>
-            <h2>Fecha: {{r.fecha}}</h2>
-            </ion-item>
-        <ion-card-content>
-          <p>Contenido: {{r.contenido}}</p>
-          <ion-item>
-            <button ion-button small item-end>Eliminar</button>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
-    </ion-list>
+    <div *ngFor="let c of Comentario" >
+        <div *ngIf= "c.id_cliente==id_cli">
+           <ion-card *ngFor="let r of RSugerencias" >
+             <div *ngIf= "r.id_comentario==c.id">
+                <ion-item>
+                 <h2>Fecha: {{r.fecha_creacion | date: 'dd/MM/yyyy   H:mm' }}</h2>
+                </ion-item>
+                 <ion-card-content>
+                 <p>Contenido: {{r.descripcion}}</p>
+                <ion-item>
+                  <button ion-button small item-end>Eliminar</button>
+              </ion-item>
+             </ion-card-content>
+            </div>
+          </ion-card>
+       </div>
+   </div>
+ </ion-list>
 </div>
 <ion-fab right bottom style="margin-bottom:5px">
     <button ion-fab color="primary" (click)='gotoNuevoComentario()'>
