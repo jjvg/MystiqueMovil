@@ -9,28 +9,28 @@
         <ion-title>Solicitud</ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content padding>
     <div *ngIf="catego">
-        <ion-list>
-            <ion-list-header>
-                <p text-center>Seleccione una categoria</p>
-            </ion-list-header>
-            <button ion-item *ngFor="let item of categoria,let i=index " (click)="siguiente(item.id)"> {{item.nombre}}</button>
-            <button ion-item (click)="verlist()">Todos</button>
-        </ion-list>
+    <ion-list>
+        <ion-list-header>
+            <h2>Seleccione una categoria</h2>
+        </ion-list-header> 
+        <button ion-item *ngFor="let item of categoria,let i=index " (click)="siguiente(i)"> {{item.nombre}}</button>
+        <button ion-item (click)="verlist()">Todos</button>     
+    </ion-list>
     </div>
-    <div *ngIf="visible">
-        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre, tipo"></ion-searchbar>
+    <div *ngIf="visible" >
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Buscar por nombre"></ion-searchbar>
         <div *ngIf="searching" class="spinner-container">
             <ion-spinner></ion-spinner>
         </div>
-        <p text-center>Seleccionar servicios</p>
+        <h3>Seleccionar servicios</h3>
         <ion-list>
-            <ion-item *ngFor="let item of serviciosmostrar ,let i=index ">
+            <ion-item *ngFor="let item of servicios ,let i=index ">
                 <div item-content>
                     <h2>{{item.nombre}}</h2>
                 </div>
-                <ion-toggle [(ngModel)]="servicios[i].select" (ngModelChange)="ver(i)" color="secondary" checked="false" item-end></ion-toggle>
+                <ion-toggle [(ngModel)]="servicios[i].select" (ngModelChange)="ver(i)" color="secondary" checked="false" item-end></ion-toggle> 
             </ion-item>
         </ion-list>
 
@@ -42,31 +42,41 @@
 
     </div>
     <div *ngIf="preferenciaAtencion">
-        <p text-center>Indique su preferencia de atencion</p>
+        <h4>Indique si desea ser atendido por un hombre o una mujer</h4>
         <ion-list>
-            <div padding>
-                <button ion-button color="secondary" (click)="Sexo('hombre')" block>Hombre</button>
-            </div>
-            <div padding>
-                <button ion-button color="secondary" (click)="Sexo('mujer')" block>Mujer</button>
-            </div>
-            <div padding>
-                <button ion-button color="secondary" (click)="Sexo('cualquiera')" block>Cualquiera</button>
-            </div>
+            <ion-item>
+                <ion-label>Hombre</ion-label>
+                <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+                <ion-label>Mujer</ion-label>
+                <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+                <ion-label>Indiferente</ion-label>
+                <ion-checkbox color="secondary" item-end checked="isChecked"></ion-checkbox>
+            </ion-item>
         </ion-list>
+        <div style="margin-top:10px">
+            <ion-fab right bottom style="margin-bottom:10px; margin-left:10px">
+                <button ion-fab color="primary" (click)="verConfirmacion()">
+                <ion-icon name="arrow-forward"></ion-icon>
+              </button>
+            </ion-fab>
+        </div>
     </div>
     <div *ngIf="empleadovisible">
-        <p text-center>Selecciona empleado</p>
+        <h3>Selecciona un empleado</h3>
         <ion-list>
-            <ion-item *ngFor="let empe of emplever;let i=index">
-                <ion-thumbnail item-start>
-                    <img src="{{url_file}}empleado/{{empe.id}}.{{empe.imagen}}">
-                </ion-thumbnail>
+            <ion-item *ngFor="let empe of empleadosDisponibles">
+                <!--<ion-thumbnail item-start>
+                    <img src="{{empe.foto}}">
+                </ion-thumbnail>-->
                 <div item-content>
                     <h2 color="primary">{{empe.nombre}}</h2>
-                    <p>Telefono: {{empe.telefono}}</p>
+                    <p>Especialidad: {{empe.especialidad}}</p>
                 </div>
-                <ion-toggle color="secondary" [(ngModel)]="emplever[i].ele" checked="false" (ngModelChange)="AsignarEmpleado(empe.id,i)" item-end></ion-toggle>
+                <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
             </ion-item>
         </ion-list>
         <ion-row>

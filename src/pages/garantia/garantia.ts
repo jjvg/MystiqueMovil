@@ -164,7 +164,7 @@ export class GarantiaPage {
       this.searching = true;
      }
     setFilteredItems() {
-      this.servicios = this.dataSer.getServicios();
+      this.servicios = this.dataSer.filterItems(this.searchTerm);
       }
       //verFecha(){
         //this.visible=false;

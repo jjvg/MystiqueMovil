@@ -18,17 +18,14 @@ export class CalificarPage {
   color: { backgroundcolor: '#fd0087' };
   visible: Boolean = true;
   Serviciovisible: Boolean;
-  id: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.id = this.navParams.data.id;
     this.calificacion = {
-      lugar: 4,
-      ambientacion: 4,
-      infraestructura: 4,
-      secado: 4,
-      lavado: 4,
-      tinte: 4
+      lugar: null,
+      ambientacion: null,
+      infraestructura: null,
+      secado: null,
+      tinte: null
     };
   }
 

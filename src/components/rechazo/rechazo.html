@@ -14,8 +14,11 @@
         </ion-row>
         <br>
         <ion-label>Motivo</ion-label>
-        <ion-select [(ngModel)]="this.respuesta.id_tipo_respuesta_presupuesta" name="tipo" okText="Aceptar" cancelText="Cancelar">
-            <ion-option *ngFor="let tipo of motivo" [value]="tipo.id">{{tipo.nombre}}</ion-option>
+        <ion-select [(ngModel)]="motivo">
+            <ion-option value="1">Costo</ion-option>
+            <ion-option value="2">No podra Acudir</ion-option>
+            <ion-option value="3">Acudira a Otro Lugar</ion-option>
+            <ion-option value="4">Otros</ion-option>
         </ion-select>
     </ion-item>
     <br><br>
@@ -23,12 +26,15 @@
         <h3>Descripción</h3>
     </div>
     <br><br>
-    <ion-item text-center>
+    <ion-item>
         <ion-label floating>Especifique Razones</ion-label>
-        <ion-textarea [(ngModel)]="respuesta.descripcion" type="text" name="razon"></ion-textarea>
+        <ion-input type="textarea"></ion-input>
     </ion-item>
     <br><br>
-    <div padding>
-        <button ion-button block (click)="confirmar()">Enviar</button>
-    </div>
+    <ion-row>
+        <ion-col col-8></ion-col>
+        <ion-col col-4>
+            <button ion-button (click)="GuardarRechazo()">Enviar</button>
+        </ion-col>
+    </ion-row>
 </ion-content>

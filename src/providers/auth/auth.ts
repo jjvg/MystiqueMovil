@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-const port = '3000';
-const API_URL = 'http://localhost:'+port+'/api/';
-const IMG_URL = 'http://localhost:'+port+'/files/';
+const API_URL = 'http://localhost:3000/api/';
 
 /*
   Generated class for the AuthProvider provider.
@@ -27,9 +25,6 @@ export class AuthProvider {
   }
   ApiUrl(){
     return API_URL;
-  }
-  ApiFile(){
-    return IMG_URL;
   }
 }
 

@@ -29,14 +29,6 @@ export class TiposProvider {
    getValorParametro(){
      return this.http.get(this.auth.ApiUrl()+'valor_parametro')
    }
-   getEspeciali(){
-     return this.http.get(this.auth.ApiUrl()+'especialidad')
-   }
-   getTipo_respuesta_presupuesto(){
-     return this.http.get(this.auth.ApiUrl()+'tipo_respuesta_presupuesto');
-   }
-   CrearRespuesta_presupuesto(res){
-     return this.http.post(this.auth.ApiUrl()+'respuesta_presupuesto',res);
-   }
+
 
 }

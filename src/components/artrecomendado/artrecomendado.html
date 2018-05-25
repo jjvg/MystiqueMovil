@@ -1,12 +1,18 @@
 <!-- Generated template for the ArtrecomendadoComponent component -->
-<ion-list *ngFor="let item of auxiliar">
+<ion-list *ngFor="let item of items">
     <ion-card>
-        <img src="{{url_files}}consejo/{{item.id}}.{{item.imagen}" />
+        <img src="{{item.img}}" />
         <ion-card-content>
             <ion-card-title>
-                {{item.titulo}}
+                {{item.nombre}}
             </ion-card-title>
-            <p>{{item.descripcion}}</p>
+            <p>{{item.content}}
+            </p>
         </ion-card-content>
+        <div text-left>
+            <button class="colorc" ion-button clear>Detalle</button>
+        </div>
+
     </ion-card>
+
 </ion-list>

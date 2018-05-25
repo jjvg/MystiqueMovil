@@ -14,10 +14,12 @@
         </ion-row>
         <br>
         <ion-label>Motivo</ion-label>
-        <ion-select [(ngModel)]="motivo">
-            <ion-option value="1">Tiempo</ion-option>
-            <ion-option value="2">Dinero</ion-option>
-            <ion-option value="3">Otros</ion-option>
+        <ion-select [(ngModel)]="incidenciaO.id_tipo_incidencia" name="motivo" multiple="false"> 
+            <div *ngFor="let C of tincidencia"  >
+            <ion-option *ngIf= "C.id_razon_incidencia==3" [value] = "C.id" >
+                {{C.nombre}}
+            </ion-option>
+        </div>
         </ion-select>
     </ion-item>
     <br> <br>
@@ -27,7 +29,7 @@
     <br><br>
     <ion-item>
         <ion-label floating>Especifique Razones</ion-label>
-        <ion-input type="textarea"></ion-input>
+        <ion-input type="textarea" [(ngModel)]="incidenciaO.descripcion" name="comentario"></ion-input>
     </ion-item>
     <br><br>
     <ion-row>

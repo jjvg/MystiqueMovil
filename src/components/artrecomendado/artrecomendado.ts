@@ -1,7 +1,4 @@
-import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { ConsejoProvider } from '../../providers/consejo/consejo';
-import { ClienteProvider } from '../../providers/cliente/cliente';
 
 /**
  * Generated class for the ArtrecomendadoComponent component.
@@ -14,77 +11,28 @@ import { ClienteProvider } from '../../providers/cliente/cliente';
   templateUrl: 'artrecomendado.html'
 })
 export class ArtrecomendadoComponent {
+
   text: string;
-  items:any[];
-  auxiliar:any[];
-  url_files:string;
-  perfil:any[];
-  tips:any[];
-  constructor(public consejosService: ConsejoProvider,public authService:AuthProvider,public clienteService:ClienteProvider) {
-    this.items=[];
-    this.auxiliar=[];
-    this.url_files=this.authService.ApiFile();
-   this.tips=[];
+  items:any;
+  constructor() {
+    
+    this.items=[{
+      "nombre":"Masaje Capilar",
+      "content":"Existe una nueva tecnica para realizar masajes capilares a nuestros clientes enterate mas aqui",
+      "img":"assets/imgs/masajecapilar.jpg"
+    },
+  {
+    "nombre":"Rutina de belleza",
+    "content":"En ocaciones la clave tener un bello rostro es seguir una rutina de belleza ",
+    "img":"assets/imgs/rutinas.jpg"
+  },
+  {
+    "nombre":"Exfoliante Natural",
+    "content":"Perfecto para un rostro un poco grasoso, es importante utilizar exfoliantes para eliminar de nuestra piel las inpuresas que dia a dia recogemos en las calles ",
+    "img":"assets/imgs/exfoliante.png"
+  }];    
     console.log('Hello ArtrecomendadoComponent Component');
     this.text = 'Hello World';
-    this.perfil=[];
-    this.consejo();
   }
-
- 
-  consejo(){
-    this.consejosService.getConsejo().subscribe(
-      (data)=>{
-        this.items=data['data'];
-        console.log(this.items)
-        this.filtro();
-        this.cargarAux();
-      },(error)=>{
-        console.log(error)
-      });
-    }
-    cargarAux(){
-      this.tips.reverse()
-      if(this.tips.length<3){
-        for (let i = 0; i < this.tips.length; i++) {
-          this.auxiliar.push(this.tips[i]); 
-        }  
-      }else{
-        for (let i = 0; i <3; i++) {
-          this.auxiliar.push(this.tips[i]); 
-        } 
-      }
-     
-      console.log(this.auxiliar);
-    }
-  filtro(){
-    this.auxiliar=[];
-    for (let j = 0; j < this.items.length; j++) {
-      console.log('ahora va al siguiente'+j);
-      this.consejos(this.items[j]);
-     }
-  }
-
-  consejos(con){
-    let consejo={
-      detalle_consejo:[],
-    };
-    let cont=0;
-    consejo.detalle_consejo=con.detalle_consejo;
-    for (let i = 0; i < consejo.detalle_consejo.length; i++) {
-      for (let j = 0; j < this.perfil.length; j++) {
-        if (this.perfil[j].id_valor_parametro===consejo.detalle_consejo[i].id_valor_parametro) {
-          cont++;
-          }
-        }
-      }
-     
-      if(cont===consejo.detalle_consejo.length){
-        this.tips.push(con);
-      }else{
-        console.log('no lo inserto');
-      }
-    }
-  
 
 }
