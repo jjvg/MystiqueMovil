@@ -1,4 +1,3 @@
-import { SolicitudProvider } from './../../providers/solicitud/solicitud';
 
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component} from '@angular/core';
@@ -9,8 +8,9 @@ import { EmpleadoProvider} from '../../providers/empleado/empleado';
 import { ServiciosProvider } from '../../providers/servicios/servicios';
 import 'rxjs/add/operator/debounceTime';
 import { FormControl } from '@angular/forms';
-import { AuthProvider } from '../../providers/auth/auth';
-
+//import { PrincipalPage } from '../principal/principal';
+//import{ FormBuilder, Validators} from '@angular/forms';
+//import {FormGroup } from '@angular/forms/src/model';
 /**
  * Generated class for the SolicitudPage page.
  *
@@ -28,177 +28,75 @@ export class SolicitudPage {
   searchTerm: string = '';
   searchControl: FormControl;
   searching: any = false;
-  especi:any[];
   //....................
   // Definicion de objeto solicitud
   solicitud:{
     id_cliente:number,
     id_promocion:number,
-    sexo:string,
-    servicio:number[],
-    empleado:number[],
+    empleados:any[],
+    servicios:any[],
   };
   //........................
   //DEfinicion de arreglo de objeto servicios
   servicios:Array<
   {id:number,
    imagen:string,
-   tipo_servicio:string,
+   id_tipo_servicio:number,
    nombre:string,
    precio:number,
    descripcion:string,
    duracion:number,
-   id_categoria_servicio:number,
-   categoria_servicio:string, 
+   status:string,
+   visible:boolean
    select:boolean}>;
 
   //...................
- serv:any[];
 
-  empleados:Array<{
-    apellido:string,
-    cedula:string,
-    direccion:string,
-    estatus:string,
-    fecha_creacion:string,
-    fecha_nacimiento:string,
-    id:number,
-    id_ciudad:number,
-    id_usuario:number,
-    imagen:string,
-    nombre:string,
-    sexo:string,
-    telefono:string,
-    visible:boolean,
-    ele:boolean
-      }>; //Variable para almacenar empleados
-
-  tipoServicios :any[];// Variable para los tipos de servicion 
+  empleados:any; //Variable para almacenar empleados
+  tipoServicios :any;// Variable para los tipos de servicion 
   visible:Boolean=false;// Variable para comtrolar segmento de la  vista
-  preferenciaAtencion:Boolean=false;// Mismo caso del anterior
+  preferenciaAtencion:Boolean;// Mismo caso del anterior
   empleadovisible:Boolean;// Mismo Caso del anterior
   categoria:any;
   catego:boolean=true;
-  serviciosmostrar:any[];
-  tipos:any[];
-  emple:any[];
-
-  emplever:Array<{
-apellido:string,
-cedula:string,
-direccion:string,
-estatus:string,
-fecha_creacion:string,
-fecha_nacimiento:string,
-id:number,
-id_ciudad:number,
-id_usuario:number,
-imagen:string,
-nombre:string,
-sexo:string,
-telefono:string,
-visible:boolean,
-ele:boolean
-  }>;
-  url_file:string;
-  hear:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, 
     public dataSer: ServiciosProvider,
     public tipoService: TiposProvider,
     public clientService: ClienteProvider,
-    public empleSrvce: EmpleadoProvider,
-    public soliService:SolicitudProvider,
-    public authService:AuthProvider
+    public empleSrvce: EmpleadoProvider
     ) {
-      this.empleados=[{
-        apellido:"",
-        cedula:'',
-        direccion:"",
-        estatus:"",
-        fecha_creacion:"",
-        fecha_nacimiento:'',
-        id:0,
-        id_ciudad:0,
-        id_usuario:0,
-        imagen:'',
-        nombre:'',
-        sexo:'',
-        telefono:'',
-        visible:false,
-        ele:false}];
-      this.emplever=[{
-    apellido:"",
-    cedula:'',
-    direccion:"",
-    estatus:"",
-    fecha_creacion:"",
-    fecha_nacimiento:'',
-    id:0,
-    id_ciudad:0,
-    id_usuario:0,
-    imagen:'',
-    nombre:'',
-    sexo:'',
-    telefono:'',
-    visible:false,
-    ele:false}];
-      this.servicios=[
-      {id:0,
-       imagen:'',
-       tipo_servicio:'',
-       nombre:'',
-       precio:0,
-       descripcion:'',
-       duracion:0,
-       id_categoria_servicio:0,
-       categoria_servicio:'',
-       select:false}];
-
     this.getCategorias();
-    this.getServicios();
-    this.searchControl = new FormControl();
-    this.solicitud={
+
+  this.searchControl = new FormControl();
+   this.solicitud={
     id_cliente:null,
     id_promocion:null,
-    sexo:'',
-    servicio:[],
-    empleado:[],
-  };this.url_file=this.authService.ApiFile();
-  
+    empleados:[],
+    servicios:[],
+  };
+  this.solicitud.servicios= [];
   console.log(this.navParams.data)
-
-  if (this.navParams.data.pro==="servi") {
+  if (this.navParams.data.tipo=="promocion") {
     console.log(this.navParams.data)
     this.visible=false;
-    this.catego=false;
-    this.preferenciaAtencion=true;
-    this.solicitud.servicio.push(this.navParams.data.item.id);
+    this.empleadovisible=true;  
+  }else{
+    this.empleadovisible=false;
   }
-    if(this.navParams.data.pro==="promo"){
-    this.visible=false;
-    this.catego=false;
-    this.preferenciaAtencion=true;
-    this.solicitud.servicio.push(this.navParams.data.item.id_servicio);
-  }
-  this.setEmplea();
-  this.getEspeciali();
-  //this.preferenciaAtencion=false;
-  //this.setEmplea();
-  this.tipos=[];
-  this.emple=[];
-  this.serviciosmostrar=[];
+  this.preferenciaAtencion=false;
+  this.empleados=[]
   }
 
   ionViewDidLoad() {
-      this.tipoServicios=[];
-    console.log('ionViewDidLoad SolicitudPage');
-    this.getTipoServicio();
+    console.log(this.servicios);
+    this.setFilteredItems();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
       this.searching = false;
       this.setFilteredItems();
-      this.getServicios();
       });
+    this.setEmplea();
+    console.log('ionViewDidLoad SolicitudPage');
   }
 
 
@@ -213,23 +111,6 @@ ele:boolean
                 text:'SI',
                 handler:()=>{
                 console.log('Dijo que si');
-                this.emplever=[{
-                  apellido:"",
-                  cedula:'',
-                  direccion:"",
-                  estatus:"",
-                  fecha_creacion:"",
-                  fecha_nacimiento:'',
-                  id:0,
-                  id_ciudad:0,
-                  id_usuario:0,
-                  imagen:'',
-                  nombre:'',
-                  sexo:'',
-                  telefono:'',
-                  visible:false,
-                  ele:false}];
-                this.EmpleaosSexo(this.solicitud.sexo);
                 this.visible=false;
                 this.preferenciaAtencion=false;
                 this.empleadovisible=true;
@@ -239,11 +120,13 @@ ele:boolean
               {
                 text: 'NO',
                 handler:()=>{
+                
                   this.visible=true;
                   this.preferenciaAtencion=false;
                   this.empleadovisible=false;
-                  this.newSolicitu(this.solicitud);
                 console.log('Dijo que no');
+                //this.asignarAleatorio();
+                //this.guardarSolicitud();
                 this.gotoGuardar();
                  }
               }
@@ -261,7 +144,7 @@ ele:boolean
           text:'Cerrar',
         handler:()=>{
          
-          this.newSolicitu(this.solicitud);
+        //  this.newSolicitu(this.solicitud);
           let navTran=alert.dismiss();
             navTran.then(()=>{
               this.navCtrl.popToRoot();
@@ -276,20 +159,22 @@ ele:boolean
       this.searching = true;
      }
     setFilteredItems() {
-      this.serviciosmostrar = this.filterItems(this.searchTerm);
+      this.servicios = this.dataSer.filterItems(this.searchTerm);
       }
       verFecha(){
         this.visible=false;
       }
       verPreferencia(){
-        this.solicitud.servicio=[];
+        let j=0;
+        this.solicitud.servicios=[];
         this.solicitud.id_cliente=this.clientService.getCliente().id
         for (let i=0;  i < this.servicios.length;  ++i) {
           if(this.servicios[i].select===true){
-            this.solicitud.servicio.push(this.servicios[i].id)
+            this.solicitud.servicios[j]=this.servicios[i].id;
+            ++j; 
           }
         }
-        console.log(this.solicitud.servicio);
+        console.log(this.solicitud);
         this.visible=false;
         this.preferenciaAtencion=true;
       }
@@ -304,29 +189,17 @@ ele:boolean
       getCategorias(){
         this.tipoService.getCategorias_ser().subscribe((data)=>{
           this.categoria=data['data'];
-          console.log(this.categoria);
+          console.log(this.categoria)
         })
       }
       verlist(){
-        this.emple=this.empleados;
         this.visible=true;
         this.catego=false;
       }
-      siguiente(item){
-        console.log(this.servicios);
-            for (let h = 0; h < this.servicios.length; h++) {
-              if(item === this.servicios[h].categoria_servicio){
-                this.serviciosmostrar.push(this.servicios[h]);
-              }      
-            }
-        console.log(this.especi);
-        this.emplePromo(item);
-        this.setFilteredItems();
-         console.log(this.serviciosmostrar);
-         console.log(this.emple);
+      siguiente(i){
         this.visible=true;
         this.catego=false;
-     }
+      }
       ver(i){
         console.log(this.servicios[i]);
       }
@@ -334,71 +207,9 @@ ele:boolean
         this.empleSrvce.getEmpleados().subscribe(
           (e)=>{
             this.empleados=e['data'];
-           
+            console.log(e)
           },(error)=>{
             console.log(error);
           })
       }
-      newSolicitu(soli){
-        console.log(soli);
-        this.soliService.saveSolicitud(soli).subscribe((soli)=>{
-          console.log(soli);
-        },(error)=>{
-          console.log(error);
-        })
-      }
-      getServicios(){
-        this.dataSer.getServiciosconCategoria().subscribe((ser)=>{
-          this.servicios=ser['data'];
-           
-        },(error)=>{
-          console.log(error);
-        })
-      }
-      filterItems(searchTerm){
-        return this.servicios.filter((item) => {
-         return item.nombre.toLowerCase().
-          indexOf(searchTerm.toLowerCase()) > -1 ||
-            item.tipo_servicio.toLowerCase().
-          indexOf(searchTerm.toLowerCase()) > -1;;
-         });
-        }
-        getEspeciali(){
-          this.tipoService.getEspeciali().subscribe((es)=>{
-            this.especi=es['data'];
-            console.log(this.especi);
-            },(error)=>{
-              console.log(error)
-            })
-          }
-          Sexo(val){
-            this.solicitud.sexo=val;
-            this.verConfirmacion();
-          }
-          AsignarEmpleado(id,i){
-            this.solicitud.empleado.push(id);
-            //this.emplever.splice(i,1);
-          }
-          EmpleaosSexo(sexo){
-            console.log(sexo);
-            this.emplever=[];
-            if(sexo != "c"){
-              console.log(sexo);
-              for (let i = 0; i < this.empleados.length; i++) {
-                console.log(this.empleados[i].sexo)
-                if(this.empleados[i].sexo==sexo){
-                  this.emplever.push(this.empleados[i])
-                }            
-              }
-           }else{
-             this.emplever=this.empleados;
-           }  
-           console.log(this.emplever);
-        }
-        emplePromo(item){
-          this.empleSrvce.getEmpleCatego(item).subscribe((resp)=>{
-            this.empleados=resp['data'].empleados;
-            console.log(this.empleados);
-          })
-        }
   }

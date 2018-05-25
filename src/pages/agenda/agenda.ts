@@ -68,7 +68,8 @@ sexo:string
  bloques_hora:any[];
  bloques_total:any[];
  citas:Array<{
-   cantidad:number
+   cantidad:number,
+   id_orden_servicio:number,
    hora_inicio:string;
    hora_fin:string;
    horarios:any[];
@@ -117,7 +118,6 @@ sexo:string
     this.buscarOren();
     this.getHorarios();
     this.obtenerLabo();
-   
   }
   openDate(){
     this.datepicker.open();
@@ -277,12 +277,14 @@ sexo:string
   }
   citasbloque(){
     let c={
-      cantidad:0,
+      
+      bloques_requeridos:0,
+      id_orden_servicio:0,
       hora_inicio:'',
       hora_fin:'',
       horarios:[]
     }
-    c.cantidad=this.solicitud.cantidad_servicios;
+    c.bloques_requeridos=this.solicitud.cantidad_servicios;
     c.hora_inicio=this.bloques[0].hora_inicio;
     let tama=this.bloques.length;
     c.hora_fin=this.bloques[tama-1].hora_fin;

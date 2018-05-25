@@ -55,66 +55,39 @@ empleaos:any[];
   public orenService:ServicioRProvider) {
     this.solicitud={
       apellido:'',
-      cantidad_servicios:null,
+      cantidad_servicios:0,
       empleado:[],
       estado:'',
       fecha_creacion:null,
-      id:null,
-      id_cliente:null,
-      id_promocion:null,
+      id:0,
+      id_cliente:0,
+      id_promocion:0,
       nombre:'',
       servicios_solicitados:[],
       sexo:''
       };
-    this.solicitud=this.navParams.data
-    this.empleaos=[];
-    this.presupuesto={
-      id:null,
-      id_solicitud:null,
-      monto_total:null,
-      fecha_creacion:null,
-      estado:''
-    };
-    this.oren={
-      id_solicitud:null,
-      empleados_asignados:[]
-    };
-    this.oren.id_solicitud=this.solicitud.id;
-    this.oren.empleados_asignados=this.solicitud.empleado;
-  }
-
-  ionViewDidLoad() {
-    console.log(this.solicitud)
-    console.log('ionViewDidLoad PresupuestoPage');
-    this.cargarPresupuesto();
-    this.cargarEmple();    
-    this.solicitud.servicios_solicitados.reverse();
-  }
-  cargarPresupuesto(){
-    this.presuService.getPresupuesto(this.solicitud.id).subscribe((ata)=>{
-      this.presupuesto=ata['data'];
-      console.log(this.presupuesto)
-    },(error)=>{
-      console.log(error);
-    })
-  } 
-  cargarEmple(){
-    for (let i = 0; i < this.solicitud.empleado.length; i++) {
-      this.empleadoService.getEmpleado(this.solicitud.empleado[i]).subscribe((empe)=>{
-        this.empleaos.push(empe['data']);
-        console.log(this.empleaos)
-      },(error)=>{
-        console.log(error);
-      })
+      this.solicitud=this.navParams.data;
+      this.oren.id_solicitud=this.solicitud.id;
+      this.oren.empleados_asignados=this.solicitud.empleado;
     }
+   
+
+  cargarSolicitud(){
+    this.solicitud=this.dataSolicitud.getSolicitud();
   }
+obtenerPresupuesto(){
+  this.presuService.getPresupuesto(this.solicitud.id).subscribe((resp)=>{
+    this.presupuesto=resp['data'];
+    console.log(this.presupuesto);
+  },(error)=>{
+    console.log(error);
+  })
+}
   rechazar(){
-    this.presuService.setPresu(this.presupuesto);
       let profileModal = this.modalCtrl.create(RechazoComponent);
       profileModal.present();
-    }
+  }
   agendar(){
-    this.crearOrden();
     this.presupuesto.estado='A',
     this.presuService.updatedPresupuesto(this.presupuesto).subscribe((pre)=>{
       console.log(pre);
@@ -123,7 +96,6 @@ empleaos:any[];
     },(error)=>{
       console.log(error);
     });
-    
   }
   crearOrden(){
     this.orenService.newOrden(this.oren).subscribe((resp)=>{

@@ -26,7 +26,7 @@
     <div *ngIf="horavisible">
         <h4>Seleccione Hora de atención</h4>
         <ion-list>
-            <ion-card *ngFor="let item of bloques_total; let i=index">
+            <ion-card *ngFor="let item of citas; let i=index">
                 <ion-item>
                     <ion-icon name="alarm" item-start></ion-icon>
                     <ion-toggle color="secondary" checked="false" item-end></ion-toggle>

@@ -17,21 +17,18 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
+
+
 <ion-content>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content pullingText="suelta para actualizar" pullingIcon="arrow-dropdown" refreshingSpinner="crescent" refreshingText="..cargando">
-        </ion-refresher-content>
-    </ion-refresher>
-    <ion-list *ngFor="let item of promo_mostrar">
+    <ion-list *ngFor="let item of promociones">
         <ion-card>
-            <img src="{{url_files}}promocion/{{item.id}}.{{item.imagen}}">
+            <img mat-card-image src= "http://localhost:3000/files/promocion/{{item.id}}.{{item.imagen}}" >
             <ion-card-content>
                 <ion-card-title>
                     {{item.nombre}}
                 </ion-card-title>
                 <h2>{{item.descripcion}}</h2>
-                <p></p>
-                <p>Porcentaje de descuento {{item.porcentaje_descuento}}
+               <p></p> <p>Porcentaje de descuento {{item.porcentaje_descuento}}
                 </p>
             </ion-card-content>
             <div text-left>

@@ -1,8 +1,8 @@
-import { PromocionProvider } from './../../providers/promocion/promocion';
 import { SolicitudPage } from './../solicitud/solicitud';
-import { AuthProvider} from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PromocionProvider } from '../../providers/promocion/promocion';
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 /**
