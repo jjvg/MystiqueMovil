@@ -6,57 +6,33 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>Agendar</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <ion-title>Agendar</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <div *ngIf="empleadovisible">
-        <h3>Selecciona un empleado</h3>
-        <ion-list>
-            <ion-item *ngFor="let empe of empleadosDisponibles">
-                <ion-thumbnail item-start>
-                    <img src="{{empe.foto}}">
-                </ion-thumbnail>
-                <div item-content>
-                    <h2 color="primary">{{empe.nombre}}</h2>
-                    <p>Especialidad: {{empe.especialidad}}</p>
-                </div>
-                <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
-            </ion-item>
-        </ion-list>
-            <div style="margin-top:10px">
-                <ion-fab right bottom style="margin-bottom:10px; margin-left:10px">
-                    <button ion-fab color="primary" (click)="verFecha()">
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </button>
-                </ion-fab>
-            </div>
-    </div>
-    <div *ngIf="Fechavisible">
-        <h4>Seleccione Fecha</h4>
-        <ion-item>
-            <button ion-button (click)="openDate()" item-start large>
+    <h4>Seleccione Fecha</h4>
+    <ion-item>
+        <button ion-button (click)="openDate()" item-start large>
                 <ion-icon name="calendar"></ion-icon>
         </button>
-            <span ion-datepicker [(value)]="initDate" [headerClasses]="color" [localeStrings]="localeString" [disabledDates]="disabledDates" [min]="initDate" clear class="ScheduleDate" locale="en-US" (ionSeleted)="obtenerBloques()" (ionChange)="obtenerBloques()">
+        <span ion-datepicker [(value)]="initDate" [headerClasses]="color" [localeStrings]="localeString" [disabledDates]="diasnodisponibles" [min]="initDate" clear class="ScheduleDate" locale="en-US" (ionSeleted)="obtenerBloques()" (ionChange)="obtenerBloques()">
                 <h1  style="margin-left:20px">{{initDate |  date:'dd/MM/yyyy'}}</h1>
         </span>
-        </ion-item>
-    </div>
+    </ion-item>
     <div *ngIf="horavisible">
         <h4>Seleccione Hora de atención</h4>
         <ion-list>
-            <ion-card *ngFor="let item of bloques">
+            <ion-card *ngFor="let item of bloques_total; let i=index">
                 <ion-item>
                     <ion-icon name="alarm" item-start></ion-icon>
                     <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
                 </ion-item>
                 <ion-card-content>
-                    <h2>Hora disponible: {{item}}</h2>
+                    <h2>Hora inicio: {{item.hora_inicio}}</h2>
                     <p>Fecha: {{initDate | date:'dd/MM/yyyy'}}</p>
                 </ion-card-content>
             </ion-card>
@@ -68,5 +44,5 @@
                 <button ion-button type="submit" (click)="gotoGuardar()"> Enviar</button>
             </ion-col>
         </ion-row>
-      </div>
+    </div>
 </ion-content>

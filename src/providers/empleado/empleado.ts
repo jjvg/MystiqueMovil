@@ -23,4 +23,7 @@ export class EmpleadoProvider {
   getEmpleCatego(i){
     return this.http.get(this.authSvce.ApiUrl()+'vista_empleados_categoria/'+i)
   }
+  getHorarioEmpleado(i){
+    return this.http.get(this.authSvce.ApiUrl()+'vista_empleado_horarios/'+i);
+  }
 }

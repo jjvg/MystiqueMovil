@@ -64,6 +64,8 @@ import { EmpleadoProvider } from '../providers/empleado/empleado';
 import { ServicioRProvider } from '../providers/servicio-r/servicio-r';
 import { CalificarProvider } from '../providers/calificar/calificar';
 import { PresupuestoProvider } from '../providers/presupuesto/presupuesto';
+import { NotificacionProvider } from '../providers/notificacion/notificacion';
+import { AgendaProvider } from '../providers/agenda/agenda';
 
 
 @NgModule({
@@ -171,6 +173,8 @@ import { PresupuestoProvider } from '../providers/presupuesto/presupuesto';
     ServicioRProvider,
     CalificarProvider,
     PresupuestoProvider,
+    NotificacionProvider,
+    AgendaProvider,
    
     
   ]

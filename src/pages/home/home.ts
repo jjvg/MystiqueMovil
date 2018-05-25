@@ -19,7 +19,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 promo:{
-  id:string,
+  id:number,
   imagen:string,
 };
 promociones:any[];
@@ -29,7 +29,7 @@ url_files:string;
     public promoService:PromocionProvider,
   public authService: AuthProvider) {
     this.promo = {
-      id:'',
+      id:null,
       imagen:''
     }
     this.getPromociones();
@@ -37,7 +37,7 @@ url_files:string;
 
   ionViewDidLoad() {
     this.promo = {
-      id:'',
+      id:null,
       imagen:''
     }
     this.url_files=this.authService.ApiFile();
@@ -51,9 +51,10 @@ url_files:string;
 getPromociones(){
   this.promoService.getPromocion().subscribe((resp)=>{
     this.promociones=resp['data'];
-    this.longitu=this.promociones.length;
-    this.promo.id=this.promociones[this.longitu-1].id;
-    this.promo.imagen=this.promociones[this.longitu-1].imagen;
+    console.log(this.promociones);
+    //this.longitu=this.promociones.length;
+    //this.promo.id=this.promociones[this.longitu-1].id;
+    //this.promo.imagen=this.promociones[this.longitu-1].imagen;
     console.log(this.promo);
   },(error)=>{
     console.log(error);

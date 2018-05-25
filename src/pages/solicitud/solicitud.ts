@@ -260,7 +260,7 @@ ele:boolean
         buttons: [{
           text:'Cerrar',
         handler:()=>{
-          console.log(this.solicitud);
+         
           this.newSolicitu(this.solicitud);
           let navTran=alert.dismiss();
             navTran.then(()=>{

@@ -20,7 +20,7 @@ getServiciosR(id){
   return this.http.get(this.authService.ApiUrl()+this.URL_serviciosr+id);
 }
 newOrden(oren){
-  return this.http.post(this.authService.ApiUrl()+'orden_servicio',oren)
+  return this.http.post(this.authService.ApiUrl()+'agregar_orden',oren)
 }
 updatedOrden(orden){
   return this.http.put(this.authService.ApiUrl()+'orden_servicio',orden)

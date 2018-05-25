@@ -15,7 +15,7 @@ presupuesto:any;
     console.log('Hello PresupuestoProvider Provider');
   }
  getPresupuesto(key){
-   return this.http.get(this.authService.ApiUrl()+'vista_presupuesto/'+key);
+   return this.http.get(this.authService.ApiUrl()+'solicitud_presupuesto/'+key);
  }
  updatedPresupuesto(presu){
    console.log(presu);

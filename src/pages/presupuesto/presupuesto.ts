@@ -1,3 +1,4 @@
+import { ServicioRProvider } from './../../providers/servicio-r/servicio-r';
 import { EmpleadoProvider } from './../../providers/empleado/empleado';
 import { PresupuestoProvider } from './../../providers/presupuesto/presupuesto';
 import { SolicitudProvider } from './../../providers/solicitud/solicitud';
@@ -42,11 +43,16 @@ presupuesto:{
   fecha_creacion:Date,
   estado:string
 };
+oren:{
+  id_solicitud:number,
+  empleados_asignados:number[];
+}
 empleaos:any[];
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public dataSolicitud: SolicitudProvider,public modalCtrl: ModalController,
     public presuService:PresupuestoProvider,
-  public empleadoService:EmpleadoProvider) {
+  public empleadoService:EmpleadoProvider,
+  public orenService:ServicioRProvider) {
     this.solicitud={
       apellido:'',
       cantidad_servicios:null,
@@ -69,6 +75,12 @@ empleaos:any[];
       fecha_creacion:null,
       estado:''
     };
+    this.oren={
+      id_solicitud:null,
+      empleados_asignados:[]
+    };
+    this.oren.id_solicitud=this.solicitud.id;
+    this.oren.empleados_asignados=this.solicitud.empleado;
   }
 
   ionViewDidLoad() {
@@ -102,12 +114,22 @@ empleaos:any[];
       profileModal.present();
     }
   agendar(){
+    this.crearOrden();
     this.presupuesto.estado='A',
     this.presuService.updatedPresupuesto(this.presupuesto).subscribe((pre)=>{
       console.log(pre);
+      this.crearOrden();
+      this.navCtrl.push(AgendaPage,this.solicitud);
     },(error)=>{
       console.log(error);
     });
-    this.navCtrl.push(AgendaPage);
+    
+  }
+  crearOrden(){
+    this.orenService.newOrden(this.oren).subscribe((resp)=>{
+      console.log(resp);
+    },(error)=>{
+      console.log(error);
+    })
   }
 }
