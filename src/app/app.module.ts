@@ -1,3 +1,5 @@
+import { GustosPreferenciasPage } from './../pages/gustos-preferencias/gustos-preferencias';
+import { ActualizarPerfilPage } from './../pages/actualizar-perfil/actualizar-perfil';
 import { RechazoComponent } from './../components/rechazo/rechazo';
 import { CancelarcitaComponent } from './../components/cancelarcita/cancelarcita';
 
@@ -60,7 +62,7 @@ import { ParametrosProvider } from '../providers/parametros/parametros';
 import { TiposProvider } from '../providers/tipos/tipos';
 import { EmpleadoProvider } from '../providers/empleado/empleado';
 import { ServicioRProvider } from '../providers/servicio-r/servicio-r';
-//import { CalificarProvider } from '../providers/calificar/calificar';
+import { CalificarProvider } from '../providers/calificar/calificar';
 import { PresupuestoProvider } from '../providers/presupuesto/presupuesto';
 import { NotificacionProvider } from '../providers/notificacion/notificacion';
 import { AgendaProvider } from '../providers/agenda/agenda';
@@ -100,7 +102,9 @@ import { AgendaProvider } from '../providers/agenda/agenda';
     ListempleadoComponent,
     ComentarPage,
     ServiciosPage,
-    EmpleadosPage
+    EmpleadosPage,
+    ActualizarPerfilPage,
+    GustosPreferenciasPage
    
   ],
   imports: [
@@ -145,7 +149,9 @@ import { AgendaProvider } from '../providers/agenda/agenda';
     ListempleadoComponent,
     ComentarPage,
     ServiciosPage,
-    EmpleadosPage
+    EmpleadosPage,
+    ActualizarPerfilPage,
+    GustosPreferenciasPage
    
 
    
@@ -165,16 +171,10 @@ import { AgendaProvider } from '../providers/agenda/agenda';
     TiposProvider,
     EmpleadoProvider,
     ServicioRProvider,
-    //CalificarProvider,
+    CalificarProvider,
     PresupuestoProvider,
     NotificacionProvider,
     AgendaProvider,
-    ConsejoProvider,
-    ParametrosProvider,
-    TiposProvider,
-    EmpleadoProvider,
-    //CancelarCitaProvider,
-    //CitaProvider,
    
     
   ]
