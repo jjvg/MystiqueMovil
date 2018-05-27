@@ -1,8 +1,11 @@
+
+import { ClienteProvider } from './../../providers/cliente/cliente';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading, Refresher } from 'ionic-angular';
 import { RechazoPage } from './../rechazo/rechazo';
 import { PresupuestoPage } from './../presupuesto/presupuesto';
 import { SolicitudPage } from '../solicitud/solicitud';
+import { SolicitudProvider } from '../../providers/solicitud/solicitud';
 /**
  * Generated class for the SolicitudesPage page.
  *
@@ -17,15 +20,24 @@ import { SolicitudPage } from '../solicitud/solicitud';
 })
 export class SolicitudesPage {
   public loading:Loading;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
+  solicitudes:Array<{
+    
+  }>;
+  cliente:any;
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public solicitudServicio: SolicitudProvider,
+    public clienteServicio:ClienteProvider) {
+      this.cliente= this.clienteServicio.getCliente().id
   }
 
   ionViewDidLoad() {
+    this.getSolicitudes();
     console.log('ionViewDidLoad SolicitudesPage');
   }
-  verPresupuesto(){
-    this.navCtrl.push(PresupuestoPage)
-    
+  verPresupuesto(item){
+    this.navCtrl.push(PresupuestoPage,item)
   }
   verDetalle()
   {
@@ -37,5 +49,24 @@ export class SolicitudesPage {
       dismissOnPageChange: true,
     });
     this.loading.present();
+  }
+  getSolicitudes(){
+    this.solicitudServicio.getSolicitud(this.cliente).subscribe((resp)=>{
+      this.solicitudes=resp['data'].solicitudes;
+      this.solicitudes.reverse();
+    },(error)=>{
+      console.log(error);
+    });
+  }
+  doRefresh(refresher:Refresher){
+    this.solicitudServicio.getSolicitud(this.cliente).subscribe((resp)=>{
+      this.solicitudes=resp['data'].solicitudes;
+      this.solicitudes.reverse();
+    },(error)=>{
+      console.log(error);
+    });
+    setTimeout(() => {
+      refresher.complete();
+    }, 5000);
   }
 }

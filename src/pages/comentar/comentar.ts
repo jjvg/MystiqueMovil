@@ -47,7 +47,7 @@ text2:Boolean=false;
   console.log(this.tcomentarios)
   console.log(this.direccion);
   this.comen={
-    id_cliente: this.cliProvider.getCliente().id_usuario,
+    id_cliente: this.cliProvider.getCliente().id,
     id_tipo_comentario: 0,
     descripcion: "",
     

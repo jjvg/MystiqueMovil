@@ -11,11 +11,9 @@
     </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
     <ion-list>
-        <button ion-item *ngFor="let item of serv" (click)="Cerrar(item.name)">
+        <button ion-item *ngFor="let item of serv">
             <div>
                 <h1>{{item.name}}</h1>
                 <p>{{item.descripcion}}</p>

@@ -102,6 +102,7 @@ ele:boolean
   }>;
   url_file:string;
   hear:boolean=false;
+  selecciono:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, 
     public dataSer: ServiciosProvider,
@@ -242,7 +243,6 @@ ele:boolean
                   this.visible=true;
                   this.preferenciaAtencion=false;
                   this.empleadovisible=false;
-                  this.newSolicitu(this.solicitud);
                 console.log('Dijo que no');
                 this.gotoGuardar();
                  }
@@ -282,16 +282,24 @@ ele:boolean
         this.visible=false;
       }
       verPreferencia(){
-        this.solicitud.servicio=[];
+        if(this.selecciono===true){
+          this.solicitud.servicio=[];
         this.solicitud.id_cliente=this.clientService.getCliente().id
         for (let i=0;  i < this.servicios.length;  ++i) {
           if(this.servicios[i].select===true){
             this.solicitud.servicio.push(this.servicios[i].id)
           }
-        }
-        console.log(this.solicitud.servicio);
+
+      }
+        
+      console.log(this.solicitud.servicio);
+
         this.visible=false;
         this.preferenciaAtencion=true;
+    }else{
+      this.mensajeError();
+    }
+        
       }
       getTipoServicio(){
         this.tipoService.getTiposServicios().subscribe(
@@ -320,7 +328,7 @@ ele:boolean
               }      
             }
         console.log(this.especi);
-        this.emplePromo(item);
+        this.empleCategoria(item);
         this.setFilteredItems();
          console.log(this.serviciosmostrar);
          console.log(this.emple);
@@ -328,6 +336,9 @@ ele:boolean
         this.catego=false;
      }
       ver(i){
+        if(i!=null){
+          this.selecciono=true;
+        }
         console.log(this.servicios[i]);
       }
       setEmplea(){
@@ -345,6 +356,7 @@ ele:boolean
           console.log(soli);
         },(error)=>{
           console.log(error);
+          this.mensajeErrorServior();
         })
       }
       getServicios(){
@@ -382,7 +394,7 @@ ele:boolean
           EmpleaosSexo(sexo){
             console.log(sexo);
             this.emplever=[];
-            if(sexo != "c"){
+            if(sexo != "cualquiera"){
               console.log(sexo);
               for (let i = 0; i < this.empleados.length; i++) {
                 console.log(this.empleados[i].sexo)
@@ -395,10 +407,41 @@ ele:boolean
            }  
            console.log(this.emplever);
         }
-        emplePromo(item){
-          this.empleSrvce.getEmpleCatego(item).subscribe((resp)=>{
+        empleCategoria  (item){
+          console.log(item);
+          let g =0;
+          g=item.id;
+          this.empleSrvce.getEmpleCatego(g).subscribe((resp)=>{
             this.empleados=resp['data'].empleados;
             console.log(this.empleados);
           })
+        }
+        mensajeError(){
+          let alert = this.alertCtrl.create({
+            title: 'Por favor',
+            subTitle: 'Para continuar seleccione una opcion',
+            buttons: [{
+              text:'Cerrar',
+            handler:()=>{
+              alert.dismiss();
+              return false;
+            }
+            }],
+          });
+          alert.present()
+        }
+        mensajeErrorServior(){
+          let alert = this.alertCtrl.create({
+            title: 'Disculpe',
+            subTitle: 'Ha ocurrido un error con el servidor, intente de nuevo mas tarde',
+            buttons: [{
+              text:'Cerrar',
+            handler:()=>{
+              alert.dismiss();
+              return false;
+            }
+            }],
+          });
+          alert.present()
         }
   }

@@ -6,6 +6,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { DatePickerDirective } from 'ion-datepicker';
 import 'rxjs/add/operator/debounceTime';
 import { AgendaProvider } from '../../providers/agenda/agenda';
+import { PrincipalPage } from '../principal/principal';
 //import {PrincipalPage} from '../principal/principal';
 /**
  * Generated class for the AgendaPage page.
@@ -68,7 +69,8 @@ sexo:string
  bloques_hora:any[];
  bloques_total:any[];
  citas:Array<{
-   cantidad:number
+  bloques_requeridos:number,
+   id_orden_servicio:number,
    hora_inicio:string;
    hora_fin:string;
    horarios:any[];
@@ -117,7 +119,6 @@ sexo:string
     this.buscarOren();
     this.getHorarios();
     this.obtenerLabo();
-   
   }
   openDate(){
     this.datepicker.open();
@@ -259,10 +260,10 @@ sexo:string
     }
     bloquesPordia(){
       console.log(this.dia_id);
-      for (let j = 0; j < this.hora_bloque.length; j++) {
-        if(this.hora_bloque[j].id_dia_laborable===this.dia_id){
+      for (let j = 0; j < this.horario_emplea.length; j++) {
+        if(this.horario_emplea[j].id_dia_laborable===this.dia_id){
           console.log('estoy aqui pana ale ');
-          this.bloques_hora.push(this.hora_bloque[j]);
+          this.bloques_hora.push(this.horario_emplea[j]);
         }
       }
     }
@@ -277,30 +278,51 @@ sexo:string
   }
   citasbloque(){
     let c={
-      cantidad:0,
-      hora_inicio:'',
-      hora_fin:'',
+      
+      bloques_requeridos:0,
+      id_orden_servicio:0,
+      hora_inicio:null,
+      hora_fin:null,
       horarios:[]
     }
-    c.cantidad=this.solicitud.cantidad_servicios;
+    c.bloques_requeridos=Number(this.solicitud.cantidad_servicios);
     c.hora_inicio=this.bloques[0].hora_inicio;
     let tama=this.bloques.length;
-    c.hora_fin=this.bloques[tama-1].hora_fin;
+    c.hora_fin=this.bloques[tama-2].hora_fin;
+    c.id_orden_servicio=this.orden.id;
     for (let i = 0; i < this.bloques.length; i++) {
-        c.horarios.push(this.bloques[i]);
+        c.horarios.push(this.bloques[i].id);
     }
     this.citas.push(c);
     this.bloques=[];
     if(this.solicitud.cantidad_servicios<=this.bloques_hora.length){
       this.cargarGranbloque(); 
     }
-    
+    console.log(this.citas)
   }
   saveCita(cita){
     this.agendaService.newCita(cita).subscribe((resp)=>{
       console.log(resp);
+      this.mensaje();
     },(error)=>{
       console.log(error);
     })
+  }
+  mensaje(){
+    let alert = this.alertCtrl.create({
+      title: 'Confirmacion',
+      subTitle: 'Gracias por preferirnos',
+      buttons: [{
+        text:'Cerrar',
+      handler:()=>{
+        let navTran=alert.dismiss();
+          navTran.then(()=>{
+            this.navCtrl.popTo(PrincipalPage);
+          });
+        return false;
+      }
+      }],
+    });
+    alert.present()
   }
 }

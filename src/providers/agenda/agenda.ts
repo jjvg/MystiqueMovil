@@ -17,11 +17,10 @@ export class AgendaProvider {
 getLaborables(){
   return this.http.get(this.auth.ApiUrl()+'/dia_laborable');
 }
+newCita(cita){
+  return this.http.post(this.auth.ApiUrl()+'agregar_cita',cita);
+}
 getHorario(){
   return this.http.get(this.auth.ApiUrl()+'/horario');
 }
-newCita(cita){
-  return this.http.get(this.auth.ApiUrl()+'/gestion_cita',cita);
-}
-
 }

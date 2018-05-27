@@ -1,6 +1,7 @@
+import { AuthProvider } from './../auth/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-const API_URL= "http://localhost:3000/api/"
+
 /*
   Generated class for the PromocionProvider provider.
 
@@ -9,12 +10,18 @@ const API_URL= "http://localhost:3000/api/"
 */
 @Injectable()
 export class PromocionProvider {
-  URL_promocion= "promocion"
-  constructor(public http: HttpClient) {
-    console.log('Hello PromocionProvider Provider');
+  URL_promocion='vista_todas_promociones';
+  promociones:any[];
+  constructor(public http: HttpClient, public authPro: AuthProvider) {
+    this.promociones=[];
   }
   getPromocion(){
-  return this.http.get(API_URL+this.URL_promocion);
+  return this.http.get(this.authPro.ApiUrl()+this.URL_promocion);
 }
-
+ reservarPromos(promos){
+  this.promociones=promos
+ }
+ retornarPromos(){
+   return this.promociones;
+ }
 }

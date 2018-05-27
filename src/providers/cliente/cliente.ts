@@ -1,7 +1,7 @@
 import { AuthProvider } from './../auth/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+const  url_cliente = 'usuario/cliente/'
 
 /*
   Generated class for the ClienteProvider provider.
@@ -11,10 +11,10 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class ClienteProvider {
-  url_user : string = 'cliente/'
+ 
   url_perfil:string = 'perfil/'
-  perfil:any;
-
+  perfil:any[];
+  sexo:string;
   correo_cliente:string;
   cliente:{
     id:number,
@@ -48,13 +48,12 @@ export class ClienteProvider {
       correo:'',
       
     }
-    console.log('Hello ClienteProvider Provider');
+    this.sexo='';
+    
   }
-  getClient(i){
-    return this.http.get(this.authService.ApiUrl()+'vista_cliente/'+i)
-  }
+ 
   getUser(id){
-    return this.http.get(this.authService.ApiUrl()+'cliente/'+id)
+    return this.http.get(this.authService.ApiUrl()+url_cliente+id)
   }
   setCliente(user){
     this.cliente=user;
@@ -67,12 +66,12 @@ export class ClienteProvider {
     return this.cliente;
   }
   getPerfilUser(){
-    return this.http.get(this.authService.ApiUrl()+'perfil/'+this.cliente.id)
+    return this.http.get(this.authService.ApiUrl()+'vista_cliente_perfil/'+this.cliente.id)
   }
   setPerfil(){
       this.getPerfilUser().subscribe(
         (data)=>{
-          this.perfil=data['data']
+          this.perfil=data['data'].perfil
           console.log(this.perfil);
         },(error)=>{
         console.log(error);
@@ -86,6 +85,17 @@ export class ClienteProvider {
       console.log(correo);
       this.correo_cliente=correo;
     }
-
-
+    setSexoCliente(sexo){
+      this.sexo=sexo
+    }
+    getSexoCliente(){
+      return this.sexo;
+    }
+    actualizarPerfil(perfil){
+      console.log(perfil);
+      return this.http.put(this.authService.ApiUrl()+'perfil/'+ perfil.id_perfil,perfil);
+    }
+    agregarPerfil(perfil){
+      return this.http.post(this.authService.ApiUrl()+'perfil',perfil);
+    }
 }

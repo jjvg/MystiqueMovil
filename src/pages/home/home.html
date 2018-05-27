@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-content>
-    <ion-card>
+    <!-- <ion-card>
         <button ion-item>
             <ion-thumbnail item-start>
                 <img src="assets/imgs/agendalogo.png">
@@ -15,12 +15,14 @@
             <ion-note item-end><ion-icon color="secondary" name="radio-button-on" large></ion-icon></ion-note>
             
         </button>
-    </ion-card>
+    </ion-card>-->
     <ion-item-group>
-        <ion-item-divider><h3>Descubre nuestras promociones</h3></ion-item-divider>
-        <ion-card>
+        <ion-item-divider *ngIf="promo.id!= null">
+            <h3>Descubre nuestras promociones</h3>
+        </ion-item-divider>
+        <ion-card *ngIf="promo.id!= null">
             <button ion-item>
-                <img src="assets/imgs/Promocion.jpg">
+                <img src="{{url_files}}promocion/{{promo.id}}.{{promo.imagen}}">
             </button>
         </ion-card>
         <ion-item-divider><strong color="other">Servicios especiales para ti</strong></ion-item-divider>

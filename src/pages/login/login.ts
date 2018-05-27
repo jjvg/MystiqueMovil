@@ -80,20 +80,23 @@ export class LoginPage {
   this.clienteService.getUser(id).subscribe((data)=>{
     console.log(data);
     this.clienteService.setCliente(data['data']);
-    this.getCliente(data['data'].id);
     this.clienteService.setClienteAuth();
     this.clienteService.setPerfil();
   },(error)=>{
     console.log(error)
   })
  }
- getCliente(id){
-   this.clienteService.getClient(id).subscribe((data)=>{
-     console.log(data);
-   })
- }
+
   
   ionViewDidLoad() {
+    this.creden= {
+      correo:'',
+      contrasenia:''
+    }
+    this.myForm = this.formBuilder.group({
+      correo: ['', [Validators.required,Validators.email]],
+      contrasenia: ['', Validators.required]
+    });
     console.log('ionViewDidLoad LoginPage');
   }
 }

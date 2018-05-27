@@ -1,6 +1,8 @@
+import { ClienteProvider } from './../../providers/cliente/cliente';
+import { AuthProvider } from './../../providers/auth/auth';
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import { SolicitudPage } from '../solicitud/solicitud';
 import {PromocionProvider} from '../../providers/promocion/promocion';
 
@@ -17,48 +19,79 @@ import {PromocionProvider} from '../../providers/promocion/promocion';
   templateUrl: 'promociones.html',
 })
 export class PromocionesPage {
-  items:any;
-  promociones: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public promocionService: PromocionProvider) {
-   this.promocion();
-    this.items=[{
-      "nombre":"Promocion 2x1",
-      "content":"Existe una nueva tecnica para realizar masajes capilares a nuestros clientes enterate mas aqui",
-      "img":"assets/imgs/Promocion.jpg",
-      'duracion':'2 semanas',
-      'tipo':'promocion'
-    },
-  {
-    "nombre":"Promocion 2x1",
-    "content":"En ocaciones la clave tener un bello rostro es seguir una rutina de belleza ",
-    "img":"assets/imgs/Promocion.jpg",
-    'duracion':'2 semanas',
-    'tipo':'promocion'
-  },
-  {
-    "nombre":"Promocion 2x1",
-    "content":"Perfecto para un rostro un poco grasoso, es importante utilizar exfoliantes para eliminar de nuestra piel las inpuresas que dia a dia recogemos en las calles ",
-    "img":"assets/imgs/Promocion.jpg",
-    'duracion': '2 semanas',
-    'tipo':'promocion'
-  }];
+  url_api:any
+  promociones: any[];
+  url_files:any;
+  perfil:any[];
+  promo_mostrar:any[];
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  public promocionService: PromocionProvider,
+  public authService: AuthProvider,
+public clienteService:ClienteProvider) {
+    this.perfil=[];
   }
-  promocion(){
+  getPromociones(){
     this.promocionService.getPromocion().subscribe(
       (data)=>{
         this.promociones=data['data'];
+        this.filtro();
+        this.promocionService.reservarPromos(this.promo_mostrar);
       },(error)=>{console.log(error)}
     );
   
   }
-    
+  doRefresh(refresher: Refresher){
+    this.promocionService.getPromocion().subscribe(
+      (data)=>{
+        this.promociones=data['data'];
+        this.filtro()
+        this.promocionService.reservarPromos(this.promo_mostrar);
+      },(error)=>{console.log(error)}
+    );
+    setTimeout(() => {
+      refresher.complete();
+    }, 5000);
+  }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PromocionesPage');
-    this.promocion();
+    this.promociones=[]
+    this.url_api= this.authService.ApiUrl();
+    this.url_files=this.authService.ApiFile();
+    this.getPromociones();
+    this.perfil=this.clienteService.getPerfil();
+   this.promo_mostrar=[];
+   
     console.log(this.promociones);
   }
   adquirirPromo(data){
     this.navCtrl.push(SolicitudPage,data)
   }
 
+  filtro(){
+    this.promo_mostrar=[];
+    for (let j = 0; j < this.promociones.length; j++) {
+      console.log('ahora va al siguiente'+j);
+      this.promo(this.promociones[j]);
+     }
+  }
+
+  promo(pro){
+    let promocion={
+      detalle_promocion:[],
+    };
+    let cont=0;
+    promocion.detalle_promocion=pro.detalle_promocion;
+    for (let i = 0; i < promocion.detalle_promocion.length; i++) {
+      for (let j = 0; j < this.perfil.length; j++) {
+        if (this.perfil[j].id_valor_parametro===promocion.detalle_promocion[i].id_valor_parametro) {
+          cont++;
+          }
+        }
+      }
+     
+      if(cont===promocion.detalle_promocion.length){
+        this.promo_mostrar.push(pro);
+      }else{
+        console.log('no lo inserto');
+      }
+    }
 }

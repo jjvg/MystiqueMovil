@@ -1,3 +1,4 @@
+import { AuthProvider } from './../auth/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -9,23 +10,19 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class SolicitudProvider {
-  solicitud:any
+  solicitudes:any
 
-  constructor(public http: HttpClient) {
-    this.solicitud={
-      fecha:'10/10/2018',
-      hora:'8:00 am',
-      empleado:'Montes Ana',
-      servicios:[
-        {nombre:'Secado', costo:10000},
-        {nombre:'Planchado', costo:30000},
-        {nombre:'Keratina Especial', costo:50000}
-      ]}
+  constructor(public http: HttpClient, public authService: AuthProvider) {
     console.log('Hello SolicitudProvider Provider');
-    console.log(this.solicitud);
-  }
-  getSolicitud(){
-    return this.solicitud;
-  }
 
+  }
+  getSolicitud(id_cliente){
+    return this.http.get(this.authService.ApiUrl()+'vista_cliente_solicitud/'+id_cliente);
+  }
+   saveSolicitud(sol){
+     return this.http.post(this.authService.ApiUrl()+'agregar_solicitud',sol)
+   }
+   respuestasolicitud(i){
+     return this.http.get(this.authService.ApiUrl()+'respuesta_solicitud_foraneo/'+i);
+   }
 }

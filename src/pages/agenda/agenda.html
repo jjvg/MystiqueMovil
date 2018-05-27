@@ -26,13 +26,13 @@
     <div *ngIf="horavisible">
         <h4>Seleccione Hora de atención</h4>
         <ion-list>
-            <ion-card *ngFor="let item of bloques_total; let i=index">
+            <ion-card *ngFor="let item of citas" (click)=saveCita(item)>
                 <ion-item>
                     <ion-icon name="alarm" item-start></ion-icon>
-                    <ion-toggle color="secondary" checked="false" item-end></ion-toggle>
+
                 </ion-item>
                 <ion-card-content>
-                    <h2>Hora inicio: {{item.hora_inicio}}</h2>
+                    <h2>Hora disponible: {{item.hora_inicio}}</h2>
                     <p>Fecha: {{initDate | date:'dd/MM/yyyy'}}</p>
                 </ion-card-content>
             </ion-card>
@@ -41,7 +41,7 @@
             <ion-col col-8 col-md-8>
             </ion-col>
             <ion-col col-4 col-md-4>
-                <button ion-button type="submit" (click)="gotoGuardar()"> Enviar</button>
+
             </ion-col>
         </ion-row>
     </div>

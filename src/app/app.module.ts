@@ -1,3 +1,4 @@
+
 import { GustosPreferenciasPage } from './../pages/gustos-preferencias/gustos-preferencias';
 import { ActualizarPerfilPage } from './../pages/actualizar-perfil/actualizar-perfil';
 import { RechazoComponent } from './../components/rechazo/rechazo';
@@ -66,6 +67,8 @@ import { CalificarProvider } from '../providers/calificar/calificar';
 import { PresupuestoProvider } from '../providers/presupuesto/presupuesto';
 import { NotificacionProvider } from '../providers/notificacion/notificacion';
 import { AgendaProvider } from '../providers/agenda/agenda';
+import { CancelarCitaProvider } from '../providers/cancelar-cita/cancelar-cita';
+import { CitaProvider } from '../providers/cita/cita';
 
 
 @NgModule({
@@ -104,7 +107,9 @@ import { AgendaProvider } from '../providers/agenda/agenda';
     ServiciosPage,
     EmpleadosPage,
     ActualizarPerfilPage,
-    GustosPreferenciasPage
+    GustosPreferenciasPage,
+    CitasPage,
+    
    
   ],
   imports: [
@@ -175,6 +180,8 @@ import { AgendaProvider } from '../providers/agenda/agenda';
     PresupuestoProvider,
     NotificacionProvider,
     AgendaProvider,
+    CancelarCitaProvider,
+    CitaProvider,
    
     
   ]
