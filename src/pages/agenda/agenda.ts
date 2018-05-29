@@ -2,7 +2,7 @@ import { EmpleadoProvider } from './../../providers/empleado/empleado';
 import { ClienteProvider } from './../../providers/cliente/cliente';
 import { ServicioRProvider } from './../../providers/servicio-r/servicio-r';
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { DatePickerDirective } from 'ion-datepicker';
 import 'rxjs/add/operator/debounceTime';
 import { AgendaProvider } from '../../providers/agenda/agenda';
@@ -75,9 +75,11 @@ sexo:string
    hora_fin:string;
    horarios:any[];
  }>
+ aux:any[];
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,
   public serviRec:ServicioRProvider, public clienteService:ClienteProvider, 
-  public empleadoServic:EmpleadoProvider, public agendaService:AgendaProvider) {
+  public empleadoServic:EmpleadoProvider, public agendaService:AgendaProvider,
+  public loadingCtrl:LoadingController) {
     this.bloques=[];
     this.fecha = this.localDate.toLocaleString()
     this.cliente=null;
@@ -105,14 +107,19 @@ sexo:string
       servicios_solicitados:[],
       sexo:''
       };
+      this.ordenes=[];
+      this.aux=[];
       this.fechaid=0;
+      this.cliente=this.clienteService.getCliente().id;
+      console.log(this.cliente);
+
   }
 
   ionViewDidLoad() {
     this.fechasnodisponibles=[];
     console.log('ionViewDidLoad AgendaPage');
     console.log(this.navParams.data)
-    this.cliente=this.clienteService.getCliente().id;
+    
     this.solicitud=this.navParams.data;
     this.emplea=this.solicitud.empleado;
     this.horariogeneral();
@@ -141,7 +148,7 @@ sexo:string
       gotoGuardar(){
         let alert = this.alertCtrl.create({
           title: 'Confirmacion',
-          subTitle: 'Su cita a sido agendada, Gracias por escojer nuestros servicios',
+          subTitle: 'Su cita a sido agendada, Gracias por escoger nuestros servicios',
           buttons: [{
             text:'Cerrar',
           handler:()=>{
@@ -161,7 +168,11 @@ sexo:string
       }
       buscarOren(){
         this.serviRec.getServiciosR(this.cliente).subscribe((resp)=>{
-          this.ordenes=resp['data'].ordenes;
+
+          this.aux=resp['data'].ordenes;
+          console.log(this.aux);
+          this.ordenes=this.aux;
+          console.log(this.ordenes);
           this.asignarUnaOrden();
         },(error)=>{
           console.log(error);
@@ -194,18 +205,14 @@ sexo:string
         this.grupoFecha=[];
         
         for (let i = 0; i <this.horario_emplea.length; i++) {
-          
           if(this.fechaid != this.horario_emplea[i].id_dia_laborable){
-           
-              let fecha = this.horario_emplea[i].id_dia_laborable;
-             
+              let fecha = this.horario_emplea[i].id_dia_laborable;  
                 for (let j = 0; j < this.horario_emplea.length; j++) {
                   if(fecha===this.horario_emplea[i].id_dia_laborable){
                     this.grupoFecha.push(this.horario_emplea[i]);
                    
                   }         
               }
-              console.log(this.grupoFecha);
               this.filtro()
           }
         }
@@ -229,7 +236,6 @@ sexo:string
     obtenerBolques(){
       
       this.horavisible=true;
-      console.log(this.initDate);
       this.agruparBloques();
       this.bloquesPordia();
       this.cargarGranbloque();
@@ -252,7 +258,6 @@ sexo:string
       let fecha=this.initDate.toISOString();
       for (let i = 0; i < this.dias_laborables.length; i++) {
           if(String(fecha) === String(this.dias_laborables[i].dia)){
-            console.log(this.dias_laborables[i],fecha);
               this.dia_id=this.dias_laborables[i].id;
               break;             
             }
@@ -316,12 +321,8 @@ sexo:string
       buttons: [{
         text:'Cerrar',
       handler:()=>{
-        let navTran=alert.dismiss();
-          navTran.then(()=>{
-            this.navCtrl.popTo(PrincipalPage);
-          });
-        return false;
-      }
+       this.Loading();
+          }
       }],
     });
     alert.present()
@@ -329,17 +330,28 @@ sexo:string
   mensajeError(){
     let alert = this.alertCtrl.create({
       title: 'Disculpe',
-      subTitle:'Falla en el servior intente mas tare ',
+      subTitle:'Falla en el servidor intente mas tarde ',
       buttons:[{
         text:'Cerrar',
         handler:()=>{
-          let navTran=alert.dismiss();
-          navTran.then(()=>{
-            this.navCtrl.popTo(PrincipalPage);
-          });
-          return false;
+           this.Loading()
         }
       }]
     })
+  }
+  Loading() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent',
+    });
+  
+    loading.present();
+  
+    setTimeout(() => {
+      this.navCtrl.popTo(PrincipalPage);
+    }, 3000);
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
   }
 }
