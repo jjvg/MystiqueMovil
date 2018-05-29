@@ -114,7 +114,6 @@ empleaos:any[];
       profileModal.present();
     }
   agendar(){
-    this.crearOrden();
     this.presupuesto.estado='A',
     this.presuService.updatedPresupuesto(this.presupuesto).subscribe((pre)=>{
       console.log(pre);

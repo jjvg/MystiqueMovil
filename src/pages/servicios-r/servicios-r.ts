@@ -33,8 +33,8 @@ export class ServiciosRPage {
     direccion:string,
     tipo_cliente:string,
     ordenes:Array<{
-      id:string,
-      id_solicitud,
+      id:number,
+      id_solicitud:number,
       estado:string}>
   }
   ordenes_no_calificadas:any[];
@@ -81,7 +81,8 @@ export class ServiciosRPage {
         this.ordenes_no_calificadas.push(this.serviciosr.ordenes[i]);
       }else{
         if(this.serviciosr.ordenes[i].estado==='C'){
-          this.ordenes_calificadas.push(this.serviciosr.ordenes[i].estado);
+          this.ordenes_calificadas.push(this.serviciosr.ordenes[i]
+            );
         }
       }
     }

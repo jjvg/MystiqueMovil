@@ -141,7 +141,7 @@ sexo:string
       gotoGuardar(){
         let alert = this.alertCtrl.create({
           title: 'Confirmacion',
-          subTitle: 'Gracias por escojer nuestros servicios',
+          subTitle: 'Su cita a sido agendada, Gracias por escojer nuestros servicios',
           buttons: [{
             text:'Cerrar',
           handler:()=>{
@@ -306,6 +306,7 @@ sexo:string
       this.mensaje();
     },(error)=>{
       console.log(error);
+      this.mensajeError();
     })
   }
   mensaje(){
@@ -324,5 +325,21 @@ sexo:string
       }],
     });
     alert.present()
+  }
+  mensajeError(){
+    let alert = this.alertCtrl.create({
+      title: 'Disculpe',
+      subTitle:'Falla en el servior intente mas tare ',
+      buttons:[{
+        text:'Cerrar',
+        handler:()=>{
+          let navTran=alert.dismiss();
+          navTran.then(()=>{
+            this.navCtrl.popTo(PrincipalPage);
+          });
+          return false;
+        }
+      }]
+    })
   }
 }
