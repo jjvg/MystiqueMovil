@@ -65,19 +65,19 @@ export class ClienteProvider {
   getCliente(){
     return this.cliente;
   }
-  getPerfilUser(){
-    return this.http.get(this.authService.ApiUrl()+'vista_cliente_perfil/'+this.cliente.id)
+  getPerfilUser(i){
+    return this.http.get(this.authService.ApiUrl()+'vista_cliente_perfil/'+i)
   }
-  setPerfil(){
-      this.getPerfilUser().subscribe(
-        (data)=>{
-          this.perfil=data['data'].perfil
-          console.log(this.perfil);
-        },(error)=>{
-        console.log(error);
-        }
-      )
-    }
+  //setPerfil(){
+   //   this.getPerfilUser().subscribe(
+    //    (data)=>{
+    //     this.perfil=data['data'].perfil
+    //     console.log(this.perfil);
+    //    },(error)=>{
+    //    console.log(error);
+   //     }
+   //   )
+  //  }
     getPerfil(){
       return this.perfil;
     }

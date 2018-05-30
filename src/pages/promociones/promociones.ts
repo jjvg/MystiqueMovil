@@ -57,19 +57,28 @@ public clienteService:ClienteProvider) {
     this.url_api= this.authService.ApiUrl();
     this.url_files=this.authService.ApiFile();
     this.getPromociones();
-    this.perfil=this.clienteService.getPerfil();
+    this.getPerfil();
+    //this.perfil=this.clienteService.getPerfil();
    this.promo_mostrar=[];
    
     console.log(this.promociones);
   }
-  adquirirPromo(data){
-    this.navCtrl.push(SolicitudPage,data)
+  adquirirPromo(item){
+    let pro='promo'
+    this.navCtrl.push(SolicitudPage,{item,pro});
   }
-
+  getPerfil(){
+    let i = this.clienteService.getCliente().id;
+    this.clienteService.agregarPerfil(i).subscribe((resp)=>{
+      this.perfil=resp['data'].perfil;
+      console.log(this.perfil);
+    },(error)=>{
+      console.log(error);
+    })
+  }
   filtro(){
     this.promo_mostrar=[];
     for (let j = 0; j < this.promociones.length; j++) {
-      console.log('ahora va al siguiente'+j);
       this.promo(this.promociones[j]);
      }
   }
@@ -90,8 +99,6 @@ public clienteService:ClienteProvider) {
      
       if(cont===promocion.detalle_promocion.length){
         this.promo_mostrar.push(pro);
-      }else{
-        console.log('no lo inserto');
       }
     }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AgendaPage} from './../agenda/agenda';
+import{ReclamoProvider} from '../../providers/reclamo/reclamo';
 /**
  * Generated class for the ReclamosPage page.
  *
@@ -14,8 +15,11 @@ import {AgendaPage} from './../agenda/agenda';
   templateUrl: 'reclamos.html',
 })
 export class ReclamosPage {
+  recla:any;
+  respuesta:any;
 
   ordenGarantia:{
+   
     codigo:string;
     id_ordenGarantia:string;
     servicios:Array<{nombre:string,costo:Number,id_servicio:string}>;
@@ -23,28 +27,29 @@ export class ReclamosPage {
     empleado:string;
     montoTotal:Number;
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public reclamoService: ReclamoProvider) {
+ this.RespuestaR();
+    this.recla=[{
+   "descripcion":"Rechazado",
+   "fecha_creacion":"2018/06/03",
 
-    this.ordenGarantia={
-      codigo: "0001",
-      id_ordenGarantia:'00023',
-      servicios:[
-        {nombre:'secado',costo:10000,id_servicio:'1234'},
-        {nombre:'tinte',costo:10000,id_servicio:'5543'},
-        {nombre:'mechas',costo:10000,id_servicio:'1245'},
-      ],
-      cita:{
-        fecha:'',
-        hora:'',
-        id_cita:''
-      },
-      empleado:'',
-      montoTotal:30000
-
-    }
+}];
   }
 
+  RespuestaR(){
+    this.reclamoService.getRespuesta().subscribe(
+      (data)=>{
+        this.respuesta=data['data'];
+        console.log(this.respuesta)
+      },(error)=>{console.log(error)}
+      
+    );
+  
+  }
+  
+
   ionViewDidLoad() {
+    this.RespuestaR();
     console.log('ionViewDidLoad ReclamosPage');
     console.log(this.ordenGarantia)
   }

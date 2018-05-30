@@ -2,7 +2,7 @@ import { SolicitudProvider } from './../../providers/solicitud/solicitud';
 
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { TiposProvider} from '../../providers/tipos/tipos';
 import   {ClienteProvider} from '../../providers/cliente/cliente';
 import { EmpleadoProvider} from '../../providers/empleado/empleado';
@@ -110,7 +110,8 @@ ele:boolean
     public clientService: ClienteProvider,
     public empleSrvce: EmpleadoProvider,
     public soliService:SolicitudProvider,
-    public authService:AuthProvider
+    public authService:AuthProvider,
+    public loadingCtrl:LoadingController
     ) {
       this.empleados=[{
         apellido:"",
@@ -169,18 +170,13 @@ ele:boolean
   
   console.log(this.navParams.data)
 
-  if (this.navParams.data.pro==="servi") {
-    console.log(this.navParams.data)
-    this.visible=false;
-    this.catego=false;
-    this.preferenciaAtencion=true;
-    this.solicitud.servicio.push(this.navParams.data.item.id);
-  }
+
     if(this.navParams.data.pro==="promo"){
     this.visible=false;
     this.catego=false;
     this.preferenciaAtencion=true;
     this.solicitud.servicio.push(this.navParams.data.item.id_servicio);
+    this.solicitud.id_promocion=this.navParams.data.item.id;
   }
   this.setEmplea();
   this.getEspeciali();
@@ -192,8 +188,7 @@ ele:boolean
   }
 
   ionViewDidLoad() {
-      this.tipoServicios=[];
-    console.log('ionViewDidLoad SolicitudPage');
+    this.tipoServicios=[];
     this.getTipoServicio();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
       this.searching = false;
@@ -201,9 +196,7 @@ ele:boolean
       this.getServicios();
       });
   }
-
-
-  
+ 
   verConfirmacion()
   {
     let confir= this.alertCtrl.create({
@@ -250,21 +243,19 @@ ele:boolean
           ]
     });
     confir.present();
-  }
-
- 
+  } 
     gotoGuardar(){
       let alert = this.alertCtrl.create({
         title: 'Confirmacion',
         subTitle: 'Gracias su solicitud sera atendida muy pronto',
         buttons: [{
           text:'Cerrar',
-        handler:()=>{
-         
+        handler:()=>{ 
+          this.solicitud.id_cliente=this.clientService.getCliente().id;     
           this.newSolicitu(this.solicitud);
           let navTran=alert.dismiss();
             navTran.then(()=>{
-              this.navCtrl.popToRoot();
+              this.Loading();
             });
           return false;
         }
@@ -327,11 +318,9 @@ ele:boolean
                 this.serviciosmostrar.push(this.servicios[h]);
               }      
             }
-        console.log(this.especi);
+        
         this.empleCategoria(item);
         this.setFilteredItems();
-         console.log(this.serviciosmostrar);
-         console.log(this.emple);
         this.visible=true;
         this.catego=false;
      }
@@ -443,5 +432,20 @@ ele:boolean
             }],
           });
           alert.present()
+        }
+        Loading() {
+          let loading = this.loadingCtrl.create({
+            spinner: 'crescent',
+          });
+        
+          loading.present();
+        
+          setTimeout(() => {
+            this.navCtrl.popToRoot();
+          }, 2000);
+        
+          setTimeout(() => {
+            loading.dismiss();
+          }, 5000);
         }
   }

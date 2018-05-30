@@ -37,12 +37,6 @@
             </ion-item>
         </ion-list>
 
-        <ion-fab right bottom style="margin-bottom:10px; margin-left:10px">
-            <button ion-fab color="primary" (click)="verPreferencia()">
-                    <ion-icon name="arrow-forward"></ion-icon>
-                  </button>
-        </ion-fab>
-
     </div>
     <div *ngIf="preferenciaAtencion">
         <p text-center>Indique su preferencia de atencion</p>
@@ -81,4 +75,9 @@
         </ion-row>
 
     </div>
+    <ion-fab *ngIf="visible" right bottom style="margin-bottom:10px; margin-left:10px">
+        <button ion-fab color="primary" (click)="verPreferencia()">
+                <ion-icon name="arrow-forward"></ion-icon>
+              </button>
+    </ion-fab>
 </ion-content>

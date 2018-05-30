@@ -19,6 +19,7 @@ export class PerfilPage {
   valor_parametros:any[];
   perfil:any[];
   sexo:string;
+  clie:number;
   constructor(
   	public modalCtrl: ModalController,
   	public navCtrl: NavController, 
@@ -27,17 +28,31 @@ export class PerfilPage {
     private tipoService: TiposProvider,
     private loadCtrl:LoadingController) {
       this.sexo='';
+    this.clie=this.clienteService.getCliente().id;
   	this.user=this.clienteService.getCliente();
-    this.perfil=this.clienteService.getPerfil();
+    this.perfil=[];
+    this.getPerfil();
     console.log(this.user);
   }
   ionViewDidLoad(){
-    this.clasificarParametros();
-    this.determinarSexo();
-    this.perfil=this.clienteService.getPerfil();
+    this.getPerfil();
+    this.perfilbasico=[];
+    this.perfilcaracteristicas=[];
+    this.perfilgustos=[];
+       
   }
 
-
+  getPerfil(){
+    this.clienteService.getPerfilUser(this.clie).subscribe((resp)=>{
+      this.perfil=resp['data'].perfil;
+      console.log(this.perfil);
+      this.clasificarParametros();
+    this.determinarSexo();
+ 
+    },(error)=>{
+      console.log(error);
+    })
+  }
   clasificarParametros(){
     this.perfilbasico=[];
     this.perfilcaracteristicas=[];
@@ -62,10 +77,10 @@ export class PerfilPage {
   }
   determinarSexo(){
     for (let i = 0; i < this.perfilbasico.length; i++) {
-      if(this.perfilbasico[i].valor==='Mujer'){
+      if(this.perfilbasico[i].valor=='Mujer'||this.perfilbasico[i].valor=='mujer'){
         this.sexo='Mujer';
       }else{
-        if(this.perfilbasico[i].valor==='Hombre'){
+        if(this.perfilbasico[i].valor=='Hombre'||this.perfilbasico[i].valor=='hombre'){
           this.sexo='Hombre';
         }
       }
