@@ -3,7 +3,7 @@ import { EmpleadoProvider } from './../../providers/empleado/empleado';
 import { PresupuestoProvider } from './../../providers/presupuesto/presupuesto';
 import { SolicitudProvider } from './../../providers/solicitud/solicitud';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { RechazoComponent } from '../../components/rechazo/rechazo';
 import { AgendaPage } from '../agenda/agenda';
 
@@ -48,7 +48,8 @@ oren:{
   empleados_asignados:number[];
 }
 empleaos:any[];
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public loadingCtrl:LoadingController, 
     public dataSolicitud: SolicitudProvider,public modalCtrl: ModalController,
     public presuService:PresupuestoProvider,
   public empleadoService:EmpleadoProvider,
@@ -118,7 +119,7 @@ empleaos:any[];
     this.presuService.updatedPresupuesto(this.presupuesto).subscribe((pre)=>{
       console.log(pre);
       this.crearOrden();
-      this.navCtrl.push(AgendaPage,this.solicitud);
+     
     },(error)=>{
       console.log(error);
     });
@@ -127,8 +128,24 @@ empleaos:any[];
   crearOrden(){
     this.orenService.newOrden(this.oren).subscribe((resp)=>{
       console.log(resp);
+      this.Loading();
     },(error)=>{
       console.log(error);
     })
+  }
+  Loading() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent',
+    });
+  
+    loading.present();
+  
+    setTimeout(() => {
+      this.navCtrl.push(AgendaPage,this.solicitud);
+    }, 3000);
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
   }
 }
