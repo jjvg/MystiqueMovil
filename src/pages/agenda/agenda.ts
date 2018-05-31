@@ -294,7 +294,7 @@ sexo:string
     c.bloques_requeridos=Number(this.solicitud.cantidad_servicios);
     c.hora_inicio=this.bloques[0].hora_inicio;
     let tama=this.bloques.length;
-    c.hora_fin=this.bloques[tama-2].hora_fin;
+    c.hora_fin=this.bloques[tama-1].hora_fin;
     c.id_orden_servicio=this.orden.id;
     for (let i = 0; i < this.bloques.length; i++) {
         c.horarios.push(this.bloques[i].id);
