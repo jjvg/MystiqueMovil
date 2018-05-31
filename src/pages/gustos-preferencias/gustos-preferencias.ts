@@ -48,6 +48,7 @@ export class GustosPreferenciasPage {
     this.optParametros();
     this.obtValorParametro();
       this.array=[];
+      this.valor_mostrar=[];
   }
 
   ionViewDidLoad() {
@@ -63,6 +64,7 @@ export class GustosPreferenciasPage {
     this.obtTipo_Parametros();
     this.optParametros();
     this.obtValorParametro();
+    this.valor_mostrar=[];
   }
   obtTipo_Parametros(){
     this.tipoService.getTipos_parametro().subscribe((data)=>{
@@ -112,13 +114,18 @@ export class GustosPreferenciasPage {
   }
   opcionesParametro(){
     console.log(this.parametro_select)
-    this.valor_mostrar=[]
+    //this.valor_mostrar=[]
+    this.obtValorParametro();
+    console.log(this.valor_parametros.length);
+    if(this.valor_parametros.length!=0){
     for (let l = 0; l < this.valor_parametros.length; l++) {
       if(this.valor_parametros[l].id_parametro===this.parametro_select){
             this.valor_mostrar.push(this.valor_parametros[l]);
           }
     }
     this.filtro();
+  }
+    
   }
   filtro(){
     for (let i = 0; i < this.valor_mostrar.length; i++) {
@@ -215,7 +222,7 @@ export class GustosPreferenciasPage {
               
                 setTimeout(() => {
                  //s this.clienteService.setPerfil();
-                  this.navCtrl.push(PerfilPage); 
+                  this.navCtrl.setRoot(PerfilPage); 
                 }, 2000);
               
                 setTimeout(() => {

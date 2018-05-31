@@ -69,7 +69,7 @@ public clienteService:ClienteProvider) {
   }
   getPerfil(){
     let i = this.clienteService.getCliente().id;
-    this.clienteService.agregarPerfil(i).subscribe((resp)=>{
+    this.clienteService.getPerfilUser(i).subscribe((resp)=>{
       this.perfil=resp['data'].perfil;
       console.log(this.perfil);
     },(error)=>{

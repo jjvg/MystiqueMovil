@@ -21,7 +21,29 @@ export class CitasPage {
   tips :any;
   url_api:any;
   citaE:any[];
-  ordenesE:any[];
+  ordenesE:Array<{
+      id:number,
+      id_solicitud: number,
+      estado: string,
+      estatus: string,
+      solicitud:number,
+      id_cliente:number,
+      estado_s: string,
+      cliente: number,
+      nombre: string,
+      apellido:string,
+    citas:Array<{
+      id:number,
+      id_orden_servicio:number,
+      fecha_creacion: string,
+      estatus:string,
+      estado:string,
+      id_agenda:number,
+      hora_inicio:number,
+      hora_fin:number,
+      bloques_requeridos:number
+      }>;
+  }>;
   citas:any[];
   ordenF:any[];
   citaT :any[];
@@ -51,6 +73,7 @@ export class CitasPage {
       this.ordenesE=[];
       this.ordenF=[];
       this.citaT=[];
+      
       this.id_cliente= this.clienteProvider.getCliente().id;
       this.ordenS={
         estado: "",
@@ -74,13 +97,7 @@ export class CitasPage {
   }
 
 
-  ionViewDidLoad() {function flatten(arr) {
-    return arr.reduce(function (flat, toFlatten) {
-      return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
-    }, []);
-  
-  }
-
+  ionViewDidLoad() {
   this.url_api= this.authService.ApiUrl();
 
     console.log('ionViewDidLoad CitasPage');
@@ -120,9 +137,14 @@ export class CitasPage {
   
   llenar(){
     if(this.ordenesE){
+      console.log('aqui estoy');
     for(let i = 0; i < this.ordenesE.length; i++){
-      if(this.ordenesE[i].citas[0].estado==='E'){
-        this.ordenF.push(this.ordenesE[i]);
+      if(this.ordenesE[i].citas.length!=0)
+        {console.log('aqui estoy otra');
+         if(this.ordenesE[i].citas[0].estado==="E"){
+            this.ordenF.push(this.ordenesE[i]);
+           }
+           console.log('aqui');
       }
     }
   }
@@ -150,26 +172,27 @@ export class CitasPage {
     ActualizarCita(a){
       this.citaA.estado='K';
       console.log(this.citaT);
-      for (let i = 0; i < this.citaT.length; i++)
-      
-       if(this.citaT[i].id_orden_servicio==a){
-         this.id_cita=this.citaT[i].id_orden_servicio;
-           this.citaProvider.Acita(this.id_cita, this.citaA).subscribe((data)=>{
+      this.citaProvider.Acita(a, this.citaA).subscribe((data)=>{
              console.log(data);
            },(error)=>{
              console.log(error);
            })
          
      }
-    }
+    
    
-    cancelarCita(or) {
+    cancelarCita(or,c) {
+      let id_cita =0;
+      let id_orden=0;
+      id_orden=or.id
+      id_cita=c.id
       console.log(this.empleados);
       console.log(this.citas);
-      this.ActualizarCita(or.id);
-      this.ActualizarOrden(or.id);
-      console.log(or);
-      console.log(this.or.id);
+
+      this.ActualizarCita(id_cita);
+      this.ActualizarOrden(id_orden);
+      console.log(id_orden);
+      console.log(id_cita);
       let profileModal = this.modalCtrl.create(CancelarcitaComponent,or);
       profileModal.present();
     }

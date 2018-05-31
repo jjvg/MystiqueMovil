@@ -13,7 +13,7 @@ import {ReclamosPage} from '../pages/reclamos/reclamos';
 import {ServiciosRPage} from '../pages/servicios-r/servicios-r';
 import {CitasPage} from '../pages/citas/citas';
 import {SugerenciasPage} from '../pages/sugerencias/sugerencias';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+//import { LocalNotifications } from '@ionic-native/local-notifications';
 @Component({
   templateUrl: 'app.html'
 })
@@ -28,7 +28,7 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar,
      splashScreen: SplashScreen,
      public loadingCtrl:LoadingController,
-     private localNotifications: LocalNotifications,
+    // private localNotifications: LocalNotifications,
     private notiService:NotificacionProvider) {
 
     this.pages=[
@@ -47,9 +47,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      setInterval(() => { 
-        this.consultarNotificaciones();
-     }, 10000);
+    //  setInterval(() => { 
+    //    this.consultarNotificaciones();
+    // }, 10000);
     });
     
 
