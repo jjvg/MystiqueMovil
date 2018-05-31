@@ -334,7 +334,7 @@ sexo:string
       buttons:[{
         text:'Cerrar',
         handler:()=>{
-           this.Loading()
+           this.Loading();
         }
       }]
     })
