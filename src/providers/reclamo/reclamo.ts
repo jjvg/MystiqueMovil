@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {ServicioRProvider} from '../servicio-r/servicio-r';
+import {AuthProvi}
 const API_URL= "http://localhost:3000/api/" 
 
 /*
@@ -17,5 +19,8 @@ URL_respuestar= "respuesta_reclamo"
 
   getRespuesta(){
     return this.http.get(API_URL+this.URL_respuestar);
+  }
+  getOrenGarantia(){
+  	this.
   }
 }

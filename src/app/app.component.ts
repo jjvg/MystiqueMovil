@@ -1,3 +1,4 @@
+import { NotificacionProvider } from './../providers/notificacion/notificacion';
 import { PrincipalPage } from './../pages/principal/principal';
 import { PromocionesPage } from './../pages/promociones/promociones';
 import { Component, ViewChild } from '@angular/core';
@@ -12,6 +13,7 @@ import {ReclamosPage} from '../pages/reclamos/reclamos';
 import {ServiciosRPage} from '../pages/servicios-r/servicios-r';
 import {CitasPage} from '../pages/citas/citas';
 import {SugerenciasPage} from '../pages/sugerencias/sugerencias';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 @Component({
   templateUrl: 'app.html'
 })
@@ -20,8 +22,14 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = LoginPage;
   pages: Array<{title: string, component: any,icon:string, bage:number}>
-
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public loadingCtrl:LoadingController) {
+  notificacion:any[];
+  auxnotificaciones: any[];
+  nuevanotificacion;
+  constructor(platform: Platform, statusBar: StatusBar,
+     splashScreen: SplashScreen,
+     public loadingCtrl:LoadingController,
+     private localNotifications: LocalNotifications,
+    private notiService:NotificacionProvider) {
 
     this.pages=[
       {title: 'Inicio', component: PrincipalPage, icon:'home', bage:null},
@@ -39,6 +47,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      setInterval(() => { 
+        this.consultarNotificaciones();
+     }, 10000);
     });
     
 
@@ -52,7 +63,7 @@ export class MyApp {
     
       setTimeout(() => {
         this.nav.setRoot(p.component);
-      }, 1000);
+      }, 2000);
     
       setTimeout(() => {
         loading.dismiss();
@@ -62,6 +73,23 @@ export class MyApp {
      // this.nav.setRoot(p.component);
  // }
   exit(){
+    localStorage.clear();
     this.nav.setRoot(LoginPage);
+  }
+  consultarNotificaciones(){
+    this.auxnotificaciones=this.notificacion;
+    this.notiService.getNotificaciones().subscribe((resp)=>{
+      this.notificacion=resp['data'];
+      this.comparacion();    
+    },(error)=>{
+      console.log(error);
+    })
+  }
+  comparacion(){
+    if(this.auxnotificaciones){
+      if(this.auxnotificaciones.length !== this.notificacion.length){
+        this.nuevanotificacion = this.notificacion[this.notificacion.length-1];
+      }
+    }
   }
 }

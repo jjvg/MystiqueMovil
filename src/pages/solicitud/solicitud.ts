@@ -178,6 +178,13 @@ ele:boolean
     this.solicitud.servicio.push(this.navParams.data.item.id_servicio);
     this.solicitud.id_promocion=this.navParams.data.item.id;
   }
+  if(this.navParams.data.pro==="servi"){
+    this.visible=false;
+    this.catego=false;
+    this.preferenciaAtencion=true;
+    this.solicitud.servicio.push(this.navParams.data.item.id);
+    //this.solicitud.id_promocion=this.navParams.data.item.id;
+  }
   this.setEmplea();
   this.getEspeciali();
   //this.preferenciaAtencion=false;

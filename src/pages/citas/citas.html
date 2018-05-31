@@ -9,82 +9,48 @@
     <ion-navbar color="primary">
         <button ion-button menuToggle>
                 <ion-icon name="menu"></ion-icon>
+           </button>
+        <ion-title>Citas</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only>
+        <ion-icon name="notifications"></ion-icon>
         </button>
-               <ion-title>Citas</ion-title>
-                 <ion-buttons end>
-                    <button ion-button icon-only>
-                       <ion-icon name="notifications"></ion-icon>
-                    </button>
-                </ion-buttons>
+        </ion-buttons>
     </ion-navbar>
+
 </ion-header>
-   <ion-content >
-       <ion-list *ngFor="let or of orden">
-          <div *ngIf= "or.estado==='E'">
-            <div *ngFor="let s of solicitud">
-          <div *ngIf= "s.id_cliente==id_cli">
-              <ion-card>
-                  <ion-card-header style="color:white;background-color: #fd0087">
-                      Datos de la cita
-                  </ion-card-header>
-                  <br> 
-                      <ion-card-content>
-                         <div *ngFor="let p of presupuesto">
-                            <div *ngIf= "p.id_solicitud==s.id"> 
-                                <h3>Total: {{p.monto_total}}</h3>   
-                            </div>
-                         </div>
-                        <br> 
-                         <h2><strong>Servicios Solicitados</strong></h2>
-                           <ion-card>
-                              <ion-item>
-                                   <div *ngFor="let ss of servicioS">
-                                      <div *ngIf= "s.id==ss.id_solicitud">
-                                        <div *ngFor="let ser of servicio">
-                                          <div *ngIf= "ss.id_servicio==ser.id">
-                                            <div *ngFor="let st of serviciot">
-                                              <div *ngIf= "ser.id_tipo_servicio==st.id">
-                                                  <h4> - {{st.nombre}}</h4>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                       </div>
-                                    </div>
-                               </ion-item>
-                           </ion-card>
-        <div *ngFor="let s of solicitud">
-          <div *ngIf= "s.id_cliente==id_cli">
-             <div *ngFor="let o of orden" >
-                <div *ngIf= "s.id==o.id_solicitud">
-                   <div *ngFor="let e of empleado">
-                      <div *ngIf= "e.id_orden_servicio==o.id_solicitud">
-                          <div *ngFor="let em of empleados">
-                              <div *ngIf= "e.id_empleado==em.id">
-                         <h3><strong>Encargado:</strong>{{em.nombre}} {{em.apellido}}</h3>
-                        </div>
-                      </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-        </div>
+
+
+<ion-content >
+    <ion-list *ngFor="let or of ordenF; let i=index">
+    <ion-card>
+       <ion-card-header style="color:white;background-color: #fd0087">
+           Datos de la cita
+       </ion-card-header>
+            <ion-card-content>
+              <br>  
+                <ion-item *ngFor="let c of or.citas">
+                   <h4><strong>Fecha:</strong> {{c.fecha_creacion | date: 'dd/MM/yyyy   H:mm' }}</h4>
+                    <br>  
+                     <h2><strong>Servicios Solicitados</strong></h2>
+                        <ion-card>
+                            <ion-list *ngFor="let item of or.servicios_solicitados">
+                               <ion-item>
+                                 <h4>{{item.tipo_servicio}}</h4>
+                                </ion-item>
+                            </ion-list>
+                        </ion-card>
+                       <br>
+                       <ion-item *ngFor="let it of or.empleados_asignados">
+                            
+                          <h3><strong>Encargado:</strong> {{it.nombre}} {{it.apellido}}</h3>
+
+                        </ion-item>
+            </ion-item>
            </ion-card-content>
-           <div *ngFor="let s of solicitud">
-              <div *ngIf= "s.id_cliente==id_cli">
-                 <div *ngFor="let o of orden" >
-                    <div *ngIf= "s.id==o.id_solicitud">
-               <div text-right style="margin-right: 5px;margin-bottom: 2px">
-             <button ion-button (click)="cancelarCita(o)">Cancelar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-          </ion-card>
-        </div>
-      </div>
-    </div>   
-</ion-list>
+              <div text-right style="margin-right: 5px;margin-bottom: 2px">
+              <button ion-button (click)="cancelarCita(or)">Cancelar</button>
+              </div>
+       </ion-card>
+   </ion-list>
 </ion-content>

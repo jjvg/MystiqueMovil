@@ -28,7 +28,7 @@
             
                 <p><strong>Reclamo</strong></p>
                 <h4>{{item.descripcion}}</h4>
-                <p>{{item.fecha_creacion}}</p>
+                <p>{{item.fecha_creacion | date:'dd/MM/yyyy' }}</p>
                 <div *ngIf= "item.estatus=== 'A'">               
             <button ion-button  small color="primary" (click)="verCita()">Agendar Cita
             </button>

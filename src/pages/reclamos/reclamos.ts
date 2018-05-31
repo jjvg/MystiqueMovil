@@ -1,3 +1,4 @@
+import { ServicioRProvider } from './../../providers/servicio-r/servicio-r';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AgendaPage} from './../agenda/agenda';
@@ -17,23 +18,14 @@ import{ReclamoProvider} from '../../providers/reclamo/reclamo';
 export class ReclamosPage {
   recla:any;
   respuesta:any;
-
-  ordenGarantia:{
-   
-    codigo:string;
-    id_ordenGarantia:string;
-    servicios:Array<{nombre:string,costo:Number,id_servicio:string}>;
-    cita:{fecha:string,hora:string,id_cita:string};
-    empleado:string;
-    montoTotal:Number;
-  }
-  constructor(public navCtrl: NavController, public navParams: NavParams, public reclamoService: ReclamoProvider) {
+  ordenes:any[];
+  orden:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public reclamoService: ReclamoProvider,
+  public serviRService:ServicioRProvider) {
+    this.ordenes=[];
+    this.orden=null;
  this.RespuestaR();
-    this.recla=[{
-   "descripcion":"Rechazado",
-   "fecha_creacion":"2018/06/03",
-
-}];
+ this.getOrenes();
   }
 
   RespuestaR(){
@@ -41,20 +33,36 @@ export class ReclamosPage {
       (data)=>{
         this.respuesta=data['data'];
         console.log(this.respuesta)
-      },(error)=>{console.log(error)}
-      
-    );
-  
+      },(error)=>{
+        console.log(error)
+      });
   }
-  
+  getOrenes(){
+    let i = 0;
+    i=Number(localStorage.getItem('id_cliente'));
+    this.serviRService.getServiciosR(i).subscribe((resp)=>{
+      this.ordenes=resp['data'];
+      this.encontrarOren();
+    },(error)=>{
+      console.log(error);
+    });
+  }
 
   ionViewDidLoad() {
     this.RespuestaR();
     console.log('ionViewDidLoad ReclamosPage');
-    console.log(this.ordenGarantia)
+    console.log(this.orden)
   }
   verCita()
   {
-    this.navCtrl.push(AgendaPage,this.ordenGarantia)
+    this.navCtrl.push(AgendaPage,this.orden)
+  }
+encontrarOren(){
+  for (let i = 0; i <this.ordenes.length; i++) {
+      if (this.ordenes[i].estado==='G') {
+        this.orden=this.ordenes[i];
+        break;
+      }
+    }
   }
 }

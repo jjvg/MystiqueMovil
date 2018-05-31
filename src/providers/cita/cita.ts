@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthProvider } from '../auth/auth';
 const API_URL= "http://localhost:3000/api/"
+
+
 /*
   Generated class for the CitaProvider provider.
 
@@ -9,52 +12,27 @@ const API_URL= "http://localhost:3000/api/"
 */
 @Injectable()
 export class CitaProvider {
-URL_orden= "orden_servicio"
-URL_empleado= "empleado_asignado"
-URL_solicitud= "solicitud"
-URL_servicioS= "servicio_solicitado"
-URL_servicio= "servicio"
-URL_tservicio= "tipo_servicio"
-URL_presupuesto= "presupuesto"
-URL_empleados= "empleado"
-URL_cita= "cita"
-  constructor(public http: HttpClient) {
+  URL_cita="vista_orden_cita/"
+  URL_citas= "cita"
+  URL_orden= "orden_servicio"
+  URL_empleado= "empleado"
+
+
+  constructor(public http: HttpClient, public authService:AuthProvider) {
     console.log('Hello CitaProvider Provider');
   }
 
-  getCita(){
-    return this.http.get(API_URL+this.URL_cita);
+  getCitas(){
+    return this.http.get(this.authService.ApiUrl()+this.URL_cita);
+  }
+  getCitaT(){
+    return this.http.get(API_URL+this.URL_citas);
   }
 
-  getOrden(){
-    return this.http.get(API_URL+this.URL_orden);
-  }
-  
   getEmpleado(){
     return this.http.get(API_URL+this.URL_empleado);
   }
 
-  getSolicitud(){
-    return this.http.get(API_URL+this.URL_solicitud);
-  }
-
-  getServicioS(){
-    return this.http.get(API_URL+this.URL_servicioS);
-  }
-  getServicio(){
-    return this.http.get(API_URL+this.URL_servicio);
-  }
-  getTServicio(){
-    return this.http.get(API_URL+this.URL_tservicio);
-  }
-
-  getPresupuesto(){
-    return this.http.get(API_URL+this.URL_presupuesto);
-  }
- 
-  getEmpleados(){
-    return this.http.get(API_URL+this.URL_empleados);
-  }
   Aincidencia(id,inc){
     return this.http.put(API_URL+'orden_servicio/'+id,inc);
   }
@@ -62,5 +40,5 @@ URL_cita= "cita"
   Acita(id,cit){
     return this.http.put(API_URL+'cita/'+id,cit);
   }
+ IDBObjectStoreidid
 }
-

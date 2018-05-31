@@ -107,11 +107,12 @@ sexo:string
       };
       this.fechaid=0;
   }
+  
 
   ionViewDidLoad() {
     this.fechasnodisponibles=[];
     console.log('ionViewDidLoad AgendaPage');
-    console.log(this.navParams.data)
+    console.log(this.navParams.data);
     this.cliente=this.clienteService.getCliente().id;
     this.solicitud=this.navParams.data;
     this.emplea=this.solicitud.empleado;

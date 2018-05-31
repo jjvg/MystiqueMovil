@@ -1,3 +1,4 @@
+import { AuthProvider } from './../auth/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -9,9 +10,14 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class NotificacionProvider {
-
-  constructor(public http: HttpClient) {
+i:number;
+  constructor(public http: HttpClient,
+    public auth:AuthProvider) {
+      this.i=Number(localStorage.getItem('id_usuario'));
     console.log('Hello NotificacionProvider Provider');
+  }
+  getNotificaciones(){
+    return this.http.get(this.auth.ApiUrl()+this.i);
   }
 
 }

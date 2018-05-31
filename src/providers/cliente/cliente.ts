@@ -58,6 +58,7 @@ export class ClienteProvider {
   setCliente(user){
     this.cliente=user;
     this.cliente.correo=this.correo_cliente;
+    localStorage.setItem('id_cliente',String(this.cliente.id));
   }
   setClienteAuth(){
     this.cliente.auth=true;
