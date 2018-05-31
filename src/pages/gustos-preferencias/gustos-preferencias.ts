@@ -99,6 +99,7 @@ export class GustosPreferenciasPage {
     }
     console.log(this.gustos);
   }
+  //Metoo para solo asignar parametros e tipo gustos y preferencias
   clasificar_valores(){
     this.parametros_mostrar=[];
     for (let j = 0; j < this.parametros.length; j++) {
@@ -140,9 +141,10 @@ export class GustosPreferenciasPage {
     p.id_cliente=this.clienteService.getCliente().id;
     p.id_valor_parametro=i.id;
     console.log(p);
-    this.valor_mostrar.splice(inex,1);
+    //this.valor_mostrar.splice(inex,1);
     this.pre_select.push(p);
     console.log(this.pre_select);
+    this.culminar();
   }
   culminar(){
     let alert=this.alertCtrl.create({
@@ -168,7 +170,7 @@ export class GustosPreferenciasPage {
               
                 setTimeout(() => {
                   this.navCtrl.popTo(ActualizarPerfilPage); 
-                }, 1000);
+                }, 5000);
               
                 setTimeout(() => {
                   loading.dismiss();
@@ -212,9 +214,9 @@ export class GustosPreferenciasPage {
                 loading.present();
               
                 setTimeout(() => {
-                  this.clienteService.setPerfil();
-                  this.navCtrl.popTo(PerfilPage); 
-                }, 1000);
+                 //s this.clienteService.setPerfil();
+                  this.navCtrl.push(PerfilPage); 
+                }, 2000);
               
                 setTimeout(() => {
                   loading.dismiss();

@@ -11,9 +11,11 @@
                </button>
             <ion-title>Reclamos</ion-title>
             <ion-buttons end>
+        
                 <button ion-button icon-only>
             <ion-icon name="notifications"></ion-icon>
             </button>
+
             </ion-buttons>
         </ion-navbar>
     </ion-header>
@@ -22,29 +24,15 @@
 <ion-content>
     <ion-card>
         
-        <ion-card-content>
+        <ion-card-content  *ngFor="let item of respuesta">
             
                 <p><strong>Reclamo</strong></p>
-                <h4>Su reclamo ha sido aprobado, por favor complete los detalles de su cita</h4>
-                <p>Viernes• 02/08/2018 1:30 pm</p>
-                           
+                <h4>{{item.descripcion}}</h4>
+                <p>{{item.fecha_creacion | date:'dd/MM/yyyy' }}</p>
+                <div *ngIf= "item.estatus=== 'A'">               
             <button ion-button  small color="primary" (click)="verCita()">Agendar Cita
             </button>
-        </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-        
-        <ion-card-content>
-            
-                <p><strong>Reclamo rechazado</strong></p>
-                <h4>Su solicitud ha sido rechazada</h4>
-                <p>Lunes• 02/08/2017 1:30 pm</p>
-                
-            <button ion-button  clear small color="secondary" >
-                   
-                Detalles
-                </button>
+            </div>
         </ion-card-content>
     </ion-card>
 

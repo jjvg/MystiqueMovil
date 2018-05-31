@@ -182,6 +182,7 @@ import { CitaProvider } from '../providers/cita/cita';
     AgendaProvider,
     CancelarCitaProvider,
     CitaProvider,
+    NotificacionProvider,
    
     
   ]

@@ -6,33 +6,31 @@
 -->
 
 <ion-content padding>
-    <ion-list-header>Historial de servicios </ion-list-header>
-            <ion-list *ngFor="let servicio of ordenes_realizadas; let i=index">
-                   <!-- <ion-list *ngFor="let servicio of ordenes_en_espera; let i=index"> -->
-                <ion-item >
-                    <ion-card *ngFor="let item of servicio.servicios_realizados">
-                        <ion-item>
-                            <p>{{item.el_tipo }}</p>
-                            <p>{{item.nombre_servicio}}</p>
-                            <p>{{item.fecha_servicio_solicitado}}</p>
-                            <p>{{item.estado_orden}}</p>
-                        </ion-item>
-                    </ion-card>
-                    </ion-item>
-       <!--</ion-list> -->
-    </ion-list>
-
-    <!--SERVICIOS EN ESPERA
-
-        <ion-list-header>
-            Servicios recibidos
-        </ion-list-header>
-
-        <ion-item>
-
-            <h2>Extensiones</h2>
-            <p>Miercoles• 02/08/2017 1:30 pm</p>
-            <p> Garantia: 12/08/2017</p>
-            <button ion-button clear item-end>Detalle</button>
-        </ion-item>-->
+                    <ion-card *ngFor="let servicio of ordenes_totales; let i=index">
+                        <div *ngIf="servicio.estado === 'E' && servicio.servicios_realizados.length!=0">   
+                        <ion-card-title>
+                              <p text-center><strong>Servicios en espera</strong></p> 
+                           </ion-card-title>
+                           <ion-list *ngFor="let item of servicio.servicios_realizados">
+                               <ion-item>
+                                    <p>{{item.el_tipo}}</p>
+                                    <p>{{item.nombre_servicio}}</p>
+                                    <p><strong>{{item.fecha_servicio_solicitado | date: 'dd/MM/yyyy H:mm'}}</strong></p>
+                                    <p>{{item.estado_orden}}</p>
+                               </ion-item>
+                           </ion-list>
+                        </div>
+                        <div *ngIf="servicio.estado === 'R' && servicio.servicios_realizados.length!=0">   
+                                <ion-card-title>
+                                      <p text-center><strong>Servicios recibidos</strong></p> 
+                                   </ion-card-title>
+                                   <ion-list *ngFor="let item of servicio.servicios_realizados">
+                                       <ion-item>
+                                            <p><strong>{{item.el_tipo}}</strong></p>
+                                            <p>{{item.nombre_servicio}}</p>
+                                            <p>{{item.fecha_servicio_solicitado | date: 'dd/MM/yyyy H:mm'}}</p>
+                                       </ion-item>
+                                   </ion-list>
+                                </div>
+                        </ion-card>
 </ion-content>

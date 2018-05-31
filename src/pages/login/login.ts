@@ -81,7 +81,7 @@ export class LoginPage {
     console.log(data);
     this.clienteService.setCliente(data['data']);
     this.clienteService.setClienteAuth();
-    this.clienteService.setPerfil();
+   // this.clienteService.setPerfil();
   },(error)=>{
     console.log(error)
   })

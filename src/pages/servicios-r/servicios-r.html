@@ -29,12 +29,12 @@
         </ion-segment>
     </ion-toolbar>
 </ion-header>
-
+<!---->
 <ion-content padding>
     <div [ngSwitch]="pestana">
         <ion-list *ngSwitchCase="'calificar'">
             <ion-item *ngFor="let servicio of ordenes_no_calificadas; let i=index">
-                <h2>Servicios recibidos</h2>
+                <h2>Servicio recibido</h2>
                 <p>¡Calificalos!</p>
                 <ion-card *ngFor="let item of servicio.servicios_realizados">
                     <ion-item>
@@ -44,30 +44,26 @@
                     </ion-item>
                 </ion-card>
                 <button ion-button small color="primary" (click)="calificar(servicio)">
-          <div>Calificar</div>
-        </button>
+                     <div>Calificar</div></button>
                 <button ion-button clear small color="secondary" (click)="Reclamo()">
-          <div>Reclamar</div>
-        </button>
+                     <div>Reclamar</div></button>
             </ion-item>
         </ion-list>
+        <!---->
         <ion-list *ngSwitchCase="'garantia'">
-            <ion-item>
-                <h2>Maquillaje de novia</h2>
-                <p>Lunes • 11/04/2018 4:30 pm</p>
-                <button ion-button icon-left clear small color="secondary" (click)="Reclamo1()">
-          <ion-icon name=""></ion-icon>
-          <div>Reclamar</div>
-        </button>
-            </ion-item>
-            <ion-item>
-                <h2>Corte</h2>
-                <p>Jueves• 03/07/2017 5:15 pm</p>
-            </ion-item>
-            <ion-item>
-                <h2>Alisado</h2>
-                <p> Martes• 10/02/2017 3:30 pm</p>
-            </ion-item>
+            <ion-item *ngFor="let servicio of ordenes_calificadas; let i=index">
+                <h2>Servicio recibido</h2>
+                <ion-card *ngFor="let item of servicio.servicios_realizados">
+                    <ion-item>
+                        <p><strong><h2>{{item.el_tipo }}</h2></strong></p>
+                        <p>{{item.nombre_servicio}}</p>
+                        <p>{{item.fecha_servicio_solicitado | date: 'dd/MM/yyyy H:mm'}}</p>
+                    </ion-item>
+                </ion-card>
+                <button ion-button small color="primary" (click)="Reclamo1(servicio)">
+                    <div>Solicitar garantia</div>
+                </button>
+             </ion-item>
         </ion-list>
     </div>
 </ion-content>

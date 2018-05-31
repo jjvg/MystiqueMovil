@@ -114,12 +114,13 @@ sexo:string
       console.log(this.cliente);
 
   }
+  
 
   ionViewDidLoad() {
     this.fechasnodisponibles=[];
     console.log('ionViewDidLoad AgendaPage');
-    console.log(this.navParams.data)
-    
+    console.log(this.navParams.data);
+    this.cliente=this.clienteService.getCliente().id;
     this.solicitud=this.navParams.data;
     this.emplea=this.solicitud.empleado;
     this.horariogeneral();

@@ -1,6 +1,8 @@
+import { ServicioRProvider } from './../../providers/servicio-r/servicio-r';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AgendaPage} from './../agenda/agenda';
+import{ReclamoProvider} from '../../providers/reclamo/reclamo';
 /**
  * Generated class for the ReclamosPage page.
  *
@@ -14,42 +16,53 @@ import {AgendaPage} from './../agenda/agenda';
   templateUrl: 'reclamos.html',
 })
 export class ReclamosPage {
-
-  ordenGarantia:{
-    codigo:string;
-    id_ordenGarantia:string;
-    servicios:Array<{nombre:string,costo:Number,id_servicio:string}>;
-    cita:{fecha:string,hora:string,id_cita:string};
-    empleado:string;
-    montoTotal:Number;
+  recla:any;
+  respuesta:any;
+  ordenes:any[];
+  orden:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public reclamoService: ReclamoProvider,
+  public serviRService:ServicioRProvider) {
+    this.ordenes=[];
+    this.orden=null;
+ this.RespuestaR();
+ this.getOrenes();
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-    this.ordenGarantia={
-      codigo: "0001",
-      id_ordenGarantia:'00023',
-      servicios:[
-        {nombre:'secado',costo:10000,id_servicio:'1234'},
-        {nombre:'tinte',costo:10000,id_servicio:'5543'},
-        {nombre:'mechas',costo:10000,id_servicio:'1245'},
-      ],
-      cita:{
-        fecha:'',
-        hora:'',
-        id_cita:''
-      },
-      empleado:'',
-      montoTotal:30000
-
-    }
+  RespuestaR(){
+    this.reclamoService.getRespuesta().subscribe(
+      (data)=>{
+        this.respuesta=data['data'];
+        console.log(this.respuesta)
+      },(error)=>{
+        console.log(error)
+      });
+  }
+  getOrenes(){
+    let i = 0;
+    i=Number(localStorage.getItem('id_cliente'));
+    this.serviRService.getServiciosR(i).subscribe((resp)=>{
+      this.ordenes=resp['data'];
+      this.encontrarOren();
+    },(error)=>{
+      console.log(error);
+    });
   }
 
   ionViewDidLoad() {
+    this.RespuestaR();
     console.log('ionViewDidLoad ReclamosPage');
-    console.log(this.ordenGarantia)
+    console.log(this.orden)
   }
   verCita()
   {
-    this.navCtrl.push(AgendaPage,this.ordenGarantia)
+    this.navCtrl.push(AgendaPage,this.orden)
+  }
+encontrarOren(){
+  for (let i = 0; i <this.ordenes.length; i++) {
+      if (this.ordenes[i].estado==='G') {
+        this.orden=this.ordenes[i];
+        break;
+      }
+    }
   }
 }

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthProvider } from '../auth/auth';
-
 /*
   Generated class for the ServicioRProvider provider.
 

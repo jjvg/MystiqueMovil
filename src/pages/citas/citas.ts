@@ -1,5 +1,6 @@
 import { CancelarcitaComponent } from './../../components/cancelarcita/cancelarcita';
 import { Component } from '@angular/core';
+import { AuthProvider } from './../../providers/auth/auth';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { CitaProvider } from './../../providers/cita/cita';
 import { ClienteProvider } from './../../providers/cliente/cliente';
@@ -17,102 +18,76 @@ import { ClienteProvider } from './../../providers/cliente/cliente';
   templateUrl: 'citas.html',
 })
 export class CitasPage {
-id_cli:number;
-orden:any;
-empleado:any;
-solicitud:any;
-servicioS:any;
-servicio:any;
-serviciot:any;
-presupuesto:any;
-empleados:any;
-citas :any[];
-tips :any;
-id_cita :number;
-ordenS:{
+  tips :any;
+  url_api:any;
+  citaE:any[];
+  ordenesE:any[];
+  citas:any[];
+  ordenF:any[];
+  citaT :any[];
+  empleados:any;
+  id_cliente:number;
+  ordenS:{
 
-  estado: string;
-}
-citaA:{
+    estado: string;
+  }
+  citaA:{
+  
+    estado: string;
+  }
+  or:{
+    id:number,
+  }
+  id_cita :number;
 
-  estado: string;
-}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl:ModalController, public citaProvider: CitaProvider,
+    public clienteProvider: ClienteProvider,
+    public authService: AuthProvider) {
+      this.getOrdenes();
+      this.obCitaT();
+      this.obEmpleados();
+      this.citas=[];
+      this.citaE=[];
+      this.ordenesE=[];
+      this.ordenF=[];
+      this.citaT=[];
+      this.id_cliente= this.clienteProvider.getCliente().id;
+      this.ordenS={
+        estado: "",
+      }
+      this.or={
+        id:0,
+      }
+      this.citaA={
 
-or_id:number;
-or:{
-  id:number,
-}
-Cita:{
-  empleado:string,
-}
-constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl:ModalController, public citaP: CitaProvider, public cliProvider: ClienteProvider) {
-this.obOrden();
-this.obEmpleado();
-this.obSolicitud();
-this.obServicioS();
-this.obServicio();
-this.obServicioT();
-this.obPresupuesto();
-this.obEmpleados();
-this.ordenS={
-  estado: "",
-}
-this.or={
-  id:0,
-}
-this.Cita={
-  empleado : "",
-}
-this.citaA={
-
-  estado: "",
-}
-this.tips=[{
-  "fecha":"20/05/2018",
-  "total":"20.000",
-  "hora":"8:00 am",
-  "servicios":"Peinado",
-  "encargado":"Maria Perez",
-}];
+        estado: "",
+      }
+  
+      this.tips=[{
+    "fecha":"20/05/2018",
+    "total":"20.000",
+    "hora":"8:00 am",
+    "servicios":"Peinado",
+    "encargado":"Maria Perez",
+  }];
 
   }
 
-  ionViewDidLoad() {
-    this.obOrden();
-this.obEmpleado();
-this.obSolicitud();
-this.obServicioS();
-this.obServicio();
-this.obServicioT();
-this.obPresupuesto();
-this.obEmpleados();
 
-this.citas=[];
-this.obCita();
+  ionViewDidLoad() {function flatten(arr) {
+    return arr.reduce(function (flat, toFlatten) {
+      return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+    }, []);
+  
+  }
+
+  this.url_api= this.authService.ApiUrl();
+
     console.log('ionViewDidLoad CitasPage');
   }
-  obOrden(){
-    this.citaP.getOrden().subscribe(
-      (data)=>{
-        this.orden=data['data'];
-        console.log(this.orden)
-      },(error)=>{console.log(error)}
-      
-    );
-  }
 
-  obCita(){
-    this.citaP.getCita().subscribe(
-      (data)=>{
-        this.citas=data['data'];
-        console.log(this.citas)
-      },(error)=>{console.log(error)}
-      
-    );
-  }
-  
   obEmpleados(){
-    this.citaP.getEmpleados().subscribe(
+    this.citaProvider.getEmpleado().subscribe(
       (data)=>{
         this.empleados=data['data'];
         console.log(this.empleados)
@@ -120,92 +95,85 @@ this.obCita();
       
     );
   }
-  obEmpleado(){
-    this.citaP.getEmpleado().subscribe(
+
+  obCitaT(){
+    this.citaProvider.getCitaT().subscribe(
       (data)=>{
-        this.empleado=data['data'];
-        console.log(this.empleado)
-      },(error)=>{console.log(error)}
-      
-    );
-  }
-  obSolicitud(){
-    this.id_cli=this.cliProvider.getCliente().id;
-    this.citaP.getSolicitud().subscribe(
-      (data)=>{
-        this.solicitud=data['data'];
-        console.log(this.solicitud)
-      },(error)=>{console.log(error)}
-      
-    );
-  }
-  obServicioS(){
-    this.citaP.getServicioS().subscribe(
-      (data)=>{
-        this.servicioS=data['data'];
-        console.log(this.orden)
-      },(error)=>{console.log(error)}
-      
-    );
-  }
-  obServicio(){
-    this.citaP.getServicio().subscribe(
-      (data)=>{
-        this.servicio=data['data'];
-        console.log(this.servicio)
-      },(error)=>{console.log(error)}
-      
-    );
-  }
-  obServicioT(){
-    this.citaP.getTServicio().subscribe(
-      (data)=>{
-        this.serviciot=data['data'];
-        console.log(this.serviciot)
+        this.citaT=data['data'];
+        console.log(this.citaT)
       },(error)=>{console.log(error)}
       
     );
   }
 
-  obPresupuesto(){
-    this.citaP.getPresupuesto().subscribe(
-      (data)=>{
-        this.presupuesto=data['data'];
-        console.log(this.presupuesto)
-      },(error)=>{console.log(error)}
+  llenarArray(){ 
+  if(this.citaE){  
+  for(let j = 0; j < this.citaE.length; j++ ){
+    if(this.citaE[j].id_cliente==this.id_cliente){
+      this.ordenesE.push(this.citaE[j]);
       
-    );
+    }
   }
-  ActualizarOrden(id){
-    this.ordenS.estado='K';
-    this.citaP.Aincidencia(id, this.ordenS).subscribe((data)=>{
-      console.log(data);
-    },(error)=>{
-      console.log(error);
-    })
+}
+  console.log(this.ordenesE);
+}
+  
+  llenar(){
+    if(this.ordenesE){
+    for(let i = 0; i < this.ordenesE.length; i++){
+      if(this.ordenesE[i].citas[0].estado==='E'){
+        this.ordenF.push(this.ordenesE[i]);
+      }
+    }
   }
-  ActualizarCita(a){
-    this.citaA.estado='K';
-    for (let i = 0; i < this.citas.length; i++)
-     if(this.citas[i].id_orden_servicio==a){
-       this.id_cita=this.citas[i].id_orden_servicio;
-         this.citaP.Acita(this.id_cita, this.citaA).subscribe((data)=>{
-           console.log(data);
-         },(error)=>{
-           console.log(error);
-         })
-       
+    console.log(this.ordenF);
    }
-  }
- 
-  cancelarCita(or) {
-    console.log(this.citas);
-    this.ActualizarCita(or.id);
-    this.ActualizarOrden(or.id);
-    console.log(or);
-    console.log(this.or.id);
-    let profileModal = this.modalCtrl.create(CancelarcitaComponent,or);
-    profileModal.present();
-  }
+
+  getOrdenes(){
+    this.citaProvider.getCitas().subscribe(
+      (data)=>{
+        this.citaE=data['data'];
+        console.log(this.citaE)
+        this.llenarArray();
+        this.llenar();
+      },(error)=>{console.log(error)} 
+    );}
+
+    ActualizarOrden(id){
+      this.ordenS.estado='K';
+      this.citaProvider.Aincidencia(id, this.ordenS).subscribe((data)=>{
+        console.log(data);
+      },(error)=>{
+        console.log(error);
+      })
+    }
+    ActualizarCita(a){
+      this.citaA.estado='K';
+      console.log(this.citaT);
+      for (let i = 0; i < this.citaT.length; i++)
+      
+       if(this.citaT[i].id_orden_servicio==a){
+         this.id_cita=this.citaT[i].id_orden_servicio;
+           this.citaProvider.Acita(this.id_cita, this.citaA).subscribe((data)=>{
+             console.log(data);
+           },(error)=>{
+             console.log(error);
+           })
+         
+     }
+    }
+   
+    cancelarCita(or) {
+      console.log(this.empleados);
+      console.log(this.citas);
+      this.ActualizarCita(or.id);
+      this.ActualizarOrden(or.id);
+      console.log(or);
+      console.log(this.or.id);
+      let profileModal = this.modalCtrl.create(CancelarcitaComponent,or);
+      profileModal.present();
+    }
+  
+  
 
 }

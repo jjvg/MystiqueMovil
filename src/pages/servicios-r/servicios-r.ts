@@ -81,8 +81,7 @@ export class ServiciosRPage {
         this.ordenes_no_calificadas.push(this.serviciosr.ordenes[i]);
       }else{
         if(this.serviciosr.ordenes[i].estado==='C'){
-          this.ordenes_calificadas.push(this.serviciosr.ordenes[i]
-            );
+          this.ordenes_calificadas.push(this.serviciosr.ordenes[i]);
         }
       }
     }
@@ -110,7 +109,7 @@ export class ServiciosRPage {
   calificar(i) {
     this.navCtrl.push(CalificarPage,i)
   }
-  Reclamo1() {
-    this.navCtrl.push(ReclamogenerarPage);
+  Reclamo1(i) {
+    this.navCtrl.push(ReclamogenerarPage,i);
   }
 }
