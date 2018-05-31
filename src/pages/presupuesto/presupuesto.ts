@@ -126,6 +126,7 @@ empleaos:any[];
     
   }
   crearOrden(){
+    console.log(this.oren);
     this.orenService.newOrden(this.oren).subscribe((resp)=>{
       console.log(resp);
       this.Loading();

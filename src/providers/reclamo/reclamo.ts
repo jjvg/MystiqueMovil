@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ServicioRProvider} from '../servicio-r/servicio-r';
-import {AuthProvi}
+import {AuthProvider} from '../auth/auth';
 const API_URL= "http://localhost:3000/api/" 
 
 /*
@@ -13,14 +13,14 @@ const API_URL= "http://localhost:3000/api/"
 @Injectable()
 export class ReclamoProvider {
 URL_respuestar= "respuesta_reclamo"
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,public auth:AuthProvider) {
     console.log('Hello ReclamoProvider Provider');
   }
 
   getRespuesta(){
-    return this.http.get(API_URL+this.URL_respuestar);
+    return this.http.get(this.auth.ApiUrl()+this.URL_respuestar);
   }
   getOrenGarantia(){
-  	this.
+  	
   }
 }

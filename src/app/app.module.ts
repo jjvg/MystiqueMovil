@@ -1,4 +1,4 @@
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { GustosPreferenciasPage } from './../pages/gustos-preferencias/gustos-preferencias';
 import { ActualizarPerfilPage } from './../pages/actualizar-perfil/actualizar-perfil';
 import { RechazoComponent } from './../components/rechazo/rechazo';
@@ -118,6 +118,7 @@ import { CitaProvider } from '../providers/cita/cita';
     HttpClientModule,
     Ionic2RatingModule,
     DatePickerModule,
+    //LocalNotifications,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

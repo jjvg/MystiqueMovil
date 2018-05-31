@@ -112,6 +112,7 @@ sexo:string
       this.fechaid=0;
       this.cliente=this.clienteService.getCliente().id;
       console.log(this.cliente);
+      this.buscarOren();
 
   }
   
@@ -169,7 +170,7 @@ sexo:string
       }
       buscarOren(){
         this.serviRec.getServiciosR(this.cliente).subscribe((resp)=>{
-
+          this.aux=[];
           this.aux=resp['data'].ordenes;
           console.log(this.aux);
           this.ordenes=this.aux;
@@ -280,6 +281,8 @@ sexo:string
         this.bloques.push(this.bloques_hora[i]);
         this.bloques_hora.splice(i,1);
       }
+      console.log(this.bloques)
+      
       this.citasbloque();
   }
   citasbloque(){
@@ -294,6 +297,7 @@ sexo:string
     c.bloques_requeridos=Number(this.solicitud.cantidad_servicios);
     c.hora_inicio=this.bloques[0].hora_inicio;
     let tama=this.bloques.length;
+    console.log(tama);
     c.hora_fin=this.bloques[tama-1].hora_fin;
     c.id_orden_servicio=this.orden.id;
     for (let i = 0; i < this.bloques.length; i++) {
@@ -335,10 +339,11 @@ sexo:string
       buttons:[{
         text:'Cerrar',
         handler:()=>{
-           this.Loading()
+           this.Loading();
         }
       }]
     })
+    alert.present();
   }
   Loading() {
     let loading = this.loadingCtrl.create({
