@@ -19,7 +19,8 @@ export class PromocionProvider {
   return this.http.get(this.authPro.ApiUrl()+this.URL_promocion);
 }
  reservarPromos(promos){
-  this.promociones=promos
+  this.promociones=promos;
+  console.log(this.promociones);
  }
  retornarPromos(){
    return this.promociones;

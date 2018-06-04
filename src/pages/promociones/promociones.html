@@ -10,11 +10,7 @@
                 <ion-icon name="menu"></ion-icon>
            </button>
         <ion-title>Promociones</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only>
-        <ion-icon name="notifications"></ion-icon>
-        </button>
-        </ion-buttons>
+
     </ion-navbar>
 </ion-header>
 <ion-content>
@@ -33,10 +29,10 @@
                 <p></p>
                 <p>Porcentaje de descuento {{item.porcentaje_descuento}}
                 </p>
+                <div text-left style="margin-left:5px;margin-bottom:3px">
+                    <button ion-button small (click)="adquirirPromo(item)">Adquirir</button>
+                </div>
             </ion-card-content>
-            <div text-left style="margin-left:5px;margin-bottom:3px">
-                <button ion-button small (click)="adquirirPromo(item)">Adquirir</button>
-            </div>
         </ion-card>
     </ion-list>
 </ion-content>

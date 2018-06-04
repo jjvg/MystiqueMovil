@@ -119,7 +119,7 @@ empleaos:any[];
     this.presuService.updatedPresupuesto(this.presupuesto).subscribe((pre)=>{
       console.log(pre);
       this.crearOrden();
-     
+     this.actualizarsolicitu();
     },(error)=>{
       console.log(error);
     });
@@ -130,6 +130,14 @@ empleaos:any[];
     this.orenService.newOrden(this.oren).subscribe((resp)=>{
       console.log(resp);
       this.Loading();
+    },(error)=>{
+      console.log(error);
+    })
+  }
+  actualizarsolicitu(){
+    this.solicitud.estado='A';
+    this.dataSolicitud.updatedSolicitud(this.solicitud.id,this.solicitud).subscribe((resp)=>{
+      console.log(resp);
     },(error)=>{
       console.log(error);
     })

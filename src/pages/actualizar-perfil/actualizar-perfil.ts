@@ -39,8 +39,7 @@ export class ActualizarPerfilPage {
     console.log('ionViewDidLoad ActualizarPerfilPage');
   }
   ionViewWillLeave(){
-   this.clienteService.setPerfil();
-  }
+    }
   eliminar(gus,i){
     let g={
       id_perfil:0,

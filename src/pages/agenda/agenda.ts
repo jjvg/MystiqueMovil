@@ -7,6 +7,7 @@ import { DatePickerDirective } from 'ion-datepicker';
 import 'rxjs/add/operator/debounceTime';
 import { AgendaProvider } from '../../providers/agenda/agenda';
 import { PrincipalPage } from '../principal/principal';
+import {SolicitudesPage} from '../solicitudes/solicitudes';
 //import {PrincipalPage} from '../principal/principal';
 /**
  * Generated class for the AgendaPage page.
@@ -150,13 +151,13 @@ sexo:string
       gotoGuardar(){
         let alert = this.alertCtrl.create({
           title: 'Confirmacion',
-          subTitle: 'Su cita a sido agendada, Gracias por escoger nuestros servicios',
+          message: 'Su cita a sido agendada Gracias por escoger nuestros servicios',
           buttons: [{
             text:'Cerrar',
           handler:()=>{
             let navTran=alert.dismiss();
               navTran.then(()=>{
-                this.navCtrl.popToRoot();
+                this.navCtrl.popTo(SolicitudesPage);
               });
             return false;
           }
@@ -267,7 +268,9 @@ sexo:string
     }
     bloquesPordia(){
       console.log(this.dia_id);
+      console.log(this.horario_emplea);
       for (let j = 0; j < this.horario_emplea.length; j++) {
+        console.log(this.horario_emplea[j].id_dia_laborable);
         if(this.horario_emplea[j].id_dia_laborable===this.dia_id){
           console.log('estoy aqui pana ale ');
           this.bloques_hora.push(this.horario_emplea[j]);
@@ -275,8 +278,8 @@ sexo:string
       }
     }
     cargarGranbloque(){
-      
-      console.log(this.bloques_hora);
+      if(this.bloques_hora.length!=0){
+        console.log(this.bloques_hora);
       for (let i = 0; i <this.solicitud.cantidad_servicios; i++) {
         this.bloques.push(this.bloques_hora[i]);
         this.bloques_hora.splice(i,1);
@@ -284,6 +287,10 @@ sexo:string
       console.log(this.bloques)
       
       this.citasbloque();
+      }else{
+        this.mensajeErroria();
+      }
+      
   }
   citasbloque(){
     let c={
@@ -359,5 +366,13 @@ sexo:string
     setTimeout(() => {
       loading.dismiss();
     }, 5000);
+  }
+  mensajeErroria(){
+    let alert = this.alertCtrl.create({
+      title: 'Disculpe ',
+      subTitle: 'Dia no laborable',
+      buttons: ['Cerrar'],
+    });
+    alert.present()
   }
 }

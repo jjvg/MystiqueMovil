@@ -6,6 +6,7 @@ import { ServiciosProvider } from '../../providers/servicios/servicios';
 import 'rxjs/add/operator/debounceTime';
 import { FormControl } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
+import { ClienteProvider } from '../../providers/cliente/cliente';
 /**
  * Generated class for the ServicioPage page.
  *
@@ -31,13 +32,15 @@ export class ServicioPage {
     perfil:any[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public dataSer: ServiciosProvider,
   public authService:AuthProvider,
-  public loag:LoadingController) {
+  public loag:LoadingController,
+  public clienteService:ClienteProvider) {
 
     this.searchControl = new FormControl();
     this.rate=0;
     this.url_file=this.authService.ApiFile();
     this.servicios_mostrar=[];
     this.perfil=[];
+    this.getPerfil();
   }
   doRefresh(refresher: Refresher){
     this.dataSer.getServicios().subscribe((ser)=>{
@@ -54,6 +57,7 @@ export class ServicioPage {
     }, 5000);
   }
   ionViewDidLoad() {
+    this.getPerfil();
     this.getServis();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search  => {
       this.searching = false;
@@ -75,6 +79,15 @@ export class ServicioPage {
        console.log(error);
      })
    }
+   getPerfil(){
+    let i = this.clienteService.getCliente().id;
+    this.clienteService.getPerfilUser(i).subscribe((resp)=>{
+      this.perfil=resp['data'].perfil;
+      console.log(this.perfil);
+    },(error)=>{
+      console.log(error);
+    })
+  }
   //setFilteredItems(ser) {
    // this.servi = ser
    // }

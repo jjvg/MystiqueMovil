@@ -19,9 +19,9 @@ import { ClienteProvider } from './../../providers/cliente/cliente';
 export class SugerenciasPage {
   id_cli:number;
   id_comen : any;
-  tcomentarios:any;
+  tcomentarios:any[];
   Sugerencias:any;
-  RSugerencias:any;
+  RSugerencias:any[];
   Comentario:any[];
   lista: Array<{id_co: number }>=[];
   respuesta:any;
@@ -30,46 +30,50 @@ export class SugerenciasPage {
  
   comentarios:string='historico';
   constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams,public comenProvider: ComentarioProvider, public cliProvider: ClienteProvider ) {
-   this.Respuestas();
+
    this.comentario();
-   this.tcomentario();
+   this.Respuestas();
+   this.Comentario=[];
+   this.RSugerencias=[];
+   this.tcomentarios=[];
   }
   comentario(){
    this.id_cli=this.cliProvider.getCliente().id;
-    this.comenProvider.getComentario().subscribe(
+    this.comenProvider.getComentario(this.id_cli).subscribe(
       (data)=>{
-        this.Comentario=data['data'];
+        this.Comentario=data['data'].comentarios;
         this.Comentario.reverse();
         console.log(this.Comentario)
       },(error)=>{console.log(error)}
       
     );
   }
-  tcomentario(){
-    this.comenProvider.getTComentario().subscribe(
-      (data)=>{
-        this.tcomentarios=data['data'];
-        console.log(this.tcomentarios)
-      },(error)=>{console.log(error)}
-      
-    );
-  
-  }
+
   Respuestas(){
-    this.comenProvider.getRSugerencia().subscribe(
+    this.comenProvider.getResComentario().subscribe(
       (data)=>{
         this.RSugerencias=data['data'];
-        this.id_comen=this.RSugerencias.id_comentario;
-        console.log(this.RSugerencias)
+        console.log(this.RSugerencias);
+        this.filtroRespuestas();
   },(error)=>{console.log(error)}
       
 );
     
   }
+  filtroRespuestas(){
+    this.tcomentarios=[];    
+    for (let i = 0; i < this.RSugerencias.length; i++) {
+      if (this.RSugerencias[i].id_cliente=== this.id_cli) {
+        this.tcomentarios.push(this.RSugerencias[i]);
+      }
+    }
+    this.tcomentarios.reverse();
+  }
   ionViewDidLoad() {
-    this.Respuestas();
+    this.Comentario=[];
+   this.RSugerencias=[];
     this.comentario();
-    this.tcomentario();
+    this.Respuestas();
     console.log('ionViewDidLoad SugerenciasPage');
     console.log(this.RSugerencias);
   }
@@ -82,7 +86,7 @@ export class SugerenciasPage {
   
     setTimeout(() => {
       this.gotoNuevoComentario();
-    }, 1000);
+    }, 3000);
   
     setTimeout(() => {
       loading.dismiss();
@@ -92,9 +96,8 @@ export class SugerenciasPage {
     this.navCtrl.push(ComentarPage);
   }
   doRefresh(refresher: Refresher){
-    this.Respuestas();
     this.comentario();
-    this.tcomentario();
+    this.Respuestas();
     setTimeout(() => {
       refresher.complete();
     }, 5000);

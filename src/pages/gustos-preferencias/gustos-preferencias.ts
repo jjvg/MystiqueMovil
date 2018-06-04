@@ -128,6 +128,7 @@ export class GustosPreferenciasPage {
     
   }
   filtro(){
+    this.array=[];
     for (let i = 0; i < this.valor_mostrar.length; i++) {
       for (let j = 0; j < this.array.length; j++) {
           if(this.valor_mostrar[i].id === this.array[j].id_valor_parametro){
@@ -222,7 +223,7 @@ export class GustosPreferenciasPage {
               
                 setTimeout(() => {
                  //s this.clienteService.setPerfil();
-                  this.navCtrl.setRoot(PerfilPage); 
+                  this.navCtrl.popTo(PerfilPage); 
                 }, 2000);
               
                 setTimeout(() => {

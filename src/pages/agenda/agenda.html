@@ -19,7 +19,7 @@
         <button ion-button (click)="openDate()" item-start large>
                 <ion-icon name="calendar"></ion-icon>
         </button>
-        <span ion-datepicker [(value)]="initDate" [headerClasses]="color" [localeStrings]="localeString" [disabledDates]="diasnodisponibles" [min]="initDate" clear class="ScheduleDate" locale="en-US" (ionSeleted)="obtenerBloques()" (ionChange)="obtenerBloques()">
+        <span ion-datepicker [(value)]="initDate" [headerClasses]="color" [localeStrings]="localeString" [disabledDates]="diasnodisponibles" [min]="initDate" clear class="ScheduleDate" locale="en-US" (ionSeleted)="obtenerBloques()" (onChange)="obtenerBloques()">
                 <h1  style="margin-left:20px">{{initDate |  date:'dd/MM/yyyy'}}</h1>
         </span>
     </ion-item>

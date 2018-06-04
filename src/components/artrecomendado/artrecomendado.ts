@@ -28,6 +28,7 @@ export class ArtrecomendadoComponent {
     console.log('Hello ArtrecomendadoComponent Component');
     this.text = 'Hello World';
     this.perfil=[];
+    this.getPerfil();
     this.consejo();
   }
 
@@ -55,12 +56,10 @@ export class ArtrecomendadoComponent {
         } 
       }
      
-      console.log(this.auxiliar);
     }
   filtro(){
     this.auxiliar=[];
     for (let j = 0; j < this.items.length; j++) {
-      console.log('ahora va al siguiente'+j);
       this.consejos(this.items[j]);
      }
   }
@@ -82,9 +81,18 @@ export class ArtrecomendadoComponent {
       if(cont===consejo.detalle_consejo.length){
         this.tips.push(con);
       }else{
-        console.log('no lo inserto');
       }
     }
-  
+    getPerfil(){
+      let i =0;
+      i = Number(localStorage.getItem('id_cliente'));
+      console.log(i);
+      this.clienteService.getPerfilUser(i).subscribe((resp)=>{
+        this.perfil=resp['data'].perfil;
+       
+      },(error)=>{
+        console.log(error);
+      })
+    }
 
 }

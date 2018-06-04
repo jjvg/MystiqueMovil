@@ -10,11 +10,6 @@
                 <ion-icon name="menu"></ion-icon>
            </button>
         <ion-title>Solicitudes</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only>
-        <ion-icon name="notifications"></ion-icon>
-        </button>
-        </ion-buttons>
     </ion-navbar>
 </ion-header>
 <ion-content>
@@ -45,7 +40,7 @@
                 <p><strong>Servicio Solicitado</strong></p>
                 <h4>Su solicitud de servicio ha sido rechazada</h4>
                 <p>{{item.fecha_creacion | date:'dd/MM/yyyy'}}</p>
-                <button ion-button clear small color="secondary" (click)="verDetalle(item)" right>Ver detalles</button>
+                <button ion-button clear small color="secondary" (click)="verDetalle(item.id)" right>Ver detalles</button>
             </ion-card-content>
         </ion-card>
     </div>

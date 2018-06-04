@@ -86,6 +86,7 @@ export class ClienteProvider {
       console.log(correo);
       this.correo_cliente=correo;
     }
+    
     setSexoCliente(sexo){
       this.sexo=sexo
     }
@@ -98,5 +99,8 @@ export class ClienteProvider {
     }
     agregarPerfil(perfil){
       return this.http.post(this.authService.ApiUrl()+'perfil',perfil);
+    }
+    actualizarTipoCliente(i,cliente){
+      return this.http.put(this.authService.ApiUrl()+'cliente/'+i,cliente);
     }
 }

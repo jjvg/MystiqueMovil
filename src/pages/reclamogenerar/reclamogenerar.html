@@ -14,23 +14,23 @@
     <ion-item>
         <ion-label stacked>Tipo de reclamo</ion-label>
         <ion-select [(ngModel)]="reclamo.id_tipo_reclamo" multiple="false">
-          <ion-option *ngFor=" let item of tipo_reclamo" [value]="item.id">{{item.nombre}}</ion-option>
+            <ion-option *ngFor=" let item of tipo_reclamo" [value]="item.id">{{item.nombre}}</ion-option>
         </ion-select>
     </ion-item>
     <!---->
     <ion-item>
-            <ion-label stacked>Servicio</ion-label>
-            <ion-select [(ngModel)]=" reclamo.id_detalle_servicio" multiple="false">
-              <ion-option *ngFor=" let item of orden.servicios_realizados; let i=index" [value]="item.id_servicio_solicitado">{{item.nombre_servicio}}</ion-option>
-            </ion-select>
-        </ion-item>
-   <br>      
-<ion-textarea [(ngModel)]="reclamo.descripcion" name="comentario" rows="15" cols="35"></ion-textarea>
-      <ion-row>
-          <ion-col col-8 col-md-8>
-          </ion-col>
-          <ion-col col-4 col-md-4>
-              <button ion-button type="submit" (click)="guardarReclamo()" > Enviar</button>
-          </ion-col>
-      </ion-row>
+        <ion-label stacked>Servicio</ion-label>
+        <ion-select [(ngModel)]=" reclamo.id_detalle_servicio" multiple="false">
+            <ion-option *ngFor=" let item of orden.servicios_realizados; let i=index" [value]="item.id_servicio_solicitado">{{item.nombre_servicio}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <br>
+    <ion-textarea [(ngModel)]="reclamo.descripcion" name="comentario"></ion-textarea>
+    <ion-row>
+        <ion-col col-8 col-md-8>
+        </ion-col>
+        <ion-col col-4 col-md-4>
+            <button ion-button type="submit" (click)="guardarReclamo()"> Enviar</button>
+        </ion-col>
+    </ion-row>
 </ion-content>

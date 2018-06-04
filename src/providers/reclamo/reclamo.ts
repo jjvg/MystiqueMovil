@@ -20,7 +20,13 @@ URL_respuestar= "respuesta_reclamo"
   getRespuesta(){
     return this.http.get(this.auth.ApiUrl()+this.URL_respuestar);
   }
-  getOrenGarantia(){
-  	
+  getTipo_reclamo(){
+  	return this.http.get(this.auth.ApiUrl()+'tipo_reclamo');
+  }
+  ActOden(i,orn){
+    return this.http.put(this.auth.ApiUrl()+'orden_servicio/'+i,orn);
+  }
+  DescripcionReclamo(rcamo){
+    return this.http.post(this.auth.ApiUrl()+'reclamo',rcamo);
   }
 }

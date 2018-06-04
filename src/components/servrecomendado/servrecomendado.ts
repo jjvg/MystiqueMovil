@@ -35,6 +35,7 @@ export class ServrecomendadoComponent {
       this.perfil=[];
       this.servicios_mostrar=[];
       this.url_file=this.auth.ApiFile();
+      this.getPerfil();
     console.log('Hello ServrecomendadoComponent Component');
     this.text = 'Hello World';
     this.getServis();
@@ -58,7 +59,6 @@ export class ServrecomendadoComponent {
   filtro(){
     this.servicios_mostrar=[];
     for (let j = 0; j < this.collection.length; j++) {
-      console.log('ahora va al siguiente'+j);
       this.servicio(this.collection[j]);
      }
   }
@@ -79,10 +79,17 @@ export class ServrecomendadoComponent {
      
       if(cont===servicio.detalle_servicio.length){
         this.servicios_mostrar.push(ser);
-      }else{
-        console.log('no lo inserto');
       }
     }
-   
+    getPerfil(){
+      let i =0;
+      i = Number(localStorage.getItem('id_cliente'));
+      console.log(i);
+      this.clienteService.getPerfilUser(i).subscribe((resp)=>{
+        this.perfil=resp['data'].perfil;
+        },(error)=>{
+        console.log(error);
+      })
+    }
   
 }

@@ -1,4 +1,3 @@
-import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ServicioRProvider } from '../../providers/servicio-r/servicio-r';
 import { AuthProvider } from './../../providers/auth/auth';
@@ -6,8 +5,9 @@ import { CalificarProvider } from '../../providers/calificar/calificar';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ClienteProvider } from '../../providers/cliente/cliente';
 import {ServiciosRPage} from './../servicios-r/servicios-r';
-import { HomePage } from '../home/home';
 import { PrincipalPage } from '../principal/principal';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Nav, LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the CalificarPage page.
@@ -22,6 +22,8 @@ import { PrincipalPage } from '../principal/principal';
   templateUrl: 'calificar.html',
 })
 export class CalificarPage {
+
+  @ViewChild(Nav) nav: Nav;
   calificacion: number;
   c:any;
   criterio: any[];
@@ -53,6 +55,7 @@ export class CalificarPage {
      public alertCtrl: AlertController,
      public authService: AuthProvider,
      public serviciosrProvider: ServicioRProvider,
+     public loadingCtrl:LoadingController,
      public clienteProvider: ClienteProvider) {
       this.califi={
         id_orden_servicio:0,
@@ -125,8 +128,8 @@ export class CalificarPage {
         handler:()=>{
           let navTran=alert.dismiss();
             navTran.then(()=>{
-              
-              this.navCtrl.setRoot(PrincipalPage)
+              this.Loading()
+             // this.navCtrl.setRoot(PrincipalPage)
             });
           return false;
         }
@@ -145,6 +148,22 @@ export class CalificarPage {
   verServicio() {
     this.visible = false;
     this.Serviciovisible = true;
+  }
+
+  Loading() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent',
+    });
+  
+    loading.present();
+  
+    setTimeout(() => {
+      this.navCtrl.setRoot(PrincipalPage);
+    }, 1000);
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
   }
 
   actualizarOrden(){

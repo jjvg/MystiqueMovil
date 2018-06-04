@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-const API_URL= "http://localhost:3000/api/" 
+import { AuthProvider } from '../auth/auth';
+const API_URL=  "http://localhost:3000/api/"
 /*
   Generated class for the ComentarioProvider provider.
 
@@ -13,6 +14,7 @@ export class ComentarioProvider {
   URL_tipoc= "tipo_comentario"
   URL_RSugerencia ="respuesta_comentario"
   URL_TRSugerencia = "tipo_respuesta_comentario"
+  url_comen='vista_cliente_comentario';
   comentarios:{
     idC : number,
     tipo:number,
@@ -20,7 +22,7 @@ export class ComentarioProvider {
     estatus:string,
     fechaC:string,
   }
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,public auth:AuthProvider) {
    this.comentarios={
     idC : 0,
     tipo:0,
@@ -40,16 +42,16 @@ export class ComentarioProvider {
   
   Ncomentario(comentarios){
     console.log(API_URL+'comentario')
-    return this.http.post(API_URL+'comentario',comentarios);
+    return this.http.post(this.auth.ApiUrl()+'comentario',comentarios);
   }
-  getComentario(){
-    return this.http.get(API_URL+this.URL_comentario);
+  getComentario(i){
+    return this.http.get(this.auth.ApiUrl()+'vista_cliente_comentario/'+i);
   }
   getTComentario(){
     return this.http.get(API_URL+this.URL_tipoc);
   }
-  getRSugerencia(){
-    return this.http.get(API_URL+this.URL_RSugerencia);
+  getResComentario(){
+    return this.http.get(this.auth.ApiUrl()+'vista_respuesta_comentario');
   }
   getTRSugerencia(){
     return this.http.get(API_URL+this.URL_TRSugerencia);

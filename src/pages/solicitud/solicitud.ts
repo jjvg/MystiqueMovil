@@ -1,3 +1,4 @@
+import { Socket } from 'ng-socket-io';
 import { SolicitudProvider } from './../../providers/solicitud/solicitud';
 
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
@@ -111,7 +112,8 @@ ele:boolean
     public empleSrvce: EmpleadoProvider,
     public soliService:SolicitudProvider,
     public authService:AuthProvider,
-    public loadingCtrl:LoadingController
+    public loadingCtrl:LoadingController,
+    public socket:Socket,
     ) {
       this.empleados=[{
         apellido:"",
@@ -258,7 +260,10 @@ ele:boolean
         buttons: [{
           text:'Cerrar',
         handler:()=>{ 
-          this.solicitud.id_cliente=this.clientService.getCliente().id;     
+          this.solicitud.id_cliente=this.clientService.getCliente().id;
+          if (this.clientService.getCliente().tipo_cliente==='P') {
+                 this.actualizarCliente();
+               }     
           this.newSolicitu(this.solicitud);
           let navTran=alert.dismiss();
             navTran.then(()=>{
@@ -350,10 +355,20 @@ ele:boolean
         console.log(soli);
         this.soliService.saveSolicitud(soli).subscribe((soli)=>{
           console.log(soli);
+          this.notificar();
         },(error)=>{
           console.log(error);
           this.mensajeErrorServior();
         })
+      }
+      actualizarCliente(){
+        let  cliente =this.clientService.getCliente();
+        cliente.tipo_cliente = 'C';
+        this.clientService.actualizarTipoCliente(cliente.id,cliente).subscribe((resp)=>{
+          console.log(resp);
+        },(error)=>{
+          console.log(error);
+        }) 
       }
       getServicios(){
         this.dataSer.getServiciosconCategoria().subscribe((ser)=>{
@@ -455,4 +470,8 @@ ele:boolean
             loading.dismiss();
           }, 5000);
         }
+        notificar(){
+          this.socket.emit('nueva_solicitu','El cliente'+' '+this.clientService.getCliente().nombre+' '+this.clientService.getCliente().apellido+ 'ha hecho una solicitu e servicio');
+        }
   }
+  

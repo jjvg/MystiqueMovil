@@ -27,6 +27,16 @@ export class TipsPage {
     this.tips=[]
    this.url_file= this.authService.ApiFile();
    this.perfil=[];
+    this.getPerfil();
+  }
+  getPerfil(){
+    let i = this.clienteService.getCliente().id;
+    this.clienteService.getPerfilUser(i).subscribe((resp)=>{
+      this.perfil=resp['data'].perfil;
+      console.log(this.perfil);
+    },(error)=>{
+      console.log(error);
+    })
   }
 consejo(){
   this.consejoService.getConsejo().subscribe(
@@ -54,9 +64,10 @@ doRefresh(refresher: Refresher){
 }
   ionViewDidLoad() {
     this.url_api= this.authService.ApiUrl();
+    this.getPerfil();
     this.tips=[];
+
    this.consejo();
-   this.perfil=this.clienteService.getPerfil();
   console.log(this.tips);
   }
   filtro(){

@@ -5,8 +5,11 @@
            </button>
         <ion-title>Mystique</ion-title>
         <ion-buttons end>
-            <button ion-button icon-only>
+            <button ion-button icon-only (click)="verNotificacion()">
         <ion-icon name="notifications"></ion-icon>
+         <ion-note item-end >
+         <ion-badge *ngIf="conta !=0 "color="secondary">{{conta}}</ion-badge>
+        </ion-note>
         </button>
         </ion-buttons>
     </ion-navbar>

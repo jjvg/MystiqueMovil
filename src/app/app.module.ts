@@ -1,3 +1,5 @@
+import { NotificacionPage } from './../pages/notificacion/notificacion';
+import { ReclamoProvider } from './../providers/reclamo/reclamo';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { GustosPreferenciasPage } from './../pages/gustos-preferencias/gustos-preferencias';
 import { ActualizarPerfilPage } from './../pages/actualizar-perfil/actualizar-perfil';
@@ -14,6 +16,7 @@ import { HttpModule } from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { DatePickerModule } from 'ion-datepicker';
+import { SocketIoModule, SocketIoConfig} from 'ng-socket-io';
 // Pages
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -70,7 +73,9 @@ import { AgendaProvider } from '../providers/agenda/agenda';
 import { CancelarCitaProvider } from '../providers/cancelar-cita/cancelar-cita';
 import { CitaProvider } from '../providers/cita/cita';
 
-
+const config:SocketIoConfig = {
+  url :'http://localhost:3001', options: {}
+};
 @NgModule({
   declarations: [
     MyApp,
@@ -109,6 +114,7 @@ import { CitaProvider } from '../providers/cita/cita';
     ActualizarPerfilPage,
     GustosPreferenciasPage,
     CitasPage,
+    NotificacionPage
     
    
   ],
@@ -119,6 +125,7 @@ import { CitaProvider } from '../providers/cita/cita';
     Ionic2RatingModule,
     DatePickerModule,
     //LocalNotifications,
+    SocketIoModule.forRoot(config),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -157,7 +164,8 @@ import { CitaProvider } from '../providers/cita/cita';
     ServiciosPage,
     EmpleadosPage,
     ActualizarPerfilPage,
-    GustosPreferenciasPage
+    GustosPreferenciasPage,
+    NotificacionPage
    
 
    
@@ -184,6 +192,7 @@ import { CitaProvider } from '../providers/cita/cita';
     CancelarCitaProvider,
     CitaProvider,
     NotificacionProvider,
+    ReclamoProvider
    
     
   ]

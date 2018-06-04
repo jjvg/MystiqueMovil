@@ -25,4 +25,7 @@ export class SolicitudProvider {
    respuestasolicitud(i){
      return this.http.get(this.authService.ApiUrl()+'respuesta_solicitud_foraneo/'+i);
    }
+   updatedSolicitud(i,solicitu){
+     return this.http.put(this.authService.ApiUrl()+'solicitud/'+i,solicitu);
+   }
 }

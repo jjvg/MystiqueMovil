@@ -17,12 +17,12 @@
         </button>
     </ion-card>-->
     <ion-item-group>
-        <ion-item-divider *ngIf="promo.id!= null">
+        <ion-item-divider *ngIf="promocion.id!= null">
             <h3>Descubre nuestras promociones</h3>
         </ion-item-divider>
-        <ion-card *ngIf="promo.id!= null">
+        <ion-card>
             <button ion-item>
-                <img src="{{url_files}}promocion/{{promo.id}}.{{promo.imagen}}">
+                <img src="{{url_files}}promocion/{{promocion.id}}.{{promocion.imagen}}">
             </button>
         </ion-card>
         <ion-item-divider><strong color="other">Servicios especiales para ti</strong></ion-item-divider>

@@ -39,9 +39,9 @@ export class SolicitudesPage {
   verPresupuesto(item){
     this.navCtrl.push(PresupuestoPage,item)
   }
-  verDetalle()
+  verDetalle(item)
   {
-    this.navCtrl.push(RechazoPage)
+    this.navCtrl.push(RechazoPage,item)
   }
   gotoSolicitud(){
     this.navCtrl.push(SolicitudPage)

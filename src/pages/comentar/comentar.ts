@@ -1,3 +1,4 @@
+import { Socket } from 'ng-socket-io';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ComentarioProvider } from './../../providers/comentario/comentario';
 import { EmpleadosPage } from './../empleados/empleados';
@@ -42,7 +43,12 @@ coment:any
 cliente:any
 text:Boolean=false;
 text2:Boolean=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public comenProvider: ComentarioProvider,  public cliProvider: ClienteProvider, public alertCtrl:AlertController) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+     public comenProvider: ComentarioProvider,  
+     public cliProvider: ClienteProvider,
+      public alertCtrl:AlertController,
+     public socket:Socket) {
   this.tcomentario();
   console.log(this.tcomentarios)
   console.log(this.direccion);
@@ -106,6 +112,7 @@ text2:Boolean=false;
     console.log(this.comen);
    this.comenProvider.Ncomentario(this.comen).subscribe((data)=>{
      console.log(data);
+    this.guardar();
    },(error)=>{
      console.log(error);
    })
@@ -124,6 +131,10 @@ text2:Boolean=false;
         }],
       });
       alert.present()
+    }
+    notificar(){
+      this.socket.emit('nuevo_comentario',{
+      mensaje: 'El cliente'+' '+this.cliProvider.getCliente().nombre+' '+this.cliProvider.getCliente().apellido+ 'ha hecho un Comentario'});
     }
 
 
